@@ -1,0 +1,248 @@
+\documentclass[ngerman,12pt]{article}
+
+\usepackage[english,main=ngerman]{babel}
+\usepackage{float}
+\usepackage[autostyle=true,german=quotes]{csquotes}
+\usepackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+%it is recommended to compile with xelatex when using pstricks
+\usepackage{pst-uml}
+\usepackage[style=authoryear-ibid,minnames=1,maxnames=3,dashed=false,giveninits=true,uniquename=false,uniquelist=false]{biblatex}
+\usepackage[nogroupskip,nonumberlist,nopostdot]{glossaries}
+\usepackage{wrapfig}
+\usepackage{tocbibind}
+\usepackage[bottom,hang]{footmisc}
+\usepackage[all]{nowidow}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[font={footnotesize}]{caption}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+
+\addbibresource{document.bib}
+%BA Dresden Citation/Bibliography Style
+%According to the style guide a publisher is not required, so formating regarding publisher's is likely wrong
+\DeclareNameAlias{labelname}{family-given}
+\DeclareNameAlias{sortname}{family-given}
+\DeclareFieldFormat{url}{in:\space\url{#1}}
+\DeclareFieldFormat{urldate}{\newunitpunct\space(#1)}
+\DeclareFieldFormat{year}{#1}
+\DeclareFieldFormat{edition}{#1 Auflage}
+\DeclareFieldFormat[article]{citetitle}{#1}
+\DeclareFieldFormat[article]{title}{\textit{#1}}
+\DefineBibliographyStrings{ngerman}{andothers={et al.}}
+\DefineBibliographyStrings{ngerman}{ibidem=ebenda}
+\setlength{\bibhang}{0pt}
+\setlength{\bibitemsep}{1.5\itemsep}
+\renewcommand*{\newunitpunct}{\addcomma\space}
+\renewcommand*{\labelnamepunct}{\addcolon\space}
+\renewcommand*{\subtitlepunct}{\addperiod\space}
+\renewcommand*{\multinamedelim}{/}
+\renewcommand*{\finalnamedelim}{/}
+\renewbibmacro*{textcite:postnote}{%
+  \iffieldundef{postnote}
+    {\ifbool{cbx:parens}
+       {\bibcloseparen}
+       {}}
+    {\ifbool{cbx:parens}
+       {\setunit{\postnotedelim}}
+       {\setunit{\extpostnotedelim\bibopenparen}}%
+	   \bibcloseparen\printfield{postnote}}}
+\providecommand*{\mkibid}[1]{#1}
+\renewbibmacro*{cite:ibid}{%
+  \printtext{\MakeLowercase{\bibstring{ibidem}}}}
+\newbibmacro*{cite:fullpartcite}{%
+  \printnames{labelname}%
+  \space%
+  \bibopenparen%
+  \printdateextra%
+  \bibcloseparen}
+
+\DeclareCiteCommand{\bacite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+     {\usebibmacro{cite:ibid}}
+     {\usebibmacro{cite:fullpartcite}}%
+	 }
+  {\addsemicolon\space}
+  {\usebibmacro{postnote}}
+\DeclareCiteCommand{\vglcite}[\mkbibfootnote]
+  {Vgl. \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+     {\usebibmacro{cite:ibid}}
+     {\usebibmacro{cite:fullpartcite}}%
+	 }
+  {\addsemicolon\space}
+  {\usebibmacro{postnote}}
+%End BA Dresden Citation/Bibliography Style
+%Frames are required around figures
+\newcommand{\bafigure}[2]{
+	\begin{figure}[H]
+		\fbox{
+			\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+				\centering
+				#2
+			\end{minipage}
+		}
+	\caption[#1]{#1 (Quelle: eigene Darstellung)}
+	\label{#1}
+	\end{figure}
+}
+\newcommand{\batable}[2]{
+	\begin{table}[H]
+		\centering
+		#2
+	\caption[#1]{#1 (Quelle: eigene Darstellung)}
+	\label{#1}
+	\end{table}
+}
+
+%Table of contents Style
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % Linie for chapters
+\renewcommand\cftsecdotsep{\cftdot}
+
+%List of figures Style
+\renewcommand{\cftfigpresnum}{Abbildung }
+\renewcommand{\cftfigaftersnum}{:}
+\newlength{\fignumspacing} % a "scratch" length
+\settowidth{\fignumspacing}{\bfseries\cftfigpresnum\cftfigaftersnum} % extra space
+\addtolength{\cftfignumwidth}{\fignumspacing} % add the extra space
+
+%List of Tables Style
+\renewcommand{\cfttabpresnum}{Tabelle }
+\renewcommand{\cfttabaftersnum}{:}
+\newlength{\tabnumspacing} % a "scratch" length
+\settowidth{\tabnumspacing}{\bfseries\cfttabpresnum\cfttabaftersnum} % extra space
+\addtolength{\cfttabnumwidth}{\tabnumspacing} % add the extra space
+
+%line spread (1.2 equals roughly 1.5 in word)
+\linespread{1.2}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+% Clear the header and footer
+\fancyhead{}
+\fancyfoot{}
+
+% List of Acronym
+\setacronymstyle{long-short}
+\renewcommand{\glossarysection}[2][]{}
+\makenoidxglossaries
+% Label Short Long
+% Example entry: \newacronym{HTTP}{HTTP}{Hypertext Transfer Protocol}
+\bapredoc
+
+\begin{document}
+%titlepage
+\begin{titlepage}
+	\begin{wrapfigure}[3]{r}{0.5\textwidth}
+		\begin{center}
+			\vspace{-18pt}
+			\includegraphics[width=0.48\textwidth]{\baimg}
+		\end{center}
+	\end{wrapfigure}
+	\noindent
+	\normalsize
+	Berufsakademie Sachsen \\ Staatliche Studienakademie \baplace{} \\ Studiengang \badepartment{} \\
+	\par
+	\vspace{5cm}
+	\begin{center}
+		\Huge
+		\textbf{\batitle{}}
+		\par
+		\vspace{4cm}
+		\normalsize
+		\balastname{}, \bafirstname{} \\
+		\bacompany{}\\
+		Matrikelnummer: \banumber{}
+	\end{center}
+	\vfill
+	Gutachter: \bacorrector{}\\[\baselineskip]
+	Tag der Themenübergabe: \bathemedate{} \\
+	Tag der Einreichung: \bareturndate{}
+\end{titlepage}
+\pagenumbering{Roman}
+\addtocounter{page}{1}
+\newpage
+
+\subsubsection*{Sperrvermerk}
+Die vorliegende Arbeit enthält vertrauliche Daten des Unternehmens \bacompany{}.
+Auf Wunsch des Unternehmens \bacompany{} ist die vorliegende Arbeit für die öffentliche Nutzung zu sperren.
+Veröffentlichung, Vervielfältigung und Einsichtnahme sind ohne ausdrückliche Genehmigung des Unternehmens \bacompany{}, in \bacompanyplace{} und des Verfassers \bafirstname{} \balastname{} nicht gestattet.
+Die Arbeit ist nur den Gutachtern und den Mitgliedern des Prüfungsausschusses zugänglich zu machen.
+\bigskip\par
+\begin{wrapfigure}[1]{r}{0.3\textwidth}
+	\begin{center}
+		\vspace{-64pt}
+		\includegraphics[width=0.28\textwidth]{\basignature}
+	\end{center}
+\end{wrapfigure}
+\bigskip\bigskip
+\par\noindent
+\baplace{}, \bareturndate{}
+\bigskip
+\par\noindent
+Ort, Datum\hfill Unterschrift des Verfassers
+\newpage
+
+% Set the right side of the footer to be the page number
+\fancyfoot[R]{\thepage}
+
+\selectlanguage{english}
+\begin{abstract}
+	That the abstract.
+	\addcontentsline{toc}{section}{\abstractname}
+\end{abstract}
+\newpage
+\selectlanguage{ngerman}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+%List of acronyms
+\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+\section*{Abkürzungsverzeichnis}
+\printnoidxglossaries
+\newpage
+
+\listoftables
+\newpage
+
+%Spacing after paragraphs
+\setlength{\parskip}{\baselineskip}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%content
+\bacontent
+
+%Bibliography
+\linespread{1.0}
+\printbibliography[heading=bibintoc]
+\newpage
+\fancyfoot{}
+
+\linespread{1.2}
+\subsubsection*{Eidesstattliche Erklärung}
+Ich erkläre an Eides statt, dass ich die vorliegende Arbeit selbständig und ohne unerlaubte fremde Hilfe angefertigt, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt habe.
+Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht.
+Die Zustimmung des Partnerunternehmens in der Praxis zur Verwendung betrieblicher Unterlagen habe ich eingeholt.
+Die Arbeit wurde bisher in gleicher oder ähnlicher Form keiner anderen Prüfungsbehörde vorgelegt und auch nicht veröffentlicht.
+\par
+\begin{wrapfigure}[1]{r}{0.3\textwidth}
+	\begin{center}
+		\vspace{-64pt}
+
+		\includegraphics[width=0.28\textwidth]{\basignature}
+	\end{center}
+\end{wrapfigure}
+\bigskip
+\par\noindent
+\baplace{}, \bareturndate{}
+\par\noindent
+Ort, Datum\hfill Unterschrift des Verfassers
+
+\end{document}
