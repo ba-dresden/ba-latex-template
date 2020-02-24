@@ -119,7 +119,10 @@
 %line spread (1.2 equals roughly 1.5 in word)
 \linespread{1.2}
 
+% Change pagestyle of "normal" pages to fancy
 \pagestyle{fancy}
+% Change pagestyle of ToC pages to fancy
+\tocloftpagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 % Clear the header and footer
 \fancyhead{}
@@ -129,8 +132,7 @@
 \setacronymstyle{long-short}
 \renewcommand{\glossarysection}[2][]{}
 \makenoidxglossaries
-% Label Short Long
-% Example entry: \newacronym{HTTP}{HTTP}{Hypertext Transfer Protocol}
+
 \bapredoc
 
 \begin{document}

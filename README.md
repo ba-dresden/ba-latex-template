@@ -31,7 +31,7 @@ There are three options to use this repository:
 ### General usage information
 The main content of the paper should be placed in the definition of \bacontent. To split the content across multiple files, the usage of \include is recommended. The listingsext.tex should be used with \input in the definition of \bapredoc. Abbreviations have to defined with \newacronym in \bapredoc and referred to with \gls in \bacontent.
 
-For indirect citations use \vglcite and for direct citations use \bacite. Use \bafigure for graphics and \batable for tables.
+For indirect citations use \vglcite and for direct citations use \bacite. Information about literature should be placed in a file called "document.bib". Use \bafigure for graphics and \batable for tables.
 
 \basignature should point to an image with contains your signature. \baimg should point to an image, which is displayed on the title page. Use \par\noindent to get compliant paragraphs.
 
