@@ -191,13 +191,17 @@ Ort, Datum\hfill Unterschrift des Verfassers
 % Set the right side of the footer to be the page number
 \fancyfoot[R]{\thepage}
 
+% only include the abstract if \baabstract is definied
+\ifdefined\baabstract
+% the language needs to be swapped to get the correct heading
 \selectlanguage{english}
 \begin{abstract}
-	That the abstract.
+	\baabstract
 	\addcontentsline{toc}{section}{\abstractname}
 \end{abstract}
 \newpage
 \selectlanguage{ngerman}
+\fi
 
 \tableofcontents
 \newpage

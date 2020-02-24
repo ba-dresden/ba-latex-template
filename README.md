@@ -4,6 +4,7 @@ __The template might do things wrong and there is no warranty. It is your own re
 ## Table of Contents
 - Motivation
 - Usage
+  - General usage information
   - Copy and Paste
   - Git repository template
   - Git submodule
@@ -29,7 +30,7 @@ There are three options to use this repository:
 - Git submodule (advanced, but enables sort of a "autoupdate" and "customize" the template feature)
 
 ### General usage information
-The main content of the paper should be placed in the definition of \bacontent. To split the content across multiple files, the usage of \include is recommended. The listingsext.tex should be used with \input in the definition of \bapredoc. Abbreviations have to defined with \newacronym in \bapredoc and referred to with \gls in \bacontent.
+The main content of the paper should be placed in the definition of \bacontent. To split the content across multiple files, the usage of \include is recommended. The listingsext.tex should be used with \input in the definition of \bapredoc. Abbreviations have to defined with \newacronym in \bapredoc and referred to with \gls in \bacontent. The content of the abstract is definied in \baabstract. If you do not need an abstract, delete the whole command definition
 
 For indirect citations use \vglcite and for direct citations use \bacite. Information about literature should be placed in a file called "document.bib". Use \bafigure for graphics and \batable for tables.
 
@@ -62,7 +63,7 @@ Read about [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Cr
 \input{folder/vars.tex}
 \input{folder/template.tex}
 ```
-Compilation can now be done by executing ```scons -f folder/SConstruct.py``` in a terminal. This approach allows you to always use the newest version of the template by executing ```git pull``` in the submodule's directory.
+Compilation can now be done by executing ```scons -f folder/SConstruct.py``` in a terminal. This approach allows you to always use the newest version of the template by executing ```git pull``` in the submodule's directory. You can receive notifications when the template's repository is updated by clicking on the "watch" button.
 
 ## Issues
 If you encounter a problem or have a question, which __are related to the template__, feel free to open an Issue or provide a fix via a pull request.
