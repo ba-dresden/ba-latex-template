@@ -8,6 +8,7 @@ __The template might do things wrong and there is no warranty. It is your own re
   - Copy and Paste
   - Git repository template
   - Git submodule
+- Macro reference
 - Issues
 
 ## Motivation
@@ -30,7 +31,7 @@ There are three options to use this repository:
 - Git submodule (advanced, but enables sort of a "autoupdate" and "customize" the template feature)
 
 ### General usage information
-The main content of the paper should be placed in the definition of \bacontent. To split the content across multiple files, the usage of \include is recommended. The listingsext.tex should be used with \input in the definition of \bapredoc. Abbreviations have to defined with \newacronym in \bapredoc and referred to with \gls in \bacontent. The content of the abstract is definied in \baabstract. If you do not need an abstract, delete the whole command definition
+The main content of the paper should be placed in the definition of \bacontent. To split the content across multiple files, the usage of \include is recommended. The listingsext.tex should be used with \input in the definition of \bapredoc. The template uses the [glossaries package](https://ctan.org/pkg/glossaries) for the management of abbreviations. These have to defined with \newacronym in \bapredoc and referred to with \gls in \bacontent. The content of the abstract is definied in \baabstract. If you do not need an abstract, delete the whole command definition
 
 For indirect citations use \vglcite and for direct citations use \bacite. Information about literature should be placed in a file called "document.bib". Use \bafigure for graphics and \batable for tables.
 
@@ -64,6 +65,43 @@ Read about [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Cr
 \input{folder/template.tex}
 ```
 Compilation can now be done by executing ```scons -f folder/SConstruct.py``` in a terminal. This approach allows you to always use the newest version of the template by executing ```git pull``` in the submodule's directory. You can receive notifications when the template's repository is updated by clicking on the "watch" button.
+
+## Macro reference
+
+### Expected predefined macros
+- ```\bafirstname``` should evaluate to the author's first name/s.
+- ```\balastname``` should evaluate to the author's last name.
+- ```\banumber``` should evaluate to the author's matriculation number.
+- ```\bacourse``` should evaluate to the author's course of studies.
+- ```\bacorrector``` should evaluate to a comma separated list of all correctors.
+- ```\bacompany``` should evaluate to the name of the company the author works at.
+- ```\bacompanyplace``` should evaluate to the post code and city of the company the author works at.
+- ```\basignature``` should evaluate to a path relative to the final documents root documents, which contains an image of the author's signature.
+- ```\baimg``` should evaluate to a path relative to the final documents root documents, which contains the logo of the BA, which can be found [here](https://www.ba-dresden.de/die-akademie/zentrale-einrichtungen/marketing-pr-kommunikation).
+- ```\batitle``` should evaluate to the title of the paper.
+- ```\bathemedate``` should evaluate to the date, when the paper was announced.
+- ```\bareturndate``` should evaluate to the date, when the paper was handed in.
+- The content of ```\bapredoc``` is placed before the ```\begin{document}...\end{document}``` block inside the template. That is usefull for stuff, which cannot reside inside that block. A common usecase is the definition of abbreviations with ```\newacronym```.
+- ```\bacontent``` should evaluate to the actual content of the paper. It is recommend to use ```\include``` to split the actual content across multiple files.
+
+### Optional predefined macros
+- ```\baabstract``` can evaluate to the abstract of the paper. If no abstract is required the macro definition should be deleted as leaving it empty results in an empty abstract.
+
+### Utility macros
+- ```\bacite[PAGE]{SOURCE}``` creates a reference for a direct citation. Behaves like other biblatex cite commands.
+  - SOURCE: identifier of the source as specified in the bibliography file
+  - PAGE: pages which are referenced (optional)
+- ```\vglcite[PAGE]{SOURCE}``` creates a reference for an indirect citation. Behaves like other biblatex cite commands.
+  - SOURCE: identifier of the source as specified in the bibliography file
+  - PAGE: pages which are referenced (optional)
+- ```\bafigure[SOURCE]{NAME}{CONTENT}``` creates a frame and label around CONTENT and adds an entry to the list of figures
+  - NAME: name of the figure
+  - CONTENT: actual figure, e.g. ```\includegraphics``` or ```\begin{pspicture}..\end{pspicture}```
+  - SOURCE: source of the figure. If omitted the author is consider as the source. (optional)
+- ```\batable[SOURCE]{NAME}{CONTENT}``` puts CONTENT in a table environment and adds an entry to the list of table
+  - NAME: name of the figure
+  - CONTENT: actual table, e.g. ```\begin{tabular}..\end{tabular}```
+  - SOURCE: source of the table. If omitted the author is consider as the source. (optional)
 
 ## Issues
 If you encounter a problem or have a question, which __are related to the template__, feel free to open an Issue or provide a fix via a pull request.

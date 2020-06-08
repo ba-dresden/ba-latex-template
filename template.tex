@@ -77,24 +77,24 @@
   {\usebibmacro{postnote}}
 %End BA Dresden Citation/Bibliography Style
 %Frames are required around figures
-\newcommand{\bafigure}[2]{
+\newcommand{\bafigure}[3][eigene Darstellung]{
 	\begin{figure}[H]
 		\fbox{
 			\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
 				\centering
-				#2
+				#3
 			\end{minipage}
 		}
-	\caption[#1]{#1 (Quelle: eigene Darstellung)}
-	\label{#1}
+	\caption[#2]{#2 (Quelle: #1)}
+	\label{#2}
 	\end{figure}
 }
-\newcommand{\batable}[2]{
+\newcommand{\batable}[3][eigene Darstellung]{
 	\begin{table}[H]
 		\centering
-		#2
-	\caption[#1]{#1 (Quelle: eigene Darstellung)}
-	\label{#1}
+		#3
+	\caption[#2]{#2 (Quelle: #1)}
+	\label{#2}
 	\end{table}
 }
 
@@ -133,6 +133,15 @@
 \renewcommand{\glossarysection}[2][]{}
 \makenoidxglossaries
 
+% Loops over the list of correctors
+% generates Gutachter: NAME\\
+\makeatletter
+\newcommand{\printcorrectors}[1]{
+  	\@for\next:=#1\do
+    	{Gutachter: \next\\}%
+	}
+\makeatother
+
 \bapredoc
 
 \begin{document}
@@ -146,7 +155,7 @@
 	\end{wrapfigure}
 	\noindent
 	\normalsize
-	Berufsakademie Sachsen \\ Staatliche Studienakademie \baplace{} \\ Studiengang \badepartment{} \\
+	Berufsakademie Sachsen \\ Staatliche Studienakademie \baplace{} \\ Studiengang \bacourse{} \\
 	\par
 	\vspace{5cm}
 	\begin{center}
@@ -160,7 +169,7 @@
 		Matrikelnummer: \banumber{}
 	\end{center}
 	\vfill
-	Gutachter: \bacorrector{}\\[\baselineskip]
+	\printcorrectors{\bacorrector{}}\\
 	Tag der Themenübergabe: \bathemedate{} \\
 	Tag der Einreichung: \bareturndate{}
 \end{titlepage}
