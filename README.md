@@ -1,6 +1,7 @@
 # A LaTeX template for BA Dresden
 This repository contains a LaTeX template, which tries to follow the [BA Dresden Styleguide](https://www.ba-dresden.de/fileadmin/dresden/downloads/zentrale-dokumente/LEITFADEN_webv2.pdf) as close as possible.
 __The template might do things wrong and there is no warranty. It is your own responsibility to check for correctness.__ Anyway, we try to make the template as good as possible. Papers using this template have already passed assessments.
+> Currently bibliography entries for contributions to anthologies (@incollection) are not rendered correctly for more than 3 authors or authors with more than 2 names. The styleguide is inconsistent on that as well. We still need to find a decent solution.
 ## Table of Contents
 - Motivation
 - Usage

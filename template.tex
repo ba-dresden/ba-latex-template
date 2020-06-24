@@ -3,7 +3,6 @@
 \usepackage[english,main=ngerman]{babel}
 \usepackage{float}
 \usepackage[autostyle=true,german=quotes]{csquotes}
-\usepackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 %it is recommended to compile with xelatex when using pstricks
 \usepackage{pst-uml}
 \usepackage[style=authoryear-ibid,minnames=1,maxnames=3,dashed=false,giveninits=true,uniquename=false,uniquelist=false]{biblatex}
@@ -17,18 +16,24 @@
 \usepackage[font={footnotesize}]{caption}
 \usepackage{fancyhdr}
 \usepackage{tocloft}
+\usepackage{xstring}
+\usepackage{hyperref}
+\usepackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 
 \addbibresource{document.bib}
 %BA Dresden Citation/Bibliography Style
 %According to the style guide a publisher is not required, so formating regarding publisher's is likely wrong
 \DeclareNameAlias{labelname}{family-given}
 \DeclareNameAlias{sortname}{family-given}
+\DeclareNameAlias{publisher}{family-given}
 \DeclareFieldFormat{url}{in:\space\url{#1}}
 \DeclareFieldFormat{urldate}{\newunitpunct\space(#1)}
 \DeclareFieldFormat{year}{#1}
 \DeclareFieldFormat{edition}{#1 Auflage}
 \DeclareFieldFormat[article]{citetitle}{#1}
 \DeclareFieldFormat[article]{title}{\textit{#1}}
+\DeclareFieldFormat[incollection]{title}{\textit{#1}}
+\DeclareFieldFormat[incollection]{citetitle}{#1}
 \DefineBibliographyStrings{ngerman}{andothers={et al.}}
 \DefineBibliographyStrings{ngerman}{ibidem=ebenda}
 \setlength{\bibhang}{0pt}
@@ -38,6 +43,73 @@
 \renewcommand*{\subtitlepunct}{\addperiod\space}
 \renewcommand*{\multinamedelim}{/}
 \renewcommand*{\finalnamedelim}{/}
+
+% fix messed up incollection ordering
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{in:}%
+  \iflistundef{publisher}
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%
+  \printlist{publisher}\space\bibopenparen Hrsg.\bibcloseparen%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printlist{location}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+% More than three publishers are not supported
+% Either way the definition is very hacky and will fail if a publish has more than one given name
+% The correct solution would be to use \printnames{publisher} in \DeclareBibliographyDriver and \DeclareNameFormat{publisher} instead of \DeclareListFormat
+% but using \printnames and \DeclareNameFormat{publisher} results in nothing being printed
+% Concludingly we have to parse the names on our selfs, which is errorprone.
+\DeclareListFormat{publisher}{%
+  \StrCut{#1}{\space}{\bastylefirstname}{\bastylelastname}\bastylelastname\addcomma\space\StrChar{\bastylefirstname}{1}\addperiod%
+  \ifthenelse{\value{listcount}<\value{liststop}}
+	{\slash}
+	{}}
+
 \renewbibmacro*{textcite:postnote}{%
   \iffieldundef{postnote}
     {\ifbool{cbx:parens}
@@ -48,8 +120,12 @@
        {\setunit{\extpostnotedelim\bibopenparen}}%
 	   \bibcloseparen\printfield{postnote}}}
 \providecommand*{\mkibid}[1]{#1}
+
+% force ebenda to lowercase
 \renewbibmacro*{cite:ibid}{%
   \printtext{\MakeLowercase{\bibstring{ibidem}}}}
+
+% Define cite format
 \newbibmacro*{cite:fullpartcite}{%
   \printnames{labelname}%
   \space%
@@ -57,6 +133,7 @@
   \printdateextra%
   \bibcloseparen}
 
+% Custom cite commands
 \DeclareCiteCommand{\bacite}[\mkbibfootnote]
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -75,12 +152,14 @@
 	 }
   {\addsemicolon\space}
   {\usebibmacro{postnote}}
-%End BA Dresden Citation/Bibliography Style
-%Frames are required around figures
+
+% End BA Dresden Citation/Bibliography Style
+% Frames are required around figures
 \newcommand{\bafigure}[3][eigene Darstellung]{
 	\begin{figure}[H]
 		\fbox{
-			\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+			% \begin{minipage}{\dimexpr\textwidth-4\fboxsep-4\fboxrule\relax}
+			\begin{minipage}{\dimexpr\textwidth-14.624pt\relax}
 				\centering
 				#3
 			\end{minipage}
@@ -145,6 +224,7 @@
 \bapredoc
 
 \begin{document}
+\pagenumbering{gobble}
 %titlepage
 \begin{titlepage}
 	\begin{wrapfigure}[3]{r}{0.5\textwidth}
@@ -197,20 +277,19 @@ Die Arbeit ist nur den Gutachtern und den Mitgliedern des Prüfungsausschusses z
 Ort, Datum\hfill Unterschrift des Verfassers
 \newpage
 
-% Set the right side of the footer to be the page number
-\fancyfoot[R]{\thepage}
-
 % only include the abstract if \baabstract is definied
 \ifdefined\baabstract
 % the language needs to be swapped to get the correct heading
 \selectlanguage{english}
 \begin{abstract}
 	\baabstract
-	\addcontentsline{toc}{section}{\abstractname}
 \end{abstract}
 \newpage
 \selectlanguage{ngerman}
 \fi
+
+% Set the right side of the footer to be the page number
+\fancyfoot[R]{\thepage}
 
 \tableofcontents
 \newpage
