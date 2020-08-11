@@ -1,0 +1,66 @@
+\documentclass[first=firstname,last=lastname,company=comp,location=Dresden]{baarticle}
+\usepackage[english,main=ngerman]{babel}
+\usepackage[autostyle=true,german=quotes]{csquotes}
+\usepackage[style=baarticle]{biblatex}
+
+\begin{filecontents}{minimal.bib}
+@book{cloudcomp,
+	author = {John W. Rittinghouse and James F. Ransome},
+	title = {Cloud Computing},
+	subtitle = {Implementation, Management and Security},
+	location = {Boca Raton},
+	year = {2018}
+}
+@collection {digitalisierung,
+    title = {Digitalisierung in Unternehmen},
+    subtitle = {Von den theoretischen Ansätzen zur praktischen Umsetzung},
+    location = {Wiesbaden},
+    year = {2018},
+    publisher = {Thomas Hans Barton and Christian Müller and Christian Seel}
+}
+@incollection{rpa,
+    author = {C. Czarnecki and G. Auth},
+    title = {Prozessdigitalisierung durch Robotic Process Automation},
+    crossref = {digitalisierung},
+    pages = {113-132}
+}
+\end{filecontents}
+
+\addbibresource{minimal.bib}
+
+\begin{document}
+    \mktitle{
+        title=Test Report,
+        img=../empty.png,
+        course=science,
+        number=1234,
+        corrector={corrector 1,corrector 2},
+        themedate=\today,
+        returndate=\today
+    }
+    \mkblocknotice{
+        signature=../empty.png,
+        date=\today,
+        location=Dresden
+    }
+    \mkfrontmatter{
+        \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+        \section*{Abkürzungsverzeichnis}
+    }
+    \section{abc}
+    Le citation.\vglcite[17-22]{cloudcomp}
+    The duplicate.\vglcite[33-35]{cloudcomp}
+    longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong\vglcite[38]{rpa}
+    \footnote{longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong}
+    \subsection{sub}
+    \subsection{pub}
+    \section{abc}
+    \clearpage
+    \printbibliography[heading=bibintoc]
+    longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong
+    \clearpage
+    \mkaffirmation{
+        signature=../empty.png,
+        date=\today
+    }
+\end{document}

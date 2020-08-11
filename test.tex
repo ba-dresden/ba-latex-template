@@ -1,0 +1,113 @@
+\documentclass[first=firstname,last=lastname,company=comp,location=Dresden]{baarticle}
+\usepackage{xcolor}
+\usepackage{ifthen}
+
+% Assertion macro
+% see https://tex.stackexchange.com/questions/42328/testing-framework-api-for-latex
+\newcommand\assert[2][]{%
+    \ttfamily
+    \def\result{#2}
+    \space Test\,\stepcounter{tst} \thetst{} (Assert \detokenize{#1}):
+    \ifthenelse{\equal{\test}{\result}}{%
+        \textcolor{green}{Passed}%
+    }{%
+        \textcolor{red}{Failed}\\Expected: "#2"\\Got: "\test"%
+    }
+    \par%
+}
+\newcommand\assertUndef[1]{%
+    \ttfamily
+    \space Test\,\stepcounter{tst} \thetst{} (Assert \detokenize{#1}is not defined):
+    \ifundef{#1}{%
+        \textcolor{green}{Passed}%
+    }{%
+        \textcolor{red}{Failed}\\Expected: \detokenize{#1} to be undefined\\Got: \detokenize{#1} is "#1"%
+    }
+    \par%
+}
+
+% Test counter
+\newcounter{tst}
+\setcounter{tst}{0}
+
+\makeatletter
+
+\begin{document}
+    \mktitle{
+        title=Test Report,
+        img=../empty.png,
+        course=science,
+        number=1234,
+        corrector={corrector 1,corrector 2},
+        themedate=\today,
+        returndate=\today
+    }
+    \clearpage
+    \edef\test{\thepage}\assert[title page increases page counter]{II}
+    \rmfamily
+    \mkblocknotice{
+        signature=../empty.png,
+        date=\today,
+        location=Dresden
+    }
+    \mkaffirmation{
+        signature=../empty.png,
+        date=\today
+    }
+    \clearpage
+    \subsection*{Lengths}
+    \edef\test{\strip@pt\parindent}\assert[parindent is 0]{0}
+    \edef\test{\headrulewidth}\assert[headrulewidth is 0pt]{0pt}
+
+    \subsection*{Table of Contents\, List of Figures and Tables}
+    \edef\test{\cftsecdotsep}\assert[ToC lines filled with dots]{\cftdot}
+    \edef\test{\cftfigpresnum}\assert[LoF prefix is Abbildung]{Abbildung }
+    \edef\test{\cftfigaftersnum}\assert[LoF suffix is :]{:}
+    \edef\test{\cfttabpresnum}\assert[LoT prefix is Tabelle]{Tabelle }
+    \edef\test{\cfttabaftersnum}\assert[LoT suffix is :]{:}
+
+    \subsection*{Environments}
+
+    % Test environment captions
+    \csdef{@baenvtitle}{Title}
+    \csdef{@baenvsource}{}
+    \edef\test{\@bacaption}\assert[caption is Title (Quelle: eigene Darstellung)]{Title (Quelle: eigene Darstellung)}
+    \csdef{@baenvsource}{Source}
+    \edef\test{\@bacaption}\assert[caption is Title (Quelle: Source)]{Title (Quelle: Source)}
+    \csdef{@baenvsource}{}
+    \csundef{@baenvsource}
+    \csundef{@baenvtitle}
+
+    % We test every environment at least twice, to ensure no robust commands are used
+    \begin{bafigure}{Test1}
+        Content2
+    \end{bafigure}
+    \begin{bafigure}[source=Source2,label=thesecond]{Test2}
+        Content
+    \end{bafigure}
+    \begin{bafigure}[placement=b]{Test3}
+        Content
+    \end{bafigure}
+    \assertUndef{\@baenvtitle}
+    \assertUndef{\@baenvsource}
+    \assertUndef{\@baenvlabel}
+    \assertUndef{\@baenvplacement}
+
+    % Latex insert \null after printing the number within \ref
+    \edef\test{\ref{Test1}}\assert[label is @baenvtitle if not set explicitly]{1\null}
+    \edef\test{\ref{thesecond}}\assert[label can be set]{2\null}
+
+    % We test every environment at least twice, to ensure no robust commands are used
+    \begin{batable}{Table1}
+        The Table
+    \end{batable}
+    \begin{batable}[source=blup,placement=b]{Table2}
+        The Table2
+    \end{batable}
+    \edef\test{\ref{Table1}}\assert[label is @baenvtitle if not set explicitly]{1\null}
+    \assertUndef{\@baenvtitle}
+    \assertUndef{\@baenvsource}
+    \assertUndef{\@baenvlabel}
+    \assertUndef{\@baenvplacement}
+
+\end{document}

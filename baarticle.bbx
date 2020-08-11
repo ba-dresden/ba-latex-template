@@ -1,0 +1,109 @@
+% Blibliography style implementing the BA Dresden Styleguide
+\ProvidesFile{baarticle.bbx}[2020/08/07 v0.1 BA Dresden bibliography style]
+% The style is based on authoryear-ibid
+\RequireBibliographyStyle{authoryear-ibid}
+% use the BA localization
+\DeclareLanguageMapping{ngerman}{ngerman-ba}
+
+% put family name for the first na,e
+\DeclareNameAlias{labelname}{family-given}
+\DeclareNameAlias{sortname}{family-given}
+\DeclareNameAlias{publisher}{family-given}
+% formatting for certain fields
+\DeclareFieldFormat{url}{in:\space\url{#1}}
+\DeclareFieldFormat{urldate}{\newunitpunct\space(#1)}
+\DeclareFieldFormat{year}{#1}
+\DeclareFieldFormat{edition}{#1 Auflage}
+\DeclareFieldFormat[article]{citetitle}{#1}
+\DeclareFieldFormat[article]{title}{\textit{#1}}
+\DeclareFieldFormat[incollection]{title}{\textit{#1}}
+\DeclareFieldFormat[incollection]{citetitle}{#1}
+
+% Sourcemapping, which copies the content of publisher to bapublisher
+\DeclareStyleSourcemap{
+    \maps[datatype=bibtex]{
+        \map{
+            \pertype{collection}
+            \step[fieldsource=publisher]
+            \step[fieldset=bapublisher, origfieldval]
+        }
+    }
+}
+
+% change certain delimiters
+\renewcommand*{\newunitpunct}{\addcomma\space}
+\renewcommand*{\labelnamepunct}{\addcolon\space}
+\renewcommand*{\subtitlepunct}{\addperiod\space}
+\renewcommand*{\multinamedelim}{/}
+\renewcommand*{\finalnamedelim}{/}
+
+% set length regarding formatting of the bibliography
+\setlength{\bibhang}{0pt}
+\setlength{\bibitemsep}{1.5\itemsep}
+
+\InitializeBibliographyStyle{%
+    \linespread{1.0}
+}
+
+% fix messed up incollection ordering
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{in:}%
+  \iflistundef{publisher}
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%
+  \printnames{bapublisher}\space\bibopenparen Hrsg.\bibcloseparen%
+  \setunit*{\addcomma\space}%
+  \usebibmacro{maintitle+booktitle}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{edition}%
+  \newunit
+  \iffieldundef{maintitle}
+    {\printfield{volume}%
+     \printfield{part}}
+    {}%
+  \newunit
+  \printfield{volumes}%
+  \newunit\newblock
+  \usebibmacro{series+number}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printlist{location}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+% fix publisher formatting
+\DeclareNameFormat{bapublisher}{%
+    \namepartfamily\addcomma\space\namepartgiveni%
+    \ifthenelse{\value{listcount}<\value{liststop}}%
+	{\slash}%
+	{}%
+}

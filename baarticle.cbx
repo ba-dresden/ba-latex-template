@@ -1,0 +1,59 @@
+% Citation style implementing the BA Dresden Styleguide
+\ProvidesFile{baarticle.cbx}[2020/08/07 v0.1 BA Dresden citation style]
+% style is based on authoryear-ibid
+\RequireCitationStyle{authoryear-ibid}
+% use the BA localization
+\DeclareLanguageMapping{ngerman}{ngerman-ba}
+
+% add global biblatex options
+\ExecuteBibliographyOptions{
+    minnames=1,
+    maxnames=3,
+    dashed=false,
+    giveninits=true,
+    uniquename=false,
+    uniquelist=false
+}
+
+\renewbibmacro*{textcite:postnote}{%
+  \iffieldundef{postnote}
+    {\ifbool{cbx:parens}
+       {\bibcloseparen}
+       {}}
+    {\ifbool{cbx:parens}
+       {\setunit{\postnotedelim}}
+       {\setunit{\extpostnotedelim\bibopenparen}}%
+	   \bibcloseparen\printfield{postnote}}}
+\providecommand*{\mkibid}[1]{#1}
+
+% force ebenda to lowercase
+\renewbibmacro*{cite:ibid}{%
+  \printtext{\MakeLowercase{\bibstring{ibidem}}}}
+
+% Define cite format
+\newbibmacro*{cite:fullpartcite}{%
+  \printnames{labelname}%
+  \space%
+  \bibopenparen%
+  \printdateextra%
+  \bibcloseparen}
+
+% Custom cite commands
+\DeclareCiteCommand{\bacite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+     {\usebibmacro{cite:ibid}}
+     {\usebibmacro{cite:fullpartcite}}%
+	 }
+  {\addsemicolon\space}
+  {\usebibmacro{postnote}}
+\DeclareCiteCommand{\vglcite}[\mkbibfootnote]
+  {Vgl. \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+     {\usebibmacro{cite:ibid}}
+     {\usebibmacro{cite:fullpartcite}}%
+	 }
+  {\addsemicolon\space}
+  {\usebibmacro{postnote}}
