@@ -271,7 +271,6 @@
             \printnoidxglossaries
         }
     }{
-        \clearpage
         \printbibliography[heading=bibintoc]
         \clearpage
         \mkaffirmation{
@@ -301,7 +300,7 @@
     }%
 }
 
-% \begin{bafigure}[source=SOURCE,placment=htb,label=LABEL]{title}
+% \begin{bafigure}[source=SOURCE,placement=htb,label=LABEL]{title}
 % bafigure puts a frame around its content and adds a source reference below the figure
 % also adds a label which equals the given title
 \newsavebox{\@bafigurebox}
