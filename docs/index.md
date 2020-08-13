@@ -4,13 +4,13 @@ title: Index
 # BA Dresden LaTeX template
 _The whole template was rewritten recently. For the pre-rewrite documentation go [here](./old) please._
 
-A template, which tries to follow the [BA Dresden Styleguide](https://www.ba-dresden.de/fileadmin/dresden/downloads/zentrale-dokumente/LEITFADEN_webv2.pdf) as close as possible. Papers using this template have already passed assessments. Build with love and sane defaults by Nuckal777.
+A template, which tries to follow the [BA Dresden Styleguide](https://www.ba-dresden.de/fileadmin/dresden/downloads/zentrale-dokumente/LEITFADEN_webv2.pdf) as close as possible. Papers using this template have already passed assessments. Built with love and sane defaults by Nuckal777.
 
 ```warning
  The template might do things wrong and there is no warranty. It is your own responsibility to check for correctness.
 ```
 
-It gets as simple as shown below. The code creates a document containing a title page, block notice, table of contents, figures, abbreviations, tables, a bibliography and an affirmation statement, while setting up correct spacing and page numbering. Anyway the template is rather customizable, if desired.
+It gets as simple as shown below. The code creates a document containing a title page, block notice, table of contents, figures, abbreviations, tables, a bibliography and an affirmation statement, while setting up correct spacing and page numbering. Anyway the template is rather customizable, if desired. Hooked? Head over to the [quick start](./quickstart).
 
 ```latex
 \documentclass[first=firstname,last=lastname,company=comp,location=Dresden,simple]{baarticle}

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Motivation
+sort: 2
 ---
 # Motivation
 Some general information about LaTeX, why you should use it for writing scientific papers, how to install and use it can be found [here](https://www.latex-project.org/about/) and [here](https://en.wikibooks.org/wiki/LaTeX/Introduction). LaTeX is known to have a somewhat steep learning curve, because it does not follow the "What you see is what you get" principle. Form my point of view learning LaTeX is worthwhile. Some arguments to justify the effort to get into LaTeX are listed below.

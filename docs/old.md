@@ -1,5 +1,6 @@
 ---
 title: Pre-rewrite Docs
+sort: 3
 ---
 # Pre-rewrite Documentation
 ```note

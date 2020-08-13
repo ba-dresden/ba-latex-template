@@ -5,7 +5,7 @@ sort: 2
 # Template Setup
 
 ## Download
-This is the easiest way to use the template. Head over to the [Release](https://github.com/Nuckal777/ba-latex-template/releases) page and grab the latest version of the template. Create a directory, where you will write your paper. Create a file with the `.tex` extension, e.g. `document.tex`. The directory structure should look like this:
+This is the easiest way to use the template. Head over to the [Releases](https://github.com/Nuckal777/ba-latex-template/releases) page and grab the latest version of the template. Create a directory, where you will write your paper. Create a file with the `.tex` extension, e.g. `document.tex`. The directory structure should look like this:
 ```text
 somedirectory
 |-baarticle.bbx
@@ -15,7 +15,7 @@ somedirectory
 |-document.tex
 |-ngerman-ba.lbx
 ```
-Done! (Still you have to get the required image as described below.)
+Done! (Still you have to get the required images as described below.)
 
 ## GitHub Template
 ```warning
@@ -29,5 +29,5 @@ Read about [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules). Cr
 ## Systemwide installation
 Clone the templates [repository](https://github.com/Nuckal777/ba-latex-template) somewhere on your computer. To add the templates directory to the LaTeX search path add the absolute path of the template directory to the `TEXINPUTS` environment variable before compiling.
 
-# Get the required image
-The titlepage uses the BA Dresden's logo. It can be found [here](https://www.ba-dresden.de/die-akademie/zentrale-einrichtungen/marketing-pr-kommunikation). Put it next to the other files.
+# Get the required images
+The titlepage uses the BA Dresden's logo. It can be found [here](https://www.ba-dresden.de/die-akademie/zentrale-einrichtungen/marketing-pr-kommunikation).Moreover you need an image of your signature. Put both images next to the other files.
