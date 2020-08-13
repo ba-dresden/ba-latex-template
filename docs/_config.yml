@@ -16,8 +16,8 @@
 title: BA Latex Template
 description: >- # this means to ignore newlines until "baseurl:"
   Latex template implementing the BA Dresden Styleguide
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/ba-latex-template" # the subpath of your site, e.g. /blog
+url: "https://nuckal777.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 markdown: GFM
