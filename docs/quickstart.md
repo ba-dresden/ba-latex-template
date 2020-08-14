@@ -61,7 +61,7 @@ Open the document.tex file in your favourite editor and copy the following code 
     \end{basimple}
 \end{document}
 ```
-The only task left is to compile the document. Open a command line in the working directory and execute `latexmk --pdf document.tex`. After running that command `document.pdf` is created along with a bunch of other files. You can view the PDF-file in your favourite viewer. Now you probably want inform yourself about the [simple mode](./usage/simple).
+The only task left is to compile the document. Open a command line in the working directory and execute `latexmk --pdf --interaction=nonstopmode document.tex`. After running that command `document.pdf` is created along with a bunch of other files. You can view the PDF-file in your favourite viewer. Now you probably want inform yourself about the [simple mode](./usage/simple).
 
 ```tip
  Some PDF-viewers, like Adobe Reader, hold file locks. You need to close these before invoking latexmk. Otherwise compilation will fail.

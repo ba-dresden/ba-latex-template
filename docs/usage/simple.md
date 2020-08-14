@@ -46,7 +46,7 @@ Let's also discuss the options of the `basimple` environment:
 - `signature` should be a path to an image of your signature
 - `location` should be the location of your company
 
-The example document given can be compiled, with `latexmk --pdf file.tex` for example.
+The example document given can be compiled, with `latexmk --pdf --interaction=nonstopmode file.tex` for example.
 ```warning
  Importing additional packages with `\usepackage` while in "simple mode" might not work. If you need to load additional packages consider not using the "simple mode".
 ```
@@ -87,7 +87,7 @@ Abbreviations are managed by the glossaries package. To define an abbreviation u
 \begin{document}
     \begin{basimple}[...]
         \section{Caption}
-        \gls{HTTP} is protocol on the OSI-Layer 7.
+        \gls{HTTP} is a protocol on the OSI-Layer 7.
     \end{basimple}
 \end{document}
 ```

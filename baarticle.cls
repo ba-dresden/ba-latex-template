@@ -42,7 +42,7 @@
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
     \RequirePackage[style=baarticle]{biblatex}
-    \RequirePackage{glossaries}
+    \RequirePackage[nogroupskip,nonumberlist,nopostdot]{glossaries}
     \RequirePackage{hyperref}
 }
 
