@@ -25,6 +25,7 @@
 % Load required packages
 \RequirePackage{etoolbox} % for csdef, csundef, ifdefempty, etc ...
 \RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
+\RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
 \RequirePackage{fancyhdr} % to adjust headers and footers
@@ -49,8 +50,8 @@
 \setlength{\parindent}{0pt}
 % Set spacing after paragraphs
 \setlength{\parskip}{\baselineskip}
-% Set line spread (1.2 equals roughly 1.5 in word)
-\linespread{1.2}
+% Set line spread
+\onehalfspacing
 
 % Table of contents Style
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % Linie for chapters
@@ -113,7 +114,7 @@
         \begin{wrapfigure}[3]{r}{0.5\textwidth}
             \begin{center}
                 \vspace{-18pt}
-                \includegraphics[width=0.48\textwidth]{\@batitleimg}
+                \includegraphics[width=0.5\textwidth]{\@batitleimg}
             \end{center}
         \end{wrapfigure}
         \noindent

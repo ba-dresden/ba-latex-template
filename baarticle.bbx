@@ -41,64 +41,71 @@
 \setlength{\bibhang}{0pt}
 \setlength{\bibitemsep}{1.5\itemsep}
 
+% check if setspace is loaded
+\@ifpackageloaded{setspace}{\newcommand{\@bibsetspace}{yes}}{}
+
 \InitializeBibliographyStyle{%
-    \linespread{1.0}
+    \ifdefvoid{\@bibsetspace}{
+        \linespread{1.0}
+    }{
+        \singlespacing
+    }
 }
 
 % fix messed up incollection ordering
 \DeclareBibliographyDriver{incollection}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{begentry}%
-  \usebibmacro{author/translator+others}%
-  \setunit{\printdelim{nametitledelim}}\newblock
-  \usebibmacro{title}%
-  \newunit
-  \printlist{language}%
-  \newunit\newblock
-  \usebibmacro{byauthor}%
-  \newunit\newblock
-  \usebibmacro{in:}%
-  \iflistundef{publisher}
-    {\setunit*{\addcomma\space}}
-    {\setunit*{\addcolon\space}}%
-  \printnames{bapublisher}\space\bibopenparen Hrsg.\bibcloseparen%
-  \setunit*{\addcomma\space}%
-  \usebibmacro{maintitle+booktitle}%
-  \newunit\newblock
-  \usebibmacro{byeditor+others}%
-  \newunit\newblock
-  \printfield{edition}%
-  \newunit
-  \iffieldundef{maintitle}
-    {\printfield{volume}%
-     \printfield{part}}
-    {}%
-  \newunit
-  \printfield{volumes}%
-  \newunit\newblock
-  \usebibmacro{series+number}%
-  \newunit\newblock
-  \printfield{note}%
-  \newunit\newblock
-  \printlist{location}%
-  \newunit\newblock
-  \usebibmacro{chapter+pages}%
-  \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
-  \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
-  \newunit\newblock
-  \iftoggle{bbx:related}
-    {\usebibmacro{related:init}%
-     \usebibmacro{related}}
-    {}%
-  \usebibmacro{finentry}}
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author/translator+others}%
+    \setunit{\printdelim{nametitledelim}}\newblock
+    \usebibmacro{title}%
+    \newunit
+    \printlist{language}%
+    \newunit\newblock
+    \usebibmacro{byauthor}%
+    \newunit\newblock
+    \usebibmacro{in:}%
+    \iflistundef{publisher}
+        {\setunit*{\addcomma\space}}
+        {\setunit*{\addcolon\space}}%
+    \printnames{bapublisher}\space\bibopenparen Hrsg.\bibcloseparen%
+    \setunit*{\addcomma\space}%
+    \usebibmacro{maintitle+booktitle}%
+    \newunit\newblock
+    \usebibmacro{byeditor+others}%
+    \newunit\newblock
+    \printfield{edition}%
+    \newunit
+    \iffieldundef{maintitle}
+        {\printfield{volume}%
+        \printfield{part}}
+        {}%
+    \newunit
+    \printfield{volumes}%
+    \newunit\newblock
+    \usebibmacro{series+number}%
+    \newunit\newblock
+    \printfield{note}%
+    \newunit\newblock
+    \printlist{location}%
+    \newunit\newblock
+    \usebibmacro{chapter+pages}%
+    \newunit\newblock
+    \iftoggle{bbx:isbn}
+        {\printfield{isbn}}
+        {}%
+    \newunit\newblock
+    \usebibmacro{doi+eprint+url}%
+    \newunit\newblock
+    \usebibmacro{addendum+pubstate}%
+    \setunit{\bibpagerefpunct}\newblock
+    \usebibmacro{pageref}%
+    \newunit\newblock
+    \iftoggle{bbx:related}
+        {\usebibmacro{related:init}%
+        \usebibmacro{related}}
+        {}%
+    \usebibmacro{finentry}}
 
 % fix publisher formatting
 \DeclareNameFormat{bapublisher}{%
