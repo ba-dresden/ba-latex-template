@@ -34,6 +34,7 @@
 \RequirePackage{wrapfig} % to place text wrapping floats
 \RequirePackage{tocbibind} % adds ToC entries for ToC, LoF, LoT, etc ...
 \RequirePackage[bottom,hang]{footmisc} % to keep footnotes always on the bottom and to fix multiline indentation
+\RequirePackage[all]{nowidow} % to eliminate widows and orphans
 
 % Load additional packages if in simple mode
 \ifdefvoid{\@baclssimple}{
@@ -123,12 +124,12 @@
         Staatliche Studienakademie \@baclslocation{} \\
         Studiengang \@batitlecourse{} \\
         \par
-        \vspace{5cm}
+        \vspace{4cm}
         \begin{center}
             \Huge
             \textbf{\@batitletitle}
             \par
-            \vspace{4cm}
+            \vspace{3cm}
             \normalsize
             \@baclslast{}, \@baclsfirst \\
             \@baclscompany{}\\

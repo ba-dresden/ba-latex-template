@@ -32,7 +32,7 @@ The template has a "simple mode", which loads a bunch of opinionated packages an
 Let's go through the other package options quickly:
 - `first` should be your first name
 - `last` should be your last name
-- `company` should be the company you work for
+- `company` should be the company you work for, in case the name contains spaces use `\space` to split the parts, e.g. `part1\space part2`
 - `location` should be the location of university
 
 Let's also discuss the options of the `basimple` environment:
