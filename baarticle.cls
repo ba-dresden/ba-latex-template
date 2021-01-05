@@ -4,6 +4,8 @@
 
 % Process package options
 \RequirePackage{xkeyval} % for key value processing
+\RequirePackage{etoolbox} % for csdef, csundef, ifdefempty, toggles, etc ...
+\newtoggle{baclssimple} % toggle are false per default
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -14,7 +16,7 @@
 % location of the university
 \DeclareOptionX[BA]{location}{\def\@baclslocation{#1}}
 % if specified the class will load additional packages and provide the basimple environment, which simplifies the setup
-\DeclareOptionX[BA]{simple}[usesimple]{\def\@baclssimple{#1}}
+\DeclareOptionX[BA]{simple}[usesimple]{\toggletrue{baclssimple}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptionsX[BA]\relax
@@ -23,7 +25,6 @@
 \LoadClass[12pt]{article}
 
 % Load required packages
-\RequirePackage{etoolbox} % for csdef, csundef, ifdefempty, etc ...
 \RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
@@ -37,14 +38,14 @@
 \RequirePackage[all]{nowidow} % to eliminate widows and orphans
 
 % Load additional packages if in simple mode
-\ifdefvoid{\@baclssimple}{
-    % simple key not set, do nothing
-}{
+\iftoggle{baclssimple}{
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
     \RequirePackage[style=baarticle]{biblatex}
     \RequirePackage[nogroupskip,nonumberlist,nopostdot]{glossaries}
     \RequirePackage{hyperref}
+} {
+    % not in simple, do nothing
 }
 
 % Set paragraph indentation
@@ -71,6 +72,21 @@
 \newlength{\tabnumspacing} % a "scratch" length
 \settowidth{\tabnumspacing}{\bfseries\cfttabpresnum\cfttabaftersnum} % extra space
 \addtolength{\cfttabnumwidth}{\tabnumspacing} % add the extra space
+
+% List of Appendix (LoA)
+% The related commands will refer to 'appx' as the appendix command is already defined by LaTeX
+\newcommand{\listappxname}{Anhangverzeichnis}
+\newlistof{appx}{loa}{\listappxname}
+\newcommand{\addtoappx}[1]{%
+        \refstepcounter{appx}
+        \addcontentsline{loa}{appx}{\protect\numberline{\theappx}#1}\par
+}
+\renewcommand{\cftloatitlefont}{\Large\bfseries}
+\renewcommand{\cftappxpresnum}{Anhang }
+\renewcommand{\cftappxaftersnum}{:}
+\newlength{\appxnumspacing} % a "scratch" length
+\settowidth{\appxnumspacing}{\bfseries\cftappxpresnum\cftappxaftersnum} % extra space
+\addtolength{\cftappxnumwidth}{\appxnumspacing} % add the extra space
 
 % Change pagestyle of "normal" pages to fancy
 \pagestyle{fancy}
@@ -223,9 +239,7 @@
 }
 
 % Define basimple environment if in simple mode
-\ifdefvoid{\@baclssimple}{
-    % simple key not set, do nothing
-}{
+\iftoggle{baclssimple}{
     % Specify environment keys
     % path to an image, placed in the top right corner
     \define@key[BA]{simple}{img}{\def\@basimpleimg{#1}}
@@ -280,6 +294,26 @@
             date=\@basimplereturndate
         }
     }
+}{
+    % not in simple mode, do nothing
+}
+
+% Appendix environment
+% Toggle defining if the baappx environment is active
+\newtoggle{baclsappx}
+\newenvironment{baappx}{
+    \toggletrue{baclsappx}
+    \phantomsection
+    \addcontentsline{toc}{section}{Anhangverzeichnis}
+    \listofappx
+    \clearpage
+    \fancyhead[R]{Anhang \theappx}
+    \section*{Anhang}
+    \addcontentsline{toc}{section}{Anhang}
+}{
+    \clearpage
+    \togglefalse{baclsappx}
+    \fancyhead[R]{}
 }
 
 % Specify environment keys
@@ -322,7 +356,16 @@
     \end{minipage}
     \end{lrbox}
     \fbox{\usebox{\@bafigurebox}}
-    \caption[\@baenvtitle]{\@bacaption}
+    \iftoggle{baclsappx}{
+        \addtoappx{\@baenvtitle}
+        \begin{center}
+            \vspace{-10pt}
+            \small
+            Anhang \theappx{}: \@bacaption
+        \end{center}
+    } {
+        \caption[\@baenvtitle]{\@bacaption}
+    }
     \ifdefempty{\@baenvlabel}{
         \label{\@baenvtitle}
     }{
@@ -347,7 +390,16 @@
     \begin{center}
     }{
     \end{center}
-    \caption[\@baenvtitle]{\@bacaption}
+    \iftoggle{baclsappx}{
+        \addtoappx{\@baenvtitle}
+        \begin{center}
+            \vspace{-10pt}
+            \small
+            Anhang \theappx{}: \@bacaption
+        \end{center}
+    } {
+        \caption[\@baenvtitle]{\@bacaption}
+    }
     \ifdefempty{\@baenvlabel}{
         \label{\@baenvtitle}
     }{
