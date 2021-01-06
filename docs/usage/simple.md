@@ -17,7 +17,8 @@ The template has a "simple mode", which loads a bunch of opinionated packages an
         themedate=\today,
         returndate=\today,
         signature=../empty.png,
-        location=Dresden
+        location=Dresden,
+        type=thesis
     ]
         \section{Caption}
         Here is the content of paper.
@@ -45,6 +46,7 @@ Let's also discuss the options of the `basimple` environment:
 - `returndate` should be the date when the paper is handed in
 - `signature` should be a path to an image of your signature
 - `location` should be the location of your company
+- `type` defines the type of the paper and influences the title page if set to `thesis`, `study` or `report`. Setting the `type` parameter is optional.
 
 The example document given can be compiled, with `latexmk --pdf --interaction=nonstopmode file.tex` for example.
 ```warning

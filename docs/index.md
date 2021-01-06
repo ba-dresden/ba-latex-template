@@ -25,7 +25,8 @@ It gets as simple as shown below. The code creates a document containing a title
         themedate=\today,
         returndate=\today,
         signature=../empty.png,
-        location=Dresden
+        location=Dresden,
+        type=thesis
     ]
         \section{Caption}
         Here is the content of paper.

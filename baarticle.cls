@@ -117,11 +117,31 @@
 \define@key[BA]{title}{themedate}{\def\@batitlethemedate{#1}}
 % date when the paper has been handed in
 \define@key[BA]{title}{returndate}{\def\@batitlereturndate{#1}}
+% type of paper (thesis etc...)
+\define@key[BA]{title}{type}{\def\@batitletype{#1}}
+\presetkeys[BA]{title}{type=undefined}{}
 
 % helper macro to print the list of correctors comma seperated
 \newcommand{\printcorrectors}[1]{
   	\@for\next:=#1\do
     	{Gutachter: \next\\}%
+}
+
+% helper macro to convert @baclstype to an actual text
+\newcommand{\@bapapertype}{%
+    % need to expand @bapapertype as ifdefstring does not do that
+    \edef\@bapapertest{\@batitletype}%
+    \ifdefstring{\@bapapertest}{thesis}{%
+        Bachelorarbeit\\
+        zur Erlangung des Abschlusses Bachelor of Science\\
+        im Studiengang \@batitlecourse%
+    }{}%
+    \ifdefstring{\@bapapertest}{study}{%
+        Studienarbeit%
+    }{}%
+    \ifdefstring{\@bapapertest}{report}{%
+        Belegarbeit%
+    }{}%
 }
 
 % Title Page
@@ -147,6 +167,7 @@
             \par
             \vspace{3cm}
             \normalsize
+            \@bapapertype{}\\[\baselineskip]
             \@baclslast{}, \@baclsfirst \\
             \@baclscompany{}\\
             Matrikelnummer: \@batitlenumber{}
@@ -259,6 +280,9 @@
     \define@key[BA]{simple}{signature}{\def\@basimplesignature{#1}}
     % where the company is located at
     \define@key[BA]{simple}{location}{\def\@basimplelocation{#1}}
+    % type of the paper (thesis etc...)
+    \define@key[BA]{simple}{type}{\def\@basimpletype{#1}}
+    \presetkeys[BA]{simple}{type=undefined}{}
 
     % adjust glossary styling
     \setacronymstyle{long-short}
@@ -274,7 +298,8 @@
             number=\@basimplenumber,
             corrector=\@basimplecorrector,
             themedate=\@basimplethemedate,
-            returndate=\@basimplereturndate
+            returndate=\@basimplereturndate,
+            type=\@basimpletype,
         }
         \mkblocknotice{
             signature=\@basimplesignature,

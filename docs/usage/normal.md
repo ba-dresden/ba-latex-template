@@ -26,7 +26,8 @@ Let's start with the basic document structure. All packages imports shown are no
         number=1234,
         corrector={corrector 1,corrector 2},
         themedate=\today,
-        returndate=\today
+        returndate=\today,
+        type=thesis
     }
     \mkblocknotice{
         signature=../empty.png,
@@ -55,6 +56,7 @@ It should be obvious that it is possible to move different elements from the beg
     - `corrector` should be a comma sperated list of correctors
     - `themedate` should be the date when the theme of the paper was announced
     - `returndate` should be the date when the paper is handed in
+    - `type` defines the type of the paper. It should be one of `thesis`, `study` or `report`. Setting the `type` parameter is optional.
 - `\mkblocknotice` creates a block notice
     - `signature` should be a path to an image of your signature
     - `date` should be the date when the paper is handed in
