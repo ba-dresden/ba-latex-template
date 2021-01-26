@@ -48,6 +48,20 @@ Let's also discuss the options of the `basimple` environment:
 - `location` should be the location of your company
 - `type` defines the type of the paper and influences the title page if set to `thesis`, `study` or `report`. Setting the `type` parameter is optional.
 
+To add an abstract to the paper define a macro called `\basimpleabstract` which replacement text is the abtract's content. The following should do it (the `\addcontentsline` is optional):
+```latex
+\documentclass[...,simple]{baarticle}
+
+\newcommand{\basimpleabstract}{
+    % if you want to add the abstract to the table of contents
+    \addcontentsline{toc}{section}{Abstract}
+    content of the abstract
+}
+\begin{document}
+    ...
+\end{document}
+```
+
 The example document given can be compiled, with `latexmk --pdf --interaction=nonstopmode file.tex` for example.
 ```warning
  Importing additional packages with `\usepackage` while in "simple mode" might not work. If you need to load additional packages consider not using the "simple mode".

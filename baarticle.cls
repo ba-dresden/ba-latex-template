@@ -134,13 +134,13 @@
     \ifdefstring{\@bapapertest}{thesis}{%
         Bachelorarbeit\\
         zur Erlangung des Abschlusses Bachelor of Science\\
-        im Studiengang \@batitlecourse%
+        im Studiengang \@batitlecourse\\[\baselineskip]%
     }{}%
     \ifdefstring{\@bapapertest}{study}{%
-        Studienarbeit%
+        Studienarbeit\\[\baselineskip]%
     }{}%
     \ifdefstring{\@bapapertest}{report}{%
-        Belegarbeit%
+        Belegarbeit\\[\baselineskip]%
     }{}%
 }
 
@@ -167,7 +167,7 @@
             \par
             \vspace{3cm}
             \normalsize
-            \@bapapertype{}\\[\baselineskip]
+            \@bapapertype{}
             \@baclslast{}, \@baclsfirst \\
             \@baclscompany{}\\
             Matrikelnummer: \@batitlenumber{}
@@ -305,6 +305,11 @@
             signature=\@basimplesignature,
             date=\@basimplereturndate,
             location=\@basimplelocation
+        }
+        \ifdefvoid{\basimpleabstract}{}{
+            \section*{Abstract}
+            \basimpleabstract
+            \clearpage
         }
         \mkfrontmatter{
             \section*{Abkürzungsverzeichnis}

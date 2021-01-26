@@ -1,6 +1,10 @@
 \documentclass[first=firstname,last=lastname,company=comp,location=Dresden,simple]{baarticle}
 
 \newacronym{HTTP}{HTTP}{Hypertext Transfer Protocol}
+\newcommand{\basimpleabstract}{
+    \addcontentsline{toc}{section}{Abstract}
+    This is going to be in the abstract.
+}
 \begin{document}
     \begin{basimple}[
         img=../empty.png,
