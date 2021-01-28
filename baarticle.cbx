@@ -41,19 +41,21 @@
 % Custom cite commands
 \DeclareCiteCommand{\bacite}[\mkbibfootnote]
   {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+  {\bibhyperref[#3]{%
+    \usebibmacro{citeindex}%
+    \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
      {\usebibmacro{cite:ibid}}
      {\usebibmacro{cite:fullpartcite}}%
-	 }
+	 }}
   {\addsemicolon\space}
   {\usebibmacro{postnote}}
 \DeclareCiteCommand{\vglcite}[\mkbibfootnote]
   {Vgl. \usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+  {\bibhyperref[#3]{%
+    \usebibmacro{citeindex}%
+    \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
      {\usebibmacro{cite:ibid}}
      {\usebibmacro{cite:fullpartcite}}%
-	 }
+	 }}
   {\addsemicolon\space}
   {\usebibmacro{postnote}}

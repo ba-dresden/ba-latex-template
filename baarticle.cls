@@ -337,13 +337,11 @@
     \addcontentsline{toc}{section}{Anhangverzeichnis}
     \listofappx
     \clearpage
-    \fancyhead[R]{Anhang \theappx}
     \section*{Anhang}
     \addcontentsline{toc}{section}{Anhang}
 }{
     \clearpage
     \togglefalse{baclsappx}
-    \fancyhead[R]{}
 }
 
 % Specify environment keys
