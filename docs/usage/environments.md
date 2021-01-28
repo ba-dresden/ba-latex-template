@@ -43,8 +43,13 @@ The `baappx` environment creates the appendix along with list of all appendix en
     \begin{bafigure}{CAPTION}
         % A figure in the appendix
     \end{bafigure}
+    \clearpage
+    \begin{batable}{CAPTION}
+        % A table in the appendix
+    \end{batable}
 \end{baappx}
 Throughout the document `\theappx` can be used to get the number/index of the last appendix entry.
+```
 ```warning
  The list of appendix entries is tracked in an extra file ending in ".loa". It might not be handled correctly by build tools when cleaning, e.g. "latexmk -c". In this case the file can be removed manually.
 ```
