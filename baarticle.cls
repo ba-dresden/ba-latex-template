@@ -1,6 +1,6 @@
 % Document class implementing the BA Dresden Styleguide
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{baarticle}[2020/07/09 v0.1]
+\ProvidesClass{baarticle}[2021/01/28 v0.2]
 
 % Process package options
 \RequirePackage{xkeyval} % for key value processing
