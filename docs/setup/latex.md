@@ -4,6 +4,10 @@ sort: 1
 ---
 # LaTeX Setup
 
+```tip
+There is a version of this template ready for the overleaf online-editor. You can find it [here](https://github.com/n3rdc4ptn/ba-latex-template-overleaf). You can skip the whole local setup, if you choose to use overleaf. Take care regarding confidential topics.
+```
+
 ## TeX System
 
 You need to install a TeX distribution.
