@@ -65,6 +65,7 @@
 \newlength{\fignumspacing} % a "scratch" length
 \settowidth{\fignumspacing}{\bfseries\cftfigpresnum\cftfigaftersnum} % extra space
 \addtolength{\cftfignumwidth}{\fignumspacing} % add the extra space
+\setlength{\cftfigindent}{0pt}
 
 % List of Tables Style
 \renewcommand{\cfttabpresnum}{Tabelle }
@@ -72,6 +73,7 @@
 \newlength{\tabnumspacing} % a "scratch" length
 \settowidth{\tabnumspacing}{\bfseries\cfttabpresnum\cfttabaftersnum} % extra space
 \addtolength{\cfttabnumwidth}{\tabnumspacing} % add the extra space
+\setlength{\cfttabindent}{0pt}
 
 % List of Appendix (LoA)
 % The related commands will refer to 'appx' as the appendix command is already defined by LaTeX
