@@ -42,7 +42,7 @@
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
     \RequirePackage[style=baarticle]{biblatex}
-    \RequirePackage[nogroupskip,nonumberlist,nopostdot]{glossaries}
+    \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
     \RequirePackage{hyperref}
 } {
     % not in simple, do nothing
@@ -287,6 +287,7 @@
     \presetkeys[BA]{simple}{type=undefined}{}
 
     % adjust glossary styling
+    \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
     \setacronymstyle{long-short}
     \renewcommand{\glossarysection}[2][]{}
     \makenoidxglossaries
@@ -314,9 +315,12 @@
             \clearpage
         }
         \mkfrontmatter{
+            \singlespacing
             \section*{Abkürzungsverzeichnis}
             \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+            \vspace{-1cm}
             \printnoidxglossaries
+            \onehalfspacing
         }
     }{
         \printbibliography[heading=bibintoc]

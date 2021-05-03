@@ -75,7 +75,7 @@ If you decide to use the glossaries package to manage abbreviations their defaul
 \usepackage[english,main=ngerman]{babel}
 \usepackage[autostyle=true,german=quotes]{csquotes}
 \usepackage[style=baarticle]{biblatex}
-\usepackage[nogroupskip,nonumberlist,nopostdot]{glossaries}
+\usepackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
 \usepackage{hyperref}
 
 \setacronymstyle{long-short}
@@ -85,9 +85,12 @@ If you decide to use the glossaries package to manage abbreviations their defaul
 \begin{document}
     ...
     \mkfrontmatter{
+        \singlespacing
         \section*{Abkürzungsverzeichnis}
         \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+        \vspace{-1cm}
         \printnoidxglossaries
+        \onehalfspacing
     }
     ...
 \end{document}
