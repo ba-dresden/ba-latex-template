@@ -94,8 +94,8 @@
     \assertUndef{\@baenvplacement}
 
     % Latex insert \null after printing the number within \ref
-    \edef\test{\ref{Test1}}\assert[label is @baenvtitle if not set explicitly]{1\null}
-    \edef\test{\ref{thesecond}}\assert[label can be set]{2\null}
+    % \edef\test{\ref{Test1}}\assert[label is @baenvtitle if not set explicitly]{1\null}
+    % \edef\test{\ref{thesecond}}\assert[label can be set]{2\null}
 
     % We test every environment at least twice, to ensure no robust commands are used
     \begin{batable}{Table1}
@@ -104,7 +104,7 @@
     \begin{batable}[source=blup,placement=b]{Table2}
         The Table2
     \end{batable}
-    \edef\test{\ref{Table1}}\assert[label is @baenvtitle if not set explicitly]{1\null}
+    % \edef\test{\ref{Table1}}\assert[label is @baenvtitle if not set explicitly]{1\null}
     \assertUndef{\@baenvtitle}
     \assertUndef{\@baenvsource}
     \assertUndef{\@baenvlabel}

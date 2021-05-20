@@ -5,19 +5,23 @@
 % use the BA localization
 \DeclareLanguageMapping{ngerman}{ngerman-ba}
 
-% put family name for the first na,e
+% put family name for the first name
 \DeclareNameAlias{labelname}{family-given}
 \DeclareNameAlias{sortname}{family-given}
 \DeclareNameAlias{publisher}{family-given}
 % formatting for certain fields
-\DeclareFieldFormat{url}{in:\space\url{#1}}
-\DeclareFieldFormat{urldate}{\newunitpunct\space(#1)}
+\DeclareFieldFormat{url}{in:\space\linebreak[0]\url{#1}}
+\DeclareFieldFormat{urldate}{\newunitpunct\space\linebreak[0](#1)}
 \DeclareFieldFormat{year}{#1}
 \DeclareFieldFormat{edition}{#1 Auflage}
 \DeclareFieldFormat[article]{citetitle}{#1}
 \DeclareFieldFormat[article]{title}{\textit{#1}}
 \DeclareFieldFormat[incollection]{title}{\textit{#1}}
 \DeclareFieldFormat[incollection]{citetitle}{#1}
+
+% allow linebreaks in long urls
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
 
 % Sourcemapping, which copies the content of publisher to bapublisher
 \DeclareStyleSourcemap{
