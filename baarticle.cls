@@ -31,7 +31,7 @@
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
 \RequirePackage{fancyhdr} % to adjust headers and footers
 \RequirePackage{graphicx} % to use includegraphics
-\RequirePackage[font={footnotesize}]{caption} % to make captions smaller
+\RequirePackage[font={footnotesize},justification=centering]{caption} % to make captions smaller and keep long captions centered
 \RequirePackage{wrapfig} % to place text wrapping floats
 \RequirePackage{tocbibind} % adds ToC entries for ToC, LoF, LoT, etc ...
 \RequirePackage[bottom,hang]{footmisc} % to keep footnotes always on the bottom and to fix multiline indentation
@@ -42,8 +42,8 @@
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
     \RequirePackage[style=baarticle]{biblatex}
-    \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
     \RequirePackage{hyperref}
+    \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
 } {
     % not in simple, do nothing
 }
