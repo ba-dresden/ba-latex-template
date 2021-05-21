@@ -7,7 +7,10 @@ Not using the "simple mode" makes the usage of the template a bit more verbose, 
 ```tip
  If you have trouble using packages in the "simple mode", do not use it.
 ```
-Let's start with the basic document structure. All packages imports shown are not required, also the author highly recommends to use these. The template bundles a complete biblatex style called "baarticle", which should be used to get the citations and bibliography right. The package options are described in the "simple mode" [section](./simple).
+Let's start with the basic document structure.
+All packages imports shown are not required, also the author highly recommends to use these.
+The template bundles a complete biblatex style called "baarticle", which should be used to get the citations and bibliography right.
+The package options are described in the "simple mode" [section](./simple).
 ```latex
 \documentclass[first=firstname,last=lastname,company=comp,location=Dresden]{baarticle}
 \usepackage[english,main=ngerman]{babel}
@@ -75,8 +78,8 @@ If you decide to use the glossaries package to manage abbreviations their defaul
 \usepackage[english,main=ngerman]{babel}
 \usepackage[autostyle=true,german=quotes]{csquotes}
 \usepackage[style=baarticle]{biblatex}
-\usepackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
 \usepackage{hyperref}
+\usepackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
 
 \setacronymstyle{long-short}
 \renewcommand{\glossarysection}[2][]{}

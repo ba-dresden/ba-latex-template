@@ -3,7 +3,8 @@ title: Simple Mode
 sort: 1
 ---
 # Simple mode
-The template has a "simple mode", which loads a bunch of opinionated packages and provides the `basimple` environment, which configures everything, so you do not have to worry about anything. The "simple mode" is enabled with the `simple` package option.
+The template has a "simple mode", which loads a bunch of opinionated packages and provides the `basimple` environment, which configures everything, so you do not have to worry about anything.
+The "simple mode" is enabled with the `simple` package option.
 ```latex
 \documentclass[first=firstname,last=lastname,company=comp,location=Dresden,simple]{baarticle}
 
@@ -67,21 +68,171 @@ The example document given can be compiled, with `latexmk --pdf --interaction=no
  Importing additional packages with `\usepackage` while in "simple mode" might not work. If you need to load additional packages consider not using the "simple mode".
 ```
 
-## A little walkthrough
+## Basic functionality
 
-Sections can be created using the `\section{title},\subsection{title},\subsubsection{title}` commands. The section titles are automatically added to the table of contents. If you do not want that use the starred version of the command, e.g. `\section*{title not in table of contents}`.
+Sections can be created using the `\section{title},\subsection{title},\subsubsection{title}` commands.
+The section titles are automatically added to the table of contents.
+If you do not want that use the starred version of the command, e.g. `\section*{title not in table of contents}`.
+Footnotes can be created as usual with `\footnote{content}`.
+Abbreviations are managed by the glossaries package.
+To define an abbreviation use `\newacronym{identifier}{short-form}{long-form}` before `\begin{document}` and to refer to it use `\gls{identifier}`.
+```latex
+\documentclass[...]{baarticle}
 
-Refering to sources can be achieved with the `\bacite{source}` command for direct citations and the the `\vglcite{source}` command for indirect citations. You need to provide LaTeX with a list of used sources. Therefore you have to create a file with the `.bib` extension, e.g. `document.bib`, and fill it with information regarding your sources.
+\newacronym{HTTP}{HTTP}{Hypertext Transfer Protocol}
+\begin{document}
+    \begin{basimple}[...]
+        \section{Caption}
+        \gls{HTTP} is a protocol on the OSI-Layer 7.\footnote{Also note that...}
+    \end{basimple}
+\end{document}
+```
+Images can be inculded with `\includegraphics`, which should be wrapped in a `bafigure` environment.
+The number of a figure can be retrieved using `\ref{caption}` with the caption provided to the environment.
+`\includegraphics` has a lot of optional arguments, e.g. for rotating and scaling images.
+Take a look [here](https://latexref.xyz/_005cincludegraphics.html).
+Tables should also be wrapped in a `batable` environment.
+```latex
+\documentclass[...]{baarticle}
+
+\begin{document}
+    \begin{basimple}[...]
+        \begin{bafigure}{caption}
+            \includegraphics{path/to/an/image.png}
+        \end{bafigure}
+        As seen in figure \ref{caption} ...
+        \begin{batable}
+            % The page width is roughly 14cm
+            \begin{tabular}{|p{6cm}|p{8cm}|}
+                \hline
+                A & B\\\hline
+                C & D\\\hline
+            \end{tabular}
+        \end{batable}
+    \end{basimple}
+\end{document}
+```
+An appendix can be created using the `baappx` environment, which will also create an overview of all appendix entries.
+Most environments introduced by this template feature some customization options, which are describe in the [environments](./environments) section.
+```latex
+\documentclass[...]{baarticle}
+
+\begin{document}
+    % lots of content
+    \begin{basimple}[...]
+        \begin{baappx}
+            \begin{bafigure}{caption}
+                \includegraphics{path/to/an/image.png}
+            \end{bafigure}
+        \end{baappx}
+    \end{basimple}
+\end{document}
+```
+It is worthwhile to split up larger documents into mulitple files.
+You can put each chapter into a separat `.tex` file and join them in the main file using `\include{path/to/the/file}`.
+Given the following file tree:
 ```text
+somedirectory
+|-baarticle.bbx
+|-baarticle.cbx
+|-baarticle.cls
+|-baarticle.dtx
+|-chapter1.tex
+|-chapter2.tex
+|-chapter3.tex
+|-document.tex
+|-ngerman-ba.lbx
+```
+This should work.
+```latex
+\documentclass[...]{baarticle}
+
+\begin{document}
+    \begin{basimple}[...]
+        % leaving out the file extension is required for \include
+        \include{chapter1}
+        \include{chapter2}
+        \include{chapter3}
+    \end{basimple}
+\end{document}
+```
+
+## Citations and bibliography
+The template uses the biblatex package to deal with the bibliography and citations and provides customized styles for it, which are automatically loaded in simple mode.
+Biblatex own its own has a load functionality, so feel free to consult their [documentation](https://ctan.mc1.root.project-creative.net/macros/latex/contrib/biblatex/doc/biblatex.pdf) and [cheatsheet](http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf).
+
+At first it is required to setup a bibliography database.
+One needs to create a file with the `.bib` extension in the file tree.
+```text
+somedirectory
+|-baarticle.bbx
+|-baarticle.cbx
+|-baarticle.cls
+|-baarticle.dtx
+|-document.bib
+|-document.tex
+|-ngerman-ba.lbx
+```
+That biliography file needs to be included in the main file before `\begin{document}` using `\addbibresource{document.bib}`.
+Such file consists of multiple entries, which each requiring a type and a citekey.
+This template covers the `@article`, `@book`, `@online`, `@collection`, `@incollection`, `@unpublished` (upcoming in v0.4) with attributes as shown below.
+```text
+// cloudcomp is the citekey for this entry
 @book{cloudcomp,
-	author = {John W. Rittinghouse and James F. Ransome},
-	title = {Cloud Computing},
-	subtitle = {Implementation, Management and Security},
-	location = {Boca Raton},
-	year = {2018}
+    author = {John W. Rittinghouse and James F. Ransome},
+    title = {Cloud Computing},
+    subtitle = {Implementation, Management and Security},
+    location = {Boca Raton},
+    year = {2018}
+}
+@article{clouderp,
+    author = {Mohamed A. Abd Elmonem and Eman S. Nasr and Mervat H. Geith},
+    title = {Benefits and challenges of cloud ERP systems},
+    subtitle = {A systematic literature review},
+    journal = {Future Computing and Informatics Journal},
+    number = {1},
+    year = {2016},
+    pages = {1-9}
+}
+@online{itmgmtdef,
+    author = {Olaf Resch},
+    title = {IT-Management},
+    subtitle = {...},
+    url = {...},
+    urldate = {2020-05-23},
+    year = {2019}
+}
+// @collection and @incollection usally go together
+@collection{reinheimercloud,
+    title = {Cloud Computing},
+    subtitle = {Die Infrastruktur der Digitalisierung},
+    location = {Wiesbaden},
+    year = {2018},
+    publisher = {Stefan Reinheimer}
+}
+@incollection{hentschelcloud,
+    author = {Raoul Hentschel and Christian Leyh},
+    title = {Cloud Computing},
+    subtitle = {Status quo, aktuelle Entwicklungen und Herausforderungen},
+    // notice the crossref to the collection
+    crossref = {reinheimercloud},
+    pages = {3-30}
+}
+@unpublished{internal,
+    author = { {Company with spaces in the name} },
+    title = {Top Secret},
+    year = {2021}
 }
 ```
-Now one can create references in the `.tex` file. `\enquote{content}` puts its argument in quotation marks. The numbers given to the cite commands in the brackets describe the pages, where the information can be found in the sources.
+```warning
+ Additional attributes should not be required and may use a wrong formatting. The same holds true for other entry types. Be aware.
+```
+Now one can create references in the `.tex` file.
+Refering to sources in the text can be achieved with the `\bacite{citekey}` command for direct citations and the the `\vglcite{citekey}` command for indirect citations.
+`\enquote{content}` puts its argument in quotation marks.
+The optional numbers given to the cite commands in the brackets describe the pages, where the information can be found in the sources.
+Footnotes for citations and the final bibliography are generated automatically.
+In case one needs to chain multiple cite commands one after another, they should be separated using `\textsuperscript{,}`.
 ```latex
 \documentclass[...]{baarticle}
 
@@ -92,50 +243,4 @@ Now one can create references in the `.tex` file. `\enquote{content}` puts its a
         indirect citation.\vglcite[17-21]{cloudcomp}\enquote{direct citation}\bacite[29]{cloudcomp}
     \end{basimple}
 \end{document}
-```
-To get a grasp on what else is possible with biblatex consult their [documentation](https://ctan.mc1.root.project-creative.net/macros/latex/contrib/biblatex/doc/biblatex.pdf) and [cheatsheet](http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf).
-
-Abbreviations are managed by the glossaries package. To define an abbreviation use `\newacronym{identifier}{short-form}{long-form}` and to refer to it use `\gls{identifier}`.
-```latex
-\documentclass[...]{baarticle}
-
-\newacronym{HTTP}{HTTP}{Hypertext Transfer Protocol}
-\begin{document}
-    \begin{basimple}[...]
-        \section{Caption}
-        \gls{HTTP} is a protocol on the OSI-Layer 7.
-    \end{basimple}
-\end{document}
-```
-Images can be inculded with `\includegraphics`, which should be wrapped in a `bafigure` environment. The number of a figure can be retrieved using `\ref{caption}` with the caption provided to the environment. Tables should also be wrapped in a `batable` environment.
-```latex
-\documentclass[...]{baarticle}
-
-\begin{document}
-    \begin{basimple}[...]
-        \begin{bafigure}{caption}
-            \includegraphics{path/to/an/image.png}
-        \end{bafigure}
-        As seen in figure \ref{caption} ...
-    \end{basimple}
-\end{document}
-```
-It is worthwhile to split up larger documents into mulitple files. You can put each chapter into a separat `.tex` file and join them in the main file using `\include{path/to/the/file}`. Assuming the files are in the same directory the following works.
-```latex
-\documentclass[...]{baarticle}
-
-\begin{document}
-    \begin{basimple}[...]
-        \include{chapter1}
-        \include{chapter2}
-        \include{chapter3}
-    \end{basimple}
-\end{document}
-```
-
-## Using non ascii symbols with pdflatex
-
-To use non ascii symbols, you need to save the `*.tex` and `*.bib` files in the UTF-8 encoding and import the inputenc package.
-```latex
-\usepackage[utf8]{inputenc}
 ```
