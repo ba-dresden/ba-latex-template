@@ -18,6 +18,8 @@
 \DeclareFieldFormat[article]{title}{\textit{#1}}
 \DeclareFieldFormat[incollection]{title}{\textit{#1}}
 \DeclareFieldFormat[incollection]{citetitle}{#1}
+\DeclareFieldFormat[unpublished]{citetitle}{#1}
+\DeclareFieldFormat[unpublished]{title}{\textit{#1}}
 
 % allow linebreaks in long urls
 \setcounter{biburllcpenalty}{7000}
@@ -109,6 +111,56 @@
         {\usebibmacro{related:init}%
         \usebibmacro{related}}
         {}%
+    \usebibmacro{finentry}}
+
+% add internal document notice to unpublished
+% (loosly copied from the standard.bbx definition of book)
+\DeclareBibliographyDriver{unpublished}{%
+    \usebibmacro{bibindex}%
+    \usebibmacro{begentry}%
+    \usebibmacro{author/editor+others/translator+others}%
+    \setunit{\printdelim{nametitledelim}}\newblock
+    \usebibmacro{maintitle+title}%
+    \newunit
+    \printlist{language}%
+    \newunit\newblock
+    \usebibmacro{byauthor}%
+    \newunit\newblock
+    \usebibmacro{byeditor+others}%
+    \newunit\newblock
+    \printfield{edition}%
+    \newunit
+    \iffieldundef{maintitle}
+    {\printfield{volume}%
+    \printfield{part}}
+    {}%
+    \newunit
+    \printfield{volumes}%
+    \newunit\newblock
+    \usebibmacro{series+number}%
+    \newunit\newblock
+    \printfield{note}%
+    \newunit\newblock
+    \usebibmacro{publisher+location+date}%
+    \newunit\newblock
+    \usebibmacro{chapter+pages}%
+    \newunit
+    \printfield{pagetotal}%
+    \newunit\newblock
+    \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+    \newunit\newblock
+    \usebibmacro{doi+eprint+url}%
+    \newunit\newblock
+    \usebibmacro{addendum+pubstate}, internes Dokument%
+    \setunit{\bibpagerefpunct}\newblock
+    \usebibmacro{pageref}%
+    \newunit\newblock
+    \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+    \usebibmacro{related}}
+    {}%
     \usebibmacro{finentry}}
 
 % fix publisher formatting
