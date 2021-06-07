@@ -5,7 +5,7 @@
 % Process package options
 \RequirePackage{xkeyval} % for key value processing
 \RequirePackage{etoolbox} % for csdef, csundef, ifdefempty, toggles, etc ...
-\newtoggle{baclssimple} % toggle are false per default
+\newtoggle{baclssimple} % toggles are false per default
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -25,6 +25,11 @@
 \LoadClass[12pt]{article}
 
 % Load required packages
+\RequirePackage{iftex} % to check the TeX engine in use
+\ifpdftex
+    \RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented chararcters properly from the compiled document
+    \RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
+\fi
 \RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
