@@ -13,11 +13,11 @@ Also adds the given caption with a source reference below the figure.
     placement=htb,
     label=LABEL
 ]{CAPTION}
-    % The content
+    % The content e.g. \includegraphics{...}
 \end{bafigure}
 ```
 Let's describe the optional arguments shortly:
-- `source` is the source of the figure, it defaults to you.
+- `source` is the source of the figure, it defaults to you. To cite something here properly `\captioncite` should be used.
 - `placement` describes the placement of the figure, it defaults to `H`, which puts the figure exactly where it was specified in the code.
 - `label` is the label, which you can use in `\ref{label}`, it defaults to the provided caption.
 
@@ -30,11 +30,11 @@ Also adds the given caption with a source reference below the figure.
     placement=htb,
     label=LABEL
 ]{CAPTION}
-    % The content
+    % The content e.g. a nested tabular environment
 \end{batable}
 ```
 The optional arguments have the same meaning as for `bafigure`.
-- `source` is the source of the table, it defaults to you.
+- `source` is the source of the table, it defaults to you. To cite something here properly `\captioncite` should be used.
 - `placement` describes the placement of the table, it defaults to `H`, which puts the table exactly where it was specified in the code.
 - `label` is the label, which you can use in `\ref{label}`, it defaults to the provided caption.
 

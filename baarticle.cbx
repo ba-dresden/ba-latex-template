@@ -59,3 +59,11 @@
 	 }}
   {\addsemicolon\space}
   {\usebibmacro{postnote}}
+\DeclareCiteCommand{\captioncite}
+  {\usebibmacro{prenote}}
+  {\bibhyperref[#3]{%
+    \usebibmacro{citeindex}%
+    \usebibmacro{cite:fullpartcite}%
+    }}
+  {\addsemicolon\space}
+  {\usebibmacro{postnote}}
