@@ -44,6 +44,7 @@
 
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
+    \RequirePackage{pdfpages}
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
     \RequirePackage[style=baarticle]{biblatex}
@@ -289,7 +290,12 @@
     \define@key[BA]{simple}{location}{\def\@basimplelocation{#1}}
     % type of the paper (thesis etc...)
     \define@key[BA]{simple}{type}{\def\@basimpletype{#1}}
-    \presetkeys[BA]{simple}{type=undefined}{}
+    % path to thesis assignment (must be a pdf file)
+    \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
+    % whether to include the blocknotice or not
+    \define@boolkey[BA]{simple}{blocknotice}[true]{}
+
+    \presetkeys[BA]{simple}{type=undefined,blocknotice=true}{}
 
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
@@ -309,11 +315,18 @@
             returndate=\@basimplereturndate,
             type=\@basimpletype,
         }
-        \mkblocknotice{
-            signature=\@basimplesignature,
-            date=\@basimplereturndate,
-            location=\@basimplelocation
+        \ifdefvoid{\@basimpleassignment}{
+            % no assignment file set, do nothing
+        }{
+            \includepdf[pages={1}]{\@basimpleassignment}
         }
+        \ifBA@simple@blocknotice
+            \mkblocknotice{
+                signature=\@basimplesignature,
+                date=\@basimplereturndate,
+                location=\@basimplelocation
+            }
+        \fi
         \ifdefvoid{\basimpleabstract}{}{
             \section*{Abstract}
             \basimpleabstract

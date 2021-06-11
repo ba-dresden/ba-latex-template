@@ -19,7 +19,8 @@ The "simple mode" is enabled with the `simple` package option.
         returndate=\today,
         signature=../empty.png,
         location=Dresden,
-        type=thesis
+        type=thesis,
+        assignment=somefile.pdf
     ]
         \section{Caption}
         Here is the content of paper.
@@ -48,6 +49,8 @@ Let's also discuss the options of the `basimple` environment:
 - `signature` should be a path to an image of your signature
 - `location` should be the location of your company
 - `type` defines the type of the paper and influences the title page if set to `thesis`, `study` or `report`. Setting the `type` parameter is optional.
+- `assignment` should point to a PDF file containing the assignment to write a thesis. It will include the first page of the given PDF file at the apropiate place. Setting the `assignment` parameter is optional.
+- `blocknotice` defines whether a blocknotice should be included or not if set to `false`. One will be included per default. Setting the `blocknotice` parameter is optional.
 
 To add an abstract to the paper define a macro called `\basimpleabstract` which replacement text is the abtract's content. The following should do it (the `\addcontentsline` is optional):
 ```latex
