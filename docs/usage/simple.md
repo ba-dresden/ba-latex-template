@@ -178,7 +178,7 @@ somedirectory
 ```
 That biliography file needs to be included in the main file before `\begin{document}` using `\addbibresource{document.bib}`.
 Such file consists of multiple entries, which each requiring a type and a citekey.
-This template covers the `@article`, `@book`, `@online`, `@collection`, `@incollection`, `@unpublished` (upcoming in v0.4) with attributes as shown below.
+This template covers the `@article`, `@book`, `@online`, `@collection`, `@incollection`, `@unpublished` with attributes as shown below.
 ```text
 // cloudcomp is the citekey for this entry
 @book{cloudcomp,

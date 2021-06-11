@@ -1,5 +1,5 @@
 % Datamodel for the BA Dresden citation and bibliography styles
-\ProvidesFile{baarticle.dbx}[2021/05/03 v0.3 BA Dresden datamodel]
+\ProvidesFile{baarticle.dbx}[2021/06/11 v0.4 BA Dresden datamodel]
 
 % Define a name list holding the publisher
 % This is required for the spurce map, which maps the original publisher list to the bapublisher namelist
