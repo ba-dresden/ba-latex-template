@@ -104,7 +104,7 @@ Tables should also be wrapped in a `batable` environment.
             \includegraphics{path/to/an/image.png}
         \end{bafigure}
         As seen in figure \ref{caption} ...
-        \begin{batable}
+        \begin{batable}{caption}
             % The page width is roughly 14cm
             \begin{tabular}{|p{6cm}|p{8cm}|}
                 \hline
