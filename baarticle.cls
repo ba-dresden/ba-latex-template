@@ -50,6 +50,14 @@
     \RequirePackage[style=baarticle]{biblatex}
     \RequirePackage{hyperref}
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
+    
+    % hyperref config
+    \hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    }
 } {
     % not in simple, do nothing
 }
