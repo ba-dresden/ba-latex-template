@@ -51,13 +51,15 @@
     \RequirePackage{hyperref}
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
     
-    % hyperref config
-    \hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-    }
+    \ifBA@simple@linkcoloring
+        % hyperref config
+        \hypersetup{
+            colorlinks=true,
+            linkcolor=blue,
+            filecolor=magenta,      
+            urlcolor=cyan,
+        }
+     \fi
 } {
     % not in simple, do nothing
 }
@@ -302,8 +304,10 @@
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
+    % display links with boxes (do not appear while printing) or as colorings (appear while printing)
+    \define@boolkey[BA]{simple}{linkcoloring}[false]{}
 
-    \presetkeys[BA]{simple}{type=undefined,blocknotice=true}{}
+    \presetkeys[BA]{simple}{type=undefined,blocknotice=true,linkcoloring=false}{}
 
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
