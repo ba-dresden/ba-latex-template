@@ -6,6 +6,7 @@
 \RequirePackage{xkeyval} % for key value processing
 \RequirePackage{etoolbox} % for csdef, csundef, ifdefempty, toggles, etc ...
 \newtoggle{baclssimple} % toggles are false per default
+\newtoggle{baclslinkcoloring} % toggles are false per default
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -17,6 +18,8 @@
 \DeclareOptionX[BA]{location}{\def\@baclslocation{#1}}
 % if specified the class will load additional packages and provide the basimple environment, which simplifies the setup
 \DeclareOptionX[BA]{simple}[usesimple]{\toggletrue{baclssimple}}
+% if specified links will be colored
+\DeclareOptionX[BA]{linkcoloring}[uselinkcoloring]{\toggletrue{baclslinkcoloring}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptionsX[BA]\relax
@@ -51,7 +54,7 @@
     \RequirePackage{hyperref}
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
     
-    \ifBA@simple@linkcoloring
+    \iftoggle{baclslinkcoloring}{
         % hyperref config
         \hypersetup{
             colorlinks=true,
@@ -59,7 +62,9 @@
             filecolor=magenta,      
             urlcolor=cyan,
         }
-     \fi
+    } {
+        % no coloring required, do nothing
+    }
 } {
     % not in simple, do nothing
 }
@@ -304,10 +309,8 @@
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
-    % display links with boxes (do not appear while printing) or as colorings (appear while printing)
-    \define@boolkey[BA]{simple}{linkcoloring}[false]{}
 
-    \presetkeys[BA]{simple}{type=undefined,blocknotice=true,linkcoloring=false}{}
+    \presetkeys[BA]{simple}{type=undefined,blocknotice=true}{}
 
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}

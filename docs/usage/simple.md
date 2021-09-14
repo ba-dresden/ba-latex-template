@@ -30,13 +30,14 @@ The "simple mode" is enabled with the `simple` package option.
 ```
 
 ```note
- The "simple" package option loads the babel, csquotes, biblatex, glossaries and hyperref packages.
+ The "simple" package option loads the pdfpages, babel, csquotes, biblatex, glossaries and hyperref packages.
 ```
 Let's go through the other package options quickly:
 - `first` should be your first name
 - `last` should be your last name
 - `company` should be the company you work for, in case the name contains spaces use `\space` to split the parts, e.g. `part1\space part2`
 - `location` should be the location of university
+- `linkcoloring` changes the text color of links, if `simple` is specified as well
 
 Let's also discuss the options of the `basimple` environment:
 - `img` should be a path pointing to the logo of the university
