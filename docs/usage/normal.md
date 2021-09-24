@@ -4,9 +4,8 @@ sort: 2
 ---
 # Normal mode
 Not using the "simple mode" makes the usage of the template a bit more verbose, but provides a lot more flexibility.
-```tip
- If you have trouble using packages in the "simple mode", do not use it.
-```
+Usually "normal mode" is only necessary if a conflicting package needs to be imported, as the order of `\usepackage` statements matters, or somebody has special requirements, which deviate from the styleguide.
+
 Let's start with the basic document structure.
 All packages imports shown are not required, also the author highly recommends to use these.
 The template bundles a complete biblatex style called "baarticle", which should be used to get the citations and bibliography right.

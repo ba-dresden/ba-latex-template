@@ -4,9 +4,11 @@ sort: 3
 ---
 # Environments
 The template provides two environments to deal with figures and tables.
+Both will likely break if the content spans multiple pages.
+Therefore it could make sense to split up large content and use multiple `bafigures` or `batables`.
 ## bafigure
 The `bafigure` environment creates a frame and a label around its content and adds an entry to the list of figures.
-Also adds the given caption with a source reference below the figure.
+It also adds the given caption with a source reference below the figure.
 ```latex
 \begin{bafigure}[
     source=SOURCE,
@@ -14,6 +16,7 @@ Also adds the given caption with a source reference below the figure.
     label=LABEL
 ]{CAPTION}
     % The content e.g. \includegraphics{...}
+    % Large images should be nicely sized by setting their width to 14cm, e.g. \includegraphics[width=14cm]{...}
 \end{bafigure}
 ```
 Let's describe the optional arguments shortly:
@@ -23,7 +26,7 @@ Let's describe the optional arguments shortly:
 
 ## batable
 The `batable` environment puts its content in a table environment and adds an entry to the list of table.
-Also adds the given caption with a source reference below the figure.
+It also adds the given caption with a source reference below the figure.
 ```latex
 \begin{batable}[
     source=SOURCE,
@@ -53,6 +56,7 @@ It adjusts the behavior of `bafigure` and `batable` so that they do not add entr
 \end{baappx}
 ```
 Throughout the document `\theappx` can be used to get the number/index of the last appendix entry.
+An entry to the list of all appendix entries can be created manually with `\addtoappx{caption}`
 ```warning
  The list of appendix entries is tracked in an extra file ending in ".loa". It might not be handled correctly by build tools when cleaning, e.g. "latexmk -c". In this case the file can be removed manually. In case your compilation fails permantly without any apparent reason try deleting the ".loa" file.
 ```

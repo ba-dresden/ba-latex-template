@@ -69,7 +69,7 @@ To add an abstract to the paper define a macro called `\basimpleabstract` which 
 
 The example document given can be compiled, with `latexmk --pdf --interaction=nonstopmode file.tex` for example.
 ```warning
- Importing additional packages with `\usepackage` while in "simple mode" might not work. If you need to load additional packages consider not using the "simple mode".
+ Importing additional packages with `\usepackage` while in "simple mode" might not work. If you need to load additional packages consider using the [normal mode](normal.html).
 ```
 
 ## Basic functionality
@@ -88,6 +88,22 @@ To define an abbreviation use `\newacronym{identifier}{short-form}{long-form}` b
     \begin{basimple}[...]
         \section{Caption}
         \gls{HTTP} is a protocol on the OSI-Layer 7.\footnote{Also note that...}
+    \end{basimple}
+\end{document}
+```
+It is possible to refer to certain sections using `\label{identifier}`, which marks a certain (sub-)section, and `\ref{identifier}`, which inserts the section number.
+By the way these references are also clickable links.
+```latex
+\documentclass[...]{baarticle}
+
+\begin{document}
+    \begin{basimple}[...]
+        \section{Caption 1}
+        \label{important}
+        Something important.
+        \section{Caption 2}
+        % Would render to "As seen in section 1."
+        As seen in section \ref{important}.
     \end{basimple}
 \end{document}
 ```

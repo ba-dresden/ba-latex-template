@@ -4,7 +4,10 @@ title: Index
 # BA Dresden LaTeX template
 
 A template, which tries to follow the [BA Dresden Styleguide](https://www.ba-dresden.de/fileadmin/dresden/downloads/zentrale-dokumente/LEITFADEN_webv2.pdf) as close as possible.
-Papers using this template have already passed assessments. Built with love and sane defaults by Nuckal777.
+Papers and bachelors theses using this template have already passed assessments.
+Built with love and sane defaults by Nuckal777.
+If this template served you well, do not forget to click the star button on [GitHub](https://github.com/nuckal777/ba-latex-template).
+It will be appreciated.
 
 ```warning
  The template might do things wrong and there is no warranty. It is your own responsibility to check for correctness.
