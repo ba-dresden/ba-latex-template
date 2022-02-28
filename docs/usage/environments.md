@@ -41,6 +41,8 @@ The optional arguments have the same meaning as for `bafigure`.
 - `placement` describes the placement of the table, it defaults to `H`, which puts the table exactly where it was specified in the code.
 - `label` is the label, which you can use in `\ref{label}`, it defaults to the provided caption.
 
+In case you need footnotes in tables possible options are outlined [here](https://texfaq.org/FAQ-footintab).
+
 ## baappx
 The `baappx` environment creates the appendix along with list of all appendix entries and adds required entries to the table of contents.
 It adjusts the behavior of `bafigure` and `batable` so that they do not add entries to the list of figures/tables and put them instead into the list of all appendix entries.
