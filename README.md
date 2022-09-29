@@ -18,3 +18,5 @@ The source files are commented rather extensively.
 Modifications to the template can be tested by compiling the `minimal.tex` and `simple.tex` files. Some sort of unit tests are provided by the `test.tex` file, but LaTeX support for unit testing is very limited.
 
 The documentation is build from the `docs` folder and served via GitHub Pages.
+
+Originally crafted by [Nuckal777](https://github.com/Nuckal777).
