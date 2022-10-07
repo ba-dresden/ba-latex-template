@@ -21,7 +21,7 @@ It gets as simple as shown below.
 The code creates a document containing a title page, block notice, table of contents, figures, abbreviations, tables,
 a bibliography and an affirmation statement, while setting up correct spacing and page numbering.
 Anyway the template is rather customizable, if desired.
-Hooked? Head over to the [quick start](./quickstart).
+Hooked? Head over to the [quick start](quickstart.md).
 
 ```latex
 \documentclass[first=firstname,last=lastname,company=comp,location=Dresden,simple]{baarticle}
