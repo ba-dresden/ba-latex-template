@@ -23,7 +23,7 @@ The package options are described in the "simple mode" [section](./simple).
 \begin{document}
     \mktitle{
         title=Test Report,
-        img=../empty.png,
+        img=images/logo.png,
         course=science,
         number=1234,
         corrector={corrector 1,corrector 2},
@@ -32,7 +32,7 @@ The package options are described in the "simple mode" [section](./simple).
         type=thesis
     }
     \mkblocknotice{
-        signature=../empty.png,
+        signature=images/signature.png,
         date=\today,
         location=Dresden
     }
@@ -44,7 +44,7 @@ The package options are described in the "simple mode" [section](./simple).
     \printbibliography[heading=bibintoc]
     \clearpage
     \mkaffirmation{
-        signature=../empty.png,
+        signature=images/signature.png,
         date=\today
     }
 \end{document}

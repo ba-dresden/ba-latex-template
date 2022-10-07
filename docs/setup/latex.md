@@ -26,7 +26,7 @@ The template should work with either.
 ### MacOS
 
 There is [MacTex](https://tug.org/mactex/), which is comparable to TeXLive.
-[MikTeX](https://miktex.org/download) is also available for MacOS.
+[MikTeX](https://miktex.org/download) is also available for macOS.
 
 ### Linux
 
@@ -37,7 +37,7 @@ Most linux distributions bundle [TexLive](https://www.tug.org/texlive/acquire-ne
 ## Editor
 
 Next you need an editor.
-There is bunch of choices, starting from plain notepad upto "IDE's", like TeXMaker.
+There is a bunch of choices, starting from plain notepad upto "IDE's", like TeXMaker.
 Some programs are presented [here](https://beebom.com/best-latex-editors/).
 The templates author uses [VSCode](https://code.visualstudio.com/) with the LaTeX Workshop extension.
 

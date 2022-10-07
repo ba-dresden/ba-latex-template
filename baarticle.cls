@@ -30,10 +30,10 @@
 % Load required packages
 \RequirePackage{iftex} % to check the TeX engine in use
 \ifpdftex
-    \RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented chararcters properly from the compiled document
-    \RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
+\RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented chararcters properly from the compiled document
+\RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
 \fi
-\RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
+\RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
@@ -44,6 +44,8 @@
 \RequirePackage{tocbibind} % adds ToC entries for ToC, LoF, LoT, etc ...
 \RequirePackage[bottom,hang]{footmisc} % to keep footnotes always on the bottom and to fix multiline indentation
 \RequirePackage[all]{nowidow} % to eliminate widows and orphans
+\RequirePackage{titlesec} % to reduce section spacing
+\RequirePackage{lipsum}% just to generate text for the example
 
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
@@ -53,21 +55,28 @@
     \RequirePackage[style=baarticle]{biblatex}
     \RequirePackage{hyperref}
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
-    
+
     \iftoggle{baclslinkcoloring}{
-        % hyperref config
+    % hyperref config
         \hypersetup{
             colorlinks=true,
             linkcolor=blue,
-            filecolor=magenta,      
+            filecolor=magenta,
             urlcolor=cyan,
         }
     } {
-        % no coloring required, do nothing
+    % no coloring required, do nothing
     }
 } {
-    % not in simple, do nothing
+% not in simple, do nothing
 }
+
+% set spacing for sections
+\titlespacing*{\section}
+{0pt}{0pt}{0pt}
+\titlespacing*{\subsection}
+{0pt}{0pt}{0pt}
+% {0pt}{1ex minus .2ex}{1ex plus .2ex}
 
 % Set paragraph indentation
 \setlength{\parindent}{0pt}
@@ -101,8 +110,8 @@
 \newcommand{\listappxname}{Anhangverzeichnis}
 \newlistof{appx}{loa}{\listappxname}
 \newcommand{\addtoappx}[1]{%
-        \refstepcounter{appx}
-        \addcontentsline{loa}{appx}{\protect\numberline{\theappx}#1}\par
+    \refstepcounter{appx}
+    \addcontentsline{loa}{appx}{\protect\numberline{\theappx}#1}\par
 }
 \renewcommand{\cftloatitlefont}{\Large\bfseries}
 \renewcommand{\cftappxpresnum}{Anhang }
@@ -115,12 +124,7 @@
 \pagestyle{fancy}
 % Change pagestyle of ToC pages to fancy
 \tocloftpagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt}
-% Clear the header and footer
-\fancyhead{}
-\fancyfoot{}
-% Show the page number on the right side
-\fancyfoot[R]{\thepage}
+% \renewcommand{\headrulewidth}{0pt}
 
 % Start with roman page numbering
 \pagenumbering{Roman}
@@ -144,21 +148,34 @@
 \define@key[BA]{title}{type}{\def\@batitletype{#1}}
 \presetkeys[BA]{title}{type=undefined}{}
 
+% Clear the header and footer
+\fancyhead{}
+\fancyfoot{}
+% Add title to the header
+\fancyhead[L]{\@batitletitle}
+% Show the page number on the right side
+\fancyfoot[R]{\thepage}
+% Default \headrulewidth is 0.4pt
+\renewcommand{\headrulewidth}{0.4pt}
+% Default \footrulewidth is 0pt
+% \renewcommand{\footrulewidth}{0.4pt}
+
+
 % helper macro to print the list of correctors comma seperated
 \newcommand{\printcorrectors}[1]{
-  	\@for\next:=#1\do
-    	{Gutachter: \next\\}%
+    \@for\next:=#1\do
+    {Gutachter: \next\\}%
 }
 
 % helper macro to convert @baclstype to an actual text
 \newcommand{\@bapapertype}{%
-    % need to expand @bapapertype as ifdefstring does not do that
+% need to expand @bapapertype as ifdefstring does not do that
     \edef\@bapapertest{\@batitletype}%
     \ifdefstring{\@bapapertest}{thesis}{%
         Bachelorarbeit\\
         zur Erlangung des Abschlusses Bachelor of Science\\
         im Studiengang \@batitlecourse\\[\baselineskip]%
-    }{}%
+    }{} % \ifdefstring
     \ifdefstring{\@bapapertest}{study}{%
         Studienarbeit\\[\baselineskip]%
     }{}%
@@ -183,22 +200,25 @@
         Staatliche Studienakademie \@baclslocation{} \\
         Studiengang \@batitlecourse{} \\
         \par
-        \vspace{4cm}
+        %%        \vspace{4cm}
+        \vspace*{\fill}
         \begin{center}
             \Huge
             \textbf{\@batitletitle}
             \par
-            \vspace{3cm}
+            \vspace{\fill}
             \normalsize
             \@bapapertype{}
             \@baclslast{}, \@baclsfirst \\
             \@baclscompany{}\\
             Matrikelnummer: \@batitlenumber{}
+            \vspace{\fill}
         \end{center}
         \vfill
         \printcorrectors{\@batitlecorrector}\\
         Tag der Themenübergabe: \@batitlethemedate \\
         Tag der Einreichung: \@batitlereturndate
+        \vfill
     \end{titlepage}
     \addtocounter{page}{1}
 }
@@ -224,7 +244,7 @@
     \bigskip\par
     \begin{wrapfigure}[1]{r}{0.3\textwidth}
         \begin{center}
-            \vspace{-64pt}
+            \vspace{-32pt}
             \includegraphics[width=0.28\textwidth]{\@bablocksignature}
         \end{center}
     \end{wrapfigure}
@@ -255,7 +275,7 @@
     \bigskip\par
     \begin{wrapfigure}[1]{r}{0.3\textwidth}
         \begin{center}
-            \vspace{-64pt}
+            \vspace{-32pt}
             \includegraphics[width=0.28\textwidth]{\@baaffirsignature}
         \end{center}
     \end{wrapfigure}
@@ -284,8 +304,8 @@
 
 % Define basimple environment if in simple mode
 \iftoggle{baclssimple}{
-    % Specify environment keys
-    % path to an image, placed in the top right corner
+% Specify environment keys
+% path to an image, placed in the top right corner
     \define@key[BA]{simple}{img}{\def\@basimpleimg{#1}}
     % course attended at the university
     \define@key[BA]{simple}{course}{\def\@basimplecourse{#1}}
@@ -331,16 +351,16 @@
             type=\@basimpletype,
         }
         \ifdefvoid{\@basimpleassignment}{
-            % no assignment file set, do nothing
+        % no assignment file set, do nothing
         }{
             \includepdf[pages={1}]{\@basimpleassignment}
         }
         \ifBA@simple@blocknotice
-            \mkblocknotice{
-                signature=\@basimplesignature,
-                date=\@basimplereturndate,
-                location=\@basimplelocation
-            }
+        \mkblocknotice{
+            signature=\@basimplesignature,
+            date=\@basimplereturndate,
+            location=\@basimplelocation
+        }
         \fi
         \ifdefvoid{\basimpleabstract}{}{
             \section*{Abstract}
@@ -355,7 +375,7 @@
             \printnoidxglossaries
             \onehalfspacing
         }
-    }{
+        }{
         \printbibliography[heading=bibintoc]
         \clearpage
         \mkaffirmation{
@@ -364,7 +384,7 @@
         }
     }
 }{
-    % not in simple mode, do nothing
+% not in simple mode, do nothing
 }
 
 % Appendix environment
@@ -378,7 +398,7 @@
     \clearpage
     \section*{Anhang}
     \addcontentsline{toc}{section}{Anhang}
-}{
+    }{
     \clearpage
     \togglefalse{baclsappx}
 }
@@ -408,71 +428,71 @@
 % also adds a label which equals the given title
 \newsavebox{\@bafigurebox}
 \newenvironment{bafigure}[2][]{
-    \setkeys[BA]{env}{#1}
-    \csdef{@basource}{\@baenvsource}
-    \csdef{@baenvtitle}{#2}
-    % the stuff below for begin figure is required because it is
-    % required to expand the placement modifier instantly
-    \def\efigure{\begin{figure}}%
-    \expandafter\efigure\expandafter[\@baenvplacement]
-    \begin{lrbox}{\@bafigurebox}
+\setkeys[BA]{env}{#1}
+\csdef{@basource}{\@baenvsource}
+\csdef{@baenvtitle}{#2}
+% the stuff below for begin figure is required because it is
+% required to expand the placement modifier instantly
+\def\efigure{\begin{figure}}%
+\expandafter\efigure\expandafter[\@baenvplacement]
+\begin{lrbox}{\@bafigurebox}
     \begin{minipage}{0.98\textwidth}
-    \begin{center}
-    }{
-    \end{center}
-    \end{minipage}
-    \end{lrbox}
-    \fbox{\usebox{\@bafigurebox}}
-    \iftoggle{baclsappx}{
-        \addtoappx{\@baenvtitle}
         \begin{center}
-            \vspace{-10pt}
-            \small
-            Anhang \theappx{}: \@bacaption
+        }{
         \end{center}
-    } {
-        \caption[\@baenvtitle]{\@bacaption}
-    }
-    \ifdefempty{\@baenvlabel}{
-        \label{\@baenvtitle}
-    }{
-        \label{\@baenvlabel}
-    }
-    \end{figure}
-    \csundef{@basource}
-    \csundef{@baenvtitle}
+    \end{minipage}
+\end{lrbox}
+\fbox{\usebox{\@bafigurebox}}
+\iftoggle{baclsappx}{
+    \addtoappx{\@baenvtitle}
+    \begin{center}
+        \vspace{-10pt}
+        \small
+        Anhang \theappx{}: \@bacaption
+    \end{center}
+} {
+    \caption[\@baenvtitle]{\@bacaption}
+}
+\ifdefempty{\@baenvlabel}{
+    \label{\@baenvtitle}
+}{
+    \label{\@baenvlabel}
+}
+\end{figure}
+\csundef{@basource}
+\csundef{@baenvtitle}
 }
 
 % \begin{batable}[source=SOURCE,placement=htb,label=LABEL]{title}
 % batable centers the content and adds a source reference below the table
 % also adds a label which equals the given title
 \newenvironment{batable}[2][]{
-    \setkeys[BA]{env}{#1}
-    \csdef{@basource}{\@baenvsource}
-    \csdef{@baenvtitle}{#2}
-    % the stuff below for begin table is required because it is
-    % required to expand the placment modifier instantly
-    \def\etable{\begin{table}}%
-    \expandafter\etable\expandafter[\@baenvplacement]
-    \begin{center}
-    }{
-    \end{center}
-    \iftoggle{baclsappx}{
-        \addtoappx{\@baenvtitle}
-        \begin{center}
-            \vspace{-10pt}
-            \small
-            Anhang \theappx{}: \@bacaption
-        \end{center}
-    } {
-        \caption[\@baenvtitle]{\@bacaption}
-    }
-    \ifdefempty{\@baenvlabel}{
-        \label{\@baenvtitle}
-    }{
-        \label{\@baenvlabel}
-    }
-    \end{table}
-    \csundef{@basource}
-    \csundef{@baenvtitle}
+\setkeys[BA]{env}{#1}
+\csdef{@basource}{\@baenvsource}
+\csdef{@baenvtitle}{#2}
+% the stuff below for begin table is required because it is
+% required to expand the placment modifier instantly
+\def\etable{\begin{table}}%
+\expandafter\etable\expandafter[\@baenvplacement]
+\begin{center}
+}{
+\end{center}
+\iftoggle{baclsappx}{
+\addtoappx{\@baenvtitle}
+\begin{center}
+\vspace{-10pt}
+\small
+Anhang \theappx{}: \@bacaption
+\end{center}
+} {
+\caption[\@baenvtitle]{\@bacaption}
+}
+\ifdefempty{\@baenvlabel}{
+\label{\@baenvtitle}
+}{
+\label{\@baenvlabel}
+}
+\end{table}
+\csundef{@basource}
+\csundef{@baenvtitle}
 }

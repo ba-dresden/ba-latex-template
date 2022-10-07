@@ -72,8 +72,8 @@
     \newunit\newblock
     \usebibmacro{in:}%
     \iflistundef{publisher}
-        {\setunit*{\addcomma\space}}
-        {\setunit*{\addcolon\space}}%
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcolon\space}}%iflistundef
     \printnames{bapublisher}\space\bibopenparen Hrsg.\bibcloseparen%
     \setunit*{\addcomma\space}%
     \usebibmacro{maintitle+booktitle}%
@@ -83,9 +83,9 @@
     \printfield{edition}%
     \newunit
     \iffieldundef{maintitle}
-        {\printfield{volume}%
-        \printfield{part}}
-        {}%
+    {\printfield{volume}%
+    \printfield{part}}
+    {}%iffieldundef
     \newunit
     \printfield{volumes}%
     \newunit\newblock
@@ -98,8 +98,8 @@
     \usebibmacro{chapter+pages}%
     \newunit\newblock
     \iftoggle{bbx:isbn}
-        {\printfield{isbn}}
-        {}%
+    {\printfield{isbn}}
+    {}%
     \newunit\newblock
     \usebibmacro{doi+eprint+url}%
     \newunit\newblock
@@ -108,9 +108,9 @@
     \usebibmacro{pageref}%
     \newunit\newblock
     \iftoggle{bbx:related}
-        {\usebibmacro{related:init}%
-        \usebibmacro{related}}
-        {}%
+    {\usebibmacro{related:init}%
+    \usebibmacro{related}}
+    {}%
     \usebibmacro{finentry}}
 
 % add internal document notice to unpublished
@@ -167,6 +167,6 @@
 \DeclareNameFormat{bapublisher}{%
     \namepartfamily\addcomma\space\namepartgiveni%
     \ifthenelse{\value{listcount}<\value{liststop}}%
-	{\slash}%
-	{}%
+    {\slash}%
+    {}%
 }

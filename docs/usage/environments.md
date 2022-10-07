@@ -5,7 +5,7 @@ sort: 3
 # Environments
 The template provides two environments to deal with figures and tables.
 Both will likely break if the content spans multiple pages.
-Therefore it could make sense to split up large content and use multiple `bafigures` or `batables`.
+Therefore, it could make sense to split up large content and use multiple `bafigures` or `batables`.
 ## bafigure
 The `bafigure` environment creates a frame and a label around its content and adds an entry to the list of figures.
 It also adds the given caption with a source reference below the figure.
@@ -45,7 +45,8 @@ In case you need footnotes in tables possible options are outlined [here](https:
 
 ## baappx
 The `baappx` environment creates the appendix along with list of all appendix entries and adds required entries to the table of contents.
-It adjusts the behavior of `bafigure` and `batable` so that they do not add entries to the list of figures/tables and put them instead into the list of all appendix entries.
+It adjusts the behavior of `bafigure` and `batable` so that they do not add entries to the list of figures/tables and
+put them instead into the list of all appendix entries.
 ```latex
 \begin{baappx}
     \begin{bafigure}{CAPTION}

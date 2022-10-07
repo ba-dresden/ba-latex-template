@@ -4,7 +4,7 @@ __The template might do things wrong and there is no warranty. It is your own re
 
 ## Enduser Documentation
 
-[Go here please](https://nuckal777.github.io/ba-latex-template/). :rocket: This readme provides a development overview.
+[Go here please](https://github.com/ba-dresden/ba-latex-template). :rocket: This readme provides a development overview.
 
 ## Files
 

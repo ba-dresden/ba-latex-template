@@ -16,54 +16,54 @@
 }
 
 \renewbibmacro*{textcite:postnote}{%
-  \iffieldundef{postnote}
+    \iffieldundef{postnote}
     {\ifbool{cbx:parens}
-       {\bibcloseparen}
-       {}}
+    {\bibcloseparen}
+    {}}%iffieldundef
     {\ifbool{cbx:parens}
-       {\setunit{\postnotedelim}}
-       {\setunit{\extpostnotedelim\bibopenparen}}%
-	   \bibcloseparen\printfield{postnote}}}
+    {\setunit{\postnotedelim}}
+    {\setunit{\extpostnotedelim\bibopenparen}}%
+    \bibcloseparen\printfield{postnote}}}
 \providecommand*{\mkibid}[1]{#1}
 
 % force ebenda to lowercase
 \renewbibmacro*{cite:ibid}{%
-  \printtext{\MakeLowercase{\bibstring{ibidem}}}}
+    \printtext{\MakeLowercase{\bibstring{ibidem}}}}
 
 % Define cite format
 \newbibmacro*{cite:fullpartcite}{%
-  \printnames{labelname}%
-  \space%
-  \bibopenparen%
-  \printdateextra%
-  \bibcloseparen}
+    \printnames{labelname}%
+    \space%
+    \bibopenparen%
+    \printdateextra%
+    \bibcloseparen}
 
 % Custom cite commands
 \DeclareCiteCommand{\bacite}[\mkbibfootnote]
-  {\usebibmacro{prenote}}
-  {\bibhyperref[#3]{%
+{\usebibmacro{prenote}}
+{\bibhyperref[#3]{%
     \usebibmacro{citeindex}%
     \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
-     {\usebibmacro{cite:ibid}}
-     {\usebibmacro{cite:fullpartcite}}%
-	 }}
-  {\addsemicolon\space}
-  {\usebibmacro{postnote}}
+    {\usebibmacro{cite:ibid}}
+    {\usebibmacro{cite:fullpartcite}}%
+}}
+{\addsemicolon\space}
+{\usebibmacro{postnote}}
 \DeclareCiteCommand{\vglcite}[\mkbibfootnote]
-  {Vgl. \usebibmacro{prenote}}
-  {\bibhyperref[#3]{%
+{Vgl. \usebibmacro{prenote}}
+{\bibhyperref[#3]{%
     \usebibmacro{citeindex}%
     \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
-     {\usebibmacro{cite:ibid}}
-     {\usebibmacro{cite:fullpartcite}}%
-	 }}
-  {\addsemicolon\space}
-  {\usebibmacro{postnote}}
+    {\usebibmacro{cite:ibid}}
+    {\usebibmacro{cite:fullpartcite}}%
+}}
+{\addsemicolon\space}
+{\usebibmacro{postnote}}
 \DeclareCiteCommand{\captioncite}
-  {\usebibmacro{prenote}}
-  {\bibhyperref[#3]{%
+{\usebibmacro{prenote}}
+{\bibhyperref[#3]{%
     \usebibmacro{citeindex}%
     \usebibmacro{cite:fullpartcite}%
-    }}
-  {\addsemicolon\space}
-  {\usebibmacro{postnote}}
+}}
+{\addsemicolon\space}
+{\usebibmacro{postnote}}

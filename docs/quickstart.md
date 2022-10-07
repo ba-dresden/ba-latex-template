@@ -29,12 +29,8 @@ somedirectory
 ```
 
 ## Get the required images
-The titlepage uses the BA Dresden's logo.
-It can be found [here](https://www.ba-dresden.de/die-akademie/zentrale-einrichtungen/marketing-pr-kommunikation).
-Grab the white png version.
-Put it next to other files and call it `logo.png`.
-Moreover you need an image of your signature.
-Put next to the other files and call it `signature.png`.
+You need an image of your signature.
+Put it into the subfolder 'images' and call it `signature.png`.
 ```note
  If the image of your signature as an other file extension than png, use that one.
 ```
@@ -46,9 +42,9 @@ somedirectory
 |-baarticle.cls
 |-baarticle.dtx
 |-document.tex
-|-logo.png
 |-ngerman-ba.lbx
-|-signature.png
+|-images|-signature.png
+|-images|-logo.png
 ```
 
 ## Build your first paper

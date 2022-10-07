@@ -5,27 +5,81 @@
 \newacronym{ulong}{ulong}{unsigned 64-bit integer}
 \newcommand{\basimpleabstract}{
     \addcontentsline{toc}{section}{Abstract}
-    This is going to be in the abstract.
+    \thispagestyle{empty}
+
+    \lipsum[1]
+
+    \lipsum[2]
+
+    \lipsum[3]
 }
+
 \begin{document}
     \begin{basimple}[
-        img=../empty.png,
+        img=images/logo.png,
         course=thecourse,
-        title=The title,
+        title=Lorem ipsum dolor sit amet consetetur sadipscing elitr sed diam nonumy eirmod tempor invidunt ut ,
         number=1234567,
         corrector={corrector1,corrector2},
         themedate=\today,
         returndate=\today,
-        signature=../empty.png,
+        signature=images/signature.png,
         location=Dresden,
         type=thesis,
     ]
-        \section{This is easy}
+        \section{De finibus bonorum et malorum}
+
+        \subsection{Sed ut perspiciatis}
+
         And also very satisfying. \gls{HTTP}\gls{UC}\gls{ulong}
+
+        \lipsum[5]
+
+        \subsection{Sed ut perspiciatis}
+
+        \lipsum[6]
+
+        \lipsum[7]
+
+        \section{Das höchste Übel}
+
+        \lipsum[8]
+
+        % sample table with text
+        \begin{batable}{My first table}
+            \begin{tabular}{l|p{0.4\linewidth} |p{0.45\linewidth}}
+                \textbf{Type} & \textbf{Description} & \textbf{Value}\\
+                \hline
+                1 & \lipsum[7] & \lipsum[8]\\
+                \hline
+                2 & \lipsum[12] & \lipsum[10]\\
+            \end{tabular}
+        \end{batable}
+
+        \lipsum[9]
+
+        \section{Das höchste Gut}
+
+        \lipsum[10]
+
+        % sample table with numbers
+        \begin{batable}{My second table}
+            \begin{tabular}{l|c|r} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+                $\alpha$ & $\beta$ & $\gamma$ \\
+                \hline
+                1 & 11.1 & a\\
+                2 & 180.1 & b\\
+                3 & 4.25231 & c\\
+            \end{tabular}
+        \end{batable}
+
         \clearpage
+
+        % appendix
         \begin{baappx}
             \begin{bafigure}{An intresting addition}
-                This is a working appendix.
+                \lipsum[4]
+                \lipsum[4]
             \end{bafigure}
         \end{baappx}
     \end{basimple}

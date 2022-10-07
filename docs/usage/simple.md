@@ -10,14 +10,14 @@ The "simple mode" is enabled with the `simple` package option.
 
 \begin{document}
     \begin{basimple}[
-        img=../empty.png,
+        img=images/logo.png,
         course=thecourse,
         title=The title,
         number=1234567,
         corrector={corrector1,corrector2},
         themedate=\today,
         returndate=\today,
-        signature=../empty.png,
+        signature=images/signature.png,
         location=Dresden,
         type=thesis,
         assignment=somefile.pdf
