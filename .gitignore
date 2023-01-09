@@ -243,3 +243,13 @@ TSWLatexianTemp*
 
 # Scons
 .sconsign.dblite
+
+# macOS: custom attributes in directory
+.DS_Store
+
+# out and output directories with auxiliary files
+./out/*
+./output/*
+
+# .idea directory in IntelliJ IDEA projects
+.idea
