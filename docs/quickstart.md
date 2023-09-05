@@ -54,14 +54,14 @@ Open the document.tex file in your favourite editor and copy the following code 
 
 \begin{document}
     \begin{basimple}[
-        img=logo.png,
+        img=./images/logo.png,
         course=thecourse,
         title=The title,
         number=1234567,
         corrector={corrector1,corrector2},
         themedate=\today,
         returndate=\today,
-        signature=signature.png,
+        signature=./images/signature.png,
         location=Dresden
     ]
         \section{Caption}
