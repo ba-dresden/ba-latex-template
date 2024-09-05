@@ -164,14 +164,17 @@
 \iftoggle{baclsheader}{
     \begingroup\expandafter\expandafter\expandafter\endgroup
     \expandafter\ifx\csname @baclsheadertitle\endcsname\relax
+        % Add title to the header
         \fancyhead[L]{\@batitletitle} % \@baclsheadertitle is undefined or \relax
     \else
+        % Add title to the header
         \fancyhead[L]{\@baclsheadertitle} % \@baclsheadertitle is set
     \fi
     % Default \headrulewidth is 0.4pt
     \renewcommand{\headrulewidth}{0.4pt}
 }
 
+% Show the page number on the right side
 \fancyfoot[R]{\thepage}
 % Default \footrulewidth is 0pt
 % \renewcommand{\footrulewidth}{0.4pt}
