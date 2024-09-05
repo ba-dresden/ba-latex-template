@@ -133,7 +133,7 @@
 \pagestyle{fancy}
 % Change pagestyle of ToC pages to fancy
 \tocloftpagestyle{fancy}
-% \renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0pt}
 
 % Start with roman page numbering
 \pagenumbering{Roman}
