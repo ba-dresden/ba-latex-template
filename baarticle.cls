@@ -7,6 +7,7 @@
 \RequirePackage{etoolbox} % for csdef, csundef, ifdefempty, toggles, etc ...
 \newtoggle{baclssimple} % toggles are false per default
 \newtoggle{baclslinkcoloring} % toggles are false per default
+\newtoggle{baclsheader} % toggles are false per default
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -20,6 +21,10 @@
 \DeclareOptionX[BA]{simple}[usesimple]{\toggletrue{baclssimple}}
 % if specified links will be colored
 \DeclareOptionX[BA]{linkcoloring}[uselinkcoloring]{\toggletrue{baclslinkcoloring}}
+% if specified title will be shown in the header
+\DeclareOptionX[BA]{header}[useheader]{\toggletrue{baclsheader}}
+% if specified header title is changed to tis provided title
+\DeclareOptionX[BA]{headertitle}[no header title provided for headertitle option | it's recommended to use a maximum lentgth of 80 characters to prevent this overflow]{\def\@baclsheadertitle{#1}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptionsX[BA]\relax
@@ -33,7 +38,11 @@
 \RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented characters properly from the compiled document
 \RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
 \fi
-\RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
+\iftoggle{baclsheader}{ % adjust the page top spacing depending on whether header is shown or not
+    \RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
+}{
+    \RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
+}
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
@@ -151,12 +160,19 @@
 % Clear the header and footer
 \fancyhead{}
 \fancyfoot{}
-% Add title to the header
-\fancyhead[L]{\@batitletitle}
-% Show the page number on the right side
+
+\iftoggle{baclsheader}{
+    \begingroup\expandafter\expandafter\expandafter\endgroup
+    \expandafter\ifx\csname @baclsheadertitle\endcsname\relax
+        \fancyhead[L]{\@batitletitle} % \@baclsheadertitle is undefined or \relax
+    \else
+        \fancyhead[L]{\@baclsheadertitle} % \@baclsheadertitle is set
+    \fi
+    % Default \headrulewidth is 0.4pt
+    \renewcommand{\headrulewidth}{0.4pt}
+}
+
 \fancyfoot[R]{\thepage}
-% Default \headrulewidth is 0.4pt
-\renewcommand{\headrulewidth}{0.4pt}
 % Default \footrulewidth is 0pt
 % \renewcommand{\footrulewidth}{0.4pt}
 
