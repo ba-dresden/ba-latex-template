@@ -30,7 +30,7 @@
 % Load required packages
 \RequirePackage{iftex} % to check the TeX engine in use
 \ifpdftex
-\RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented chararcters properly from the compiled document
+\RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented characters properly from the compiled document
 \RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
 \fi
 \RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
