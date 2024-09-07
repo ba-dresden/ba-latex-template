@@ -8,6 +8,7 @@
 \newtoggle{baclssimple} % toggles are false per default
 \newtoggle{baclslinkcoloring} % toggles are false per default
 \newtoggle{baclsheader} % toggles are false per default
+\toggletrue{baclsheader} % default setting should show the header
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -21,10 +22,11 @@
 \DeclareOptionX[BA]{simple}[usesimple]{\toggletrue{baclssimple}}
 % if specified links will be colored
 \DeclareOptionX[BA]{linkcoloring}[uselinkcoloring]{\toggletrue{baclslinkcoloring}}
-% if specified title will be shown in the header
-\DeclareOptionX[BA]{header}[useheader]{\toggletrue{baclsheader}}
+% if specified title will not be shown in the header
+\DeclareOptionX[BA]{noheader}[usenoheader]{\togglefalse{baclsheader}}
 % if specified header title is changed to tis provided title
-\DeclareOptionX[BA]{headertitle}[no header title provided for headertitle option | it's recommended to use a maximum lentgth of 80 characters to prevent this overflow]{\def\@baclsheadertitle{#1}}
+% it's recommended to use a maximum lentgth of 80 characters to prevent an overflow
+\DeclareOptionX[BA]{headertitle}[]{\def\@baclsheadertitle{#1}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptionsX[BA]\relax
@@ -39,9 +41,9 @@
 \RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
 \fi
 \iftoggle{baclsheader}{ % adjust the page top spacing depending on whether header is shown or not
-    \RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
-}{
     \RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
+}{
+    \RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
 }
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
@@ -162,14 +164,11 @@
 \fancyfoot{}
 
 \iftoggle{baclsheader}{
-    \begingroup\expandafter\expandafter\expandafter\endgroup
-    \expandafter\ifx\csname @baclsheadertitle\endcsname\relax
-        % Add title to the header
-        \fancyhead[L]{\@batitletitle} % \@baclsheadertitle is undefined or \relax
-    \else
-        % Add title to the header
-        \fancyhead[L]{\@baclsheadertitle} % \@baclsheadertitle is set
-    \fi
+    \ifdefvoid{\@baclsheadertitle}{
+        \fancyhead[L]{\@batitletitle}
+    }{
+        \fancyhead[L]{\@baclsheadertitle}
+    }
     % Default \headrulewidth is 0.4pt
     \renewcommand{\headrulewidth}{0.4pt}
 }
