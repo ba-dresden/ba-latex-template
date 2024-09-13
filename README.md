@@ -1,5 +1,5 @@
 # A LaTeX template for BA Dresden
-This repository contains a LaTeX template, which tries to follow the [BA Dresden Styleguide](https://www.ba-dresden.de/fileadmin/dresden/downloads/zentrale-dokumente/LEITFADEN_webv2.pdf) as close as possible.
+This repository contains a LaTeX template, which tries to follow the [BA Dresden Styleguide](https://www.ba-dresden.de/fileadmin/M3__BA_Dresden/downloads/zentrale-dokumente/Leitfaden_wissentschaftliche_Arbeiten.pdf) as close as possible.
 __The template might do things wrong and there is no warranty. It is your own responsibility to check for correctness.__
 
 ## Enduser Documentation

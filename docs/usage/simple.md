@@ -38,6 +38,8 @@ Let's go through the other package options quickly:
 - `company` should be the company you work for, in case the name contains spaces use `\space` to split the parts, e.g. `part1\space part2`
 - `location` should be the location of university
 - `linkcoloring` changes the text color of links, if `simple` is specified as well
+- `noheader` removes the document title from the header
+- `headertitle` takes an argument to overwrite the header with the new value
 
 Let's also discuss the options of the `basimple` environment:
 - `img` should be a path pointing to the logo of the university

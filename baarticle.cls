@@ -7,6 +7,8 @@
 \RequirePackage{etoolbox} % for csdef, csundef, ifdefempty, toggles, etc ...
 \newtoggle{baclssimple} % toggles are false per default
 \newtoggle{baclslinkcoloring} % toggles are false per default
+\newtoggle{baclsheader} % toggles are false per default
+\toggletrue{baclsheader} % default setting should show the header
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -20,6 +22,11 @@
 \DeclareOptionX[BA]{simple}[usesimple]{\toggletrue{baclssimple}}
 % if specified links will be colored
 \DeclareOptionX[BA]{linkcoloring}[uselinkcoloring]{\toggletrue{baclslinkcoloring}}
+% if specified title will not be shown in the header
+\DeclareOptionX[BA]{noheader}[usenoheader]{\togglefalse{baclsheader}}
+% if specified header title is changed to tis provided title
+% it's recommended to use a maximum lentgth of 80 characters to prevent an overflow
+\DeclareOptionX[BA]{headertitle}[]{\def\@baclsheadertitle{#1}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptionsX[BA]\relax
@@ -30,10 +37,14 @@
 % Load required packages
 \RequirePackage{iftex} % to check the TeX engine in use
 \ifpdftex
-\RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented chararcters properly from the compiled document
+\RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented characters properly from the compiled document
 \RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
 \fi
-\RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
+\iftoggle{baclsheader}{ % adjust the page top spacing depending on whether header is shown or not
+    \RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
+}{
+    \RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
+}
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
@@ -124,7 +135,7 @@
 \pagestyle{fancy}
 % Change pagestyle of ToC pages to fancy
 \tocloftpagestyle{fancy}
-% \renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0pt}
 
 % Start with roman page numbering
 \pagenumbering{Roman}
@@ -151,12 +162,19 @@
 % Clear the header and footer
 \fancyhead{}
 \fancyfoot{}
-% Add title to the header
-\fancyhead[L]{\@batitletitle}
+
+\iftoggle{baclsheader}{
+    \ifdefvoid{\@baclsheadertitle}{
+        \fancyhead[L]{\@batitletitle}
+    }{
+        \fancyhead[L]{\@baclsheadertitle}
+    }
+    % Default \headrulewidth is 0.4pt
+    \renewcommand{\headrulewidth}{0.4pt}
+}
+
 % Show the page number on the right side
 \fancyfoot[R]{\thepage}
-% Default \headrulewidth is 0.4pt
-\renewcommand{\headrulewidth}{0.4pt}
 % Default \footrulewidth is 0pt
 % \renewcommand{\footrulewidth}{0.4pt}
 
