@@ -19,14 +19,14 @@
 % location of the university
 \DeclareOptionX[BA]{location}{\def\@baclslocation{#1}}
 % if specified the class will load additional packages and provide the basimple environment, which simplifies the setup
-\DeclareOptionX[BA]{simple}[usesimple]{\toggletrue{baclssimple}}
+\DeclareOptionX[BA]{simple}{\toggletrue{baclssimple}}
 % if specified links will be colored
-\DeclareOptionX[BA]{linkcoloring}[uselinkcoloring]{\toggletrue{baclslinkcoloring}}
+\DeclareOptionX[BA]{linkcoloring}{\toggletrue{baclslinkcoloring}}
 % if specified title will not be shown in the header
-\DeclareOptionX[BA]{noheader}[usenoheader]{\togglefalse{baclsheader}}
+\DeclareOptionX[BA]{noheader}{\togglefalse{baclsheader}}
 % if specified header title is changed to tis provided title
 % it's recommended to use a maximum lentgth of 80 characters to prevent an overflow
-\DeclareOptionX[BA]{headertitle}[]{\def\@baclsheadertitle{#1}}
+\DeclareOptionX[BA]{headertitle}{\def\@baclsheadertitle{#1}}
 
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptionsX[BA]\relax
@@ -37,8 +37,8 @@
 % Load required packages
 \RequirePackage{iftex} % to check the TeX engine in use
 \ifpdftex
-\RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented characters properly from the compiled document
-\RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
+    \RequirePackage[T1]{fontenc} % change the fontencoding so people can copy accented characters properly from the compiled document
+    \RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
 \fi
 \iftoggle{baclsheader}{ % adjust the page top spacing depending on whether header is shown or not
     \RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
@@ -66,9 +66,9 @@
     \RequirePackage[style=baarticle]{biblatex}
     \RequirePackage{hyperref}
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
-
+    
     \iftoggle{baclslinkcoloring}{
-    % hyperref config
+        % hyperref config
         \hypersetup{
             colorlinks=true,
             linkcolor=blue,
@@ -76,10 +76,10 @@
             urlcolor=cyan,
         }
     } {
-    % no coloring required, do nothing
+        % no coloring required, do nothing
     }
 } {
-% not in simple, do nothing
+    % not in simple, do nothing
 }
 
 % set spacing for sections
@@ -187,7 +187,7 @@
 
 % helper macro to convert @baclstype to an actual text
 \newcommand{\@bapapertype}{%
-% need to expand @bapapertype as ifdefstring does not do that
+    % need to expand @bapapertype as ifdefstring does not do that
     \edef\@bapapertest{\@batitletype}%
     \ifdefstring{\@bapapertest}{thesis}{%
         Bachelorarbeit\\
@@ -322,8 +322,8 @@
 
 % Define basimple environment if in simple mode
 \iftoggle{baclssimple}{
-% Specify environment keys
-% path to an image, placed in the top right corner
+    % Specify environment keys
+    % path to an image, placed in the top right corner
     \define@key[BA]{simple}{img}{\def\@basimpleimg{#1}}
     % course attended at the university
     \define@key[BA]{simple}{course}{\def\@basimplecourse{#1}}
@@ -347,15 +347,15 @@
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
-
+    
     \presetkeys[BA]{simple}{type=undefined,blocknotice=true}{}
-
+    
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
     \setacronymstyle{long-short}
     \renewcommand{\glossarysection}[2][]{}
     \makenoidxglossaries
-
+    
     \newenvironment{basimple}[1][]{
         \setkeys[BA]{simple}{#1}
         \mktitle{
@@ -369,16 +369,16 @@
             type=\@basimpletype,
         }
         \ifdefvoid{\@basimpleassignment}{
-        % no assignment file set, do nothing
+            % no assignment file set, do nothing
         }{
             \includepdf[pages={1}]{\@basimpleassignment}
         }
         \ifBA@simple@blocknotice
-        \mkblocknotice{
-            signature=\@basimplesignature,
-            date=\@basimplereturndate,
-            location=\@basimplelocation
-        }
+            \mkblocknotice{
+                signature=\@basimplesignature,
+                date=\@basimplereturndate,
+                location=\@basimplelocation
+            }
         \fi
         \ifdefvoid{\basimpleabstract}{}{
             \section*{Abstract}
@@ -393,7 +393,7 @@
             \printnoidxglossaries
             \onehalfspacing
         }
-        }{
+    }{
         \printbibliography[heading=bibintoc]
         \clearpage
         \mkaffirmation{
@@ -402,7 +402,7 @@
         }
     }
 }{
-% not in simple mode, do nothing
+    % not in simple mode, do nothing
 }
 
 % Appendix environment
@@ -416,7 +416,7 @@
     \clearpage
     \section*{Anhang}
     \addcontentsline{toc}{section}{Anhang}
-    }{
+}{
     \clearpage
     \togglefalse{baclsappx}
 }
@@ -452,33 +452,33 @@
 % the stuff below for begin figure is required because it is
 % required to expand the placement modifier instantly
 \def\efigure{\begin{figure}}%
-\expandafter\efigure\expandafter[\@baenvplacement]
-\begin{lrbox}{\@bafigurebox}
-    \begin{minipage}{0.98\textwidth}
-        \begin{center}
+        \expandafter\efigure\expandafter[\@baenvplacement]
+        \begin{lrbox}{\@bafigurebox}
+            \begin{minipage}{0.98\textwidth}
+                \begin{center}
+                    }{
+                \end{center}
+            \end{minipage}
+        \end{lrbox}
+        \fbox{\usebox{\@bafigurebox}}
+        \iftoggle{baclsappx}{
+            \addtoappx{\@baenvtitle}
+            \begin{center}
+                \vspace{-10pt}
+                \small
+                Anhang \theappx{}: \@bacaption
+            \end{center}
+        } {
+            \caption[\@baenvtitle]{\@bacaption}
+        }
+        \ifdefempty{\@baenvlabel}{
+            \label{\@baenvtitle}
         }{
-        \end{center}
-    \end{minipage}
-\end{lrbox}
-\fbox{\usebox{\@bafigurebox}}
-\iftoggle{baclsappx}{
-    \addtoappx{\@baenvtitle}
-    \begin{center}
-        \vspace{-10pt}
-        \small
-        Anhang \theappx{}: \@bacaption
-    \end{center}
-} {
-    \caption[\@baenvtitle]{\@bacaption}
-}
-\ifdefempty{\@baenvlabel}{
-    \label{\@baenvtitle}
-}{
-    \label{\@baenvlabel}
-}
-\end{figure}
-\csundef{@basource}
-\csundef{@baenvtitle}
+            \label{\@baenvlabel}
+        }
+    \end{figure}
+    \csundef{@basource}
+    \csundef{@baenvtitle}
 }
 
 % \begin{batable}[source=SOURCE,placement=htb,label=LABEL]{title}
@@ -491,26 +491,26 @@
 % the stuff below for begin table is required because it is
 % required to expand the placment modifier instantly
 \def\etable{\begin{table}}%
-\expandafter\etable\expandafter[\@baenvplacement]
-\begin{center}
-}{
-\end{center}
-\iftoggle{baclsappx}{
-\addtoappx{\@baenvtitle}
-\begin{center}
-\vspace{-10pt}
-\small
-Anhang \theappx{}: \@bacaption
-\end{center}
-} {
-\caption[\@baenvtitle]{\@bacaption}
-}
-\ifdefempty{\@baenvlabel}{
-\label{\@baenvtitle}
-}{
-\label{\@baenvlabel}
-}
-\end{table}
-\csundef{@basource}
-\csundef{@baenvtitle}
+        \expandafter\etable\expandafter[\@baenvplacement]
+        \begin{center}
+            }{
+        \end{center}
+        \iftoggle{baclsappx}{
+            \addtoappx{\@baenvtitle}
+            \begin{center}
+                \vspace{-10pt}
+                \small
+                Anhang \theappx{}: \@bacaption
+            \end{center}
+        } {
+            \caption[\@baenvtitle]{\@bacaption}
+        }
+        \ifdefempty{\@baenvlabel}{
+            \label{\@baenvtitle}
+        }{
+            \label{\@baenvlabel}
+        }
+    \end{table}
+    \csundef{@basource}
+    \csundef{@baenvtitle}
 }
