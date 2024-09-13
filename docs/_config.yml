@@ -21,7 +21,7 @@ url: "https://nuckal777.github.io" # the base hostname & protocol for your site,
 
 # Build settings
 markdown: GFM
-remote_theme: rundocs/jekyll-rtd-theme
+remote_theme: StarHPC/jekyll-rtd-theme
 plugins:
   - jekyll-feed
 
