@@ -41,9 +41,9 @@
 \RequirePackage{lmodern} % swap the font so that the fontencoding change does not screw up letter kerning
 \fi
 \iftoggle{baclsheader}{ % adjust the page top spacing depending on whether header is shown or not
-    \RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
-}{
     \RequirePackage[a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry} % for paper size and page spacing
+}{
+    \RequirePackage[a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry} % for paper size and page spacing
 }
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
