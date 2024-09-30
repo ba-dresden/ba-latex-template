@@ -11,7 +11,7 @@ From my point of view learning LaTeX is worthwhile. Some arguments to justify th
 
 One major advantage of LaTeX is consistent formatting.
 If the code describing the formatting of paper is correct, there cannot be any formatting errors.
-Following the styleguide, using correct spelling and grammar make up more than a half of the BA Dresden's assessment, 
+Following the styleguide, using correct spelling and grammar make up more than a half of the DHSN Dresden's assessment, 
 so you can basically pass any required scientific work without content but correct formatting.
 A rule, which easily creates violations of the styleguide, is that every citation after the first has to replace the 
 author and year with "ebenda".
@@ -28,6 +28,6 @@ General tips and workflow recommendations about LaTeX with Git can be found is
 [this](https://stackoverflow.com/questions/6188780/git-latex-workflow) question on StackOverflow.
 If you are using GitHub reviews could be made with pull requests.
 
-Unfortunately, the BA styleguide makes the usage of LaTeX for the average user unnecessarily hard.
-There is no style included in LaTeX, which fulfills the requirements of the BA.
+Unfortunately, the DHSN styleguide makes the usage of LaTeX for the average user unnecessarily hard.
+There is no style included in LaTeX, which fulfills the requirements of the DHSN.
 That is why this template has been created.
