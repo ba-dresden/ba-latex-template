@@ -214,7 +214,7 @@
         \end{wrapfigure}
         \noindent
         \normalsize
-        Berufsakademie Sachsen \\
+        Duale Hochschule Sachsen \\
         Staatliche Studienakademie \@baclslocation{} \\
         Studiengang \@batitlecourse{} \\
         \par
