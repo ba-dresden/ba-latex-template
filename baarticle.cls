@@ -1,4 +1,4 @@
-% Document class implementing the BA Dresden Styleguide
+% Document class implementing the DHSN Dresden Styleguide
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{baarticle}[2021/09/24 v1.0.0]
 
