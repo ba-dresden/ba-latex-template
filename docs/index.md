@@ -4,7 +4,7 @@ title: Index
 # DHSN Dresden LaTeX template
 
 A template, which tries to follow the
-[DHSN Dresden Styleguide](https://www.ba-dresden.de/fileadmin/dresden/downloads/zentrale-dokumente/LEITFADEN_webv2.pdf)
+[DHSN Dresden Styleguide](https://dresden.ba-sn.de/fileadmin/M3__BA_Dresden/downloads/zentrale-dokumente/Leitfaden_wissentschaftliche_Arbeiten.pdf)
 as close as possible.
 Papers and bachelors theses using this template have already passed assessments.
 Built with love and sane defaults by [Nuckal777](https://github.com/Nuckal777).
