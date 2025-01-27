@@ -10,6 +10,9 @@
 \newtoggle{baclsheader} % toggles are false per default
 \toggletrue{baclsheader} % default setting should show the header
 
+% use package showframe for "debugging"
+% \RequirePackage{showframe}
+
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
 % last name of the author
