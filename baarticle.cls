@@ -212,7 +212,8 @@
         \begin{wrapfigure}[3]{r}{0.5\textwidth}
             \begin{center}
                 \vspace{-18pt}
-                \includegraphics[width=0.5\textwidth]{\@batitleimg}
+                \hfill
+                \includegraphics[width=7\baselineskip]{\@batitleimg}
             \end{center}
         \end{wrapfigure}
         \noindent
