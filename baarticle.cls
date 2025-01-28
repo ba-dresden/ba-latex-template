@@ -1,4 +1,4 @@
-% Document class implementing the BA Dresden Styleguide
+% Document class implementing the DHSN Dresden Styleguide
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{baarticle}[2021/09/24 v1.0.0]
 
@@ -9,6 +9,9 @@
 \newtoggle{baclslinkcoloring} % toggles are false per default
 \newtoggle{baclsheader} % toggles are false per default
 \toggletrue{baclsheader} % default setting should show the header
+
+% use package showframe for "debugging"
+% \RequirePackage{showframe}
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -208,14 +211,15 @@
     \begin{titlepage}
         \begin{wrapfigure}[3]{r}{0.5\textwidth}
             \begin{center}
-                \vspace{-18pt}
-                \includegraphics[width=0.5\textwidth]{\@batitleimg}
+                \vspace{-14pt}
+                \hfill
+                \includegraphics[width=6.2\baselineskip]{\@batitleimg}
             \end{center}
         \end{wrapfigure}
         \noindent
         \normalsize
-        Berufsakademie Sachsen \\
-        Staatliche Studienakademie \@baclslocation{} \\
+        Duale Hochschule Sachsen \\
+        Studienakademie \@baclslocation{} \\
         Studiengang \@batitlecourse{} \\
         \par
         %%        \vspace{4cm}
