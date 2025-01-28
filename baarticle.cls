@@ -211,9 +211,9 @@
     \begin{titlepage}
         \begin{wrapfigure}[3]{r}{0.5\textwidth}
             \begin{center}
-                \vspace{-18pt}
+                \vspace{-14pt}
                 \hfill
-                \includegraphics[width=7\baselineskip]{\@batitleimg}
+                \includegraphics[width=6.2\baselineskip]{\@batitleimg}
             \end{center}
         \end{wrapfigure}
         \noindent
