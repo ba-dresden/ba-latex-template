@@ -290,22 +290,33 @@
     % do not print page number on affirmation
     \thispagestyle{empty}
     \subsubsection*{Eidesstattliche Erklärung}
-    Ich erkläre an Eides statt, dass ich die vorliegende Arbeit selbständig und ohne unerlaubte fremde Hilfe angefertigt, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt habe.
-    Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht.
-    Die Zustimmung des Partnerunternehmens in der Praxis zur Verwendung betrieblicher Unterlagen habe ich eingeholt.
-    Die Arbeit wurde bisher in gleicher oder ähnlicher Form keiner anderen Prüfungsbehörde vorgelegt und auch nicht veröffentlicht.
+    Ich erkläre an Eides statt, \\
+    dass ich die vorliegende Arbeit selbständig und nur unter Verwendung der angegebenen Quellen und Hilfsmittel angefertigt habe. \\
+    Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht. \\
+    Bestandteile der Arbeit, die mittels Künstlicher Intelligenz entstanden sind, wurden ausdrücklich gekennzeichnet. \\
+    Die Zustimmung des/der beteiligten Unternehmen/s zur Verwendung betrieblicher Unterlagen habe ich eingeholt. \\
+    Die Arbeit wurde bisher in gleicher oder ähnlicher Form weder veröffentlicht noch einer anderen Prüfungsbehörde/-stelle vorgelegt. \\
+
     \bigskip\par
+    \par\noindent
+    \@baclslast{}, \@baclsfirst{} \vspace{-8pt} \\
+    \rule{0.4\textwidth}{0.5pt} \\
+    \noindent
+    Name, Vorname Verfassender
+
     \begin{wrapfigure}[1]{r}{0.3\textwidth}
         \begin{center}
-            \vspace{-32pt}
+            \vspace{-40pt}
             \includegraphics[width=0.28\textwidth]{\@baaffirsignature}
         \end{center}
     \end{wrapfigure}
     \bigskip
+
     \par\noindent
-    \@baclslocation{}, \@baaffirdate{}
-    \par\noindent
-    Ort, Datum\hfill Unterschrift des Verfassers
+    \@baclslocation{}, \@baaffirdate{} \vspace{-8pt} \\
+    \rule{0.4\textwidth}{0.5pt}\hfill \rule{0.4\textwidth}{0.5pt}\\
+    \noindent
+    Ort, Datum Abgabetermin\hfill Unterschrift Verfassender
 }
 
 % Frontmatter
