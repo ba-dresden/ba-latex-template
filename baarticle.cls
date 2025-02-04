@@ -14,7 +14,7 @@
 % use package showframe for "debugging"
 % \RequirePackage{showframe}
 
-\usepackage[figure,table]{totalcount}
+\RequirePackage[figure,table]{totalcount}
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
