@@ -13,6 +13,8 @@
 % use package showframe for "debugging"
 % \RequirePackage{showframe}
 
+\usepackage[figure,table]{totalcount}
+
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
 % last name of the author
@@ -315,11 +317,15 @@
 \newcommand{\mkfrontmatter}[1]{
     \tableofcontents
     \clearpage
-    \listoffigures
+    \iftotalfigures
+        \listoffigures
+    \fi
     \clearpage
     #1
     \clearpage
-    \listoftables
+    \iftotaltables
+        \listoftables
+    \fi
     \clearpage
     \pagenumbering{arabic}
 }
