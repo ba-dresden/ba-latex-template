@@ -9,6 +9,7 @@
 \newtoggle{baclslinkcoloring} % toggles are false per default
 \newtoggle{baclsheader} % toggles are false per default
 \toggletrue{baclsheader} % default setting should show the header
+\newtoggle{dhsnacronyms} % toggles are false per default
 
 % use package showframe for "debugging"
 % \RequirePackage{showframe}
@@ -71,7 +72,7 @@
     \RequirePackage[style=baarticle]{biblatex}
     \RequirePackage{hyperref}
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
-    
+
     \iftoggle{baclslinkcoloring}{
         % hyperref config
         \hypersetup{
@@ -120,6 +121,12 @@
 \settowidth{\tabnumspacing}{\bfseries\cfttabpresnum\cfttabaftersnum} % extra space
 \addtolength{\cfttabnumwidth}{\tabnumspacing} % add the extra space
 \setlength{\cfttabindent}{0pt}
+
+% redefine the \newacronym command to set the toggle for the glossary
+\renewcommand{\newacronym}[3]{
+    \newacronym{#1}{#2}{#3}
+    \toggletrue{dhsnacronyms}
+}
 
 % List of Appendix (LoA)
 % The related commands will refer to 'appx' as the appendix command is already defined by LaTeX
@@ -396,12 +403,16 @@
             \clearpage
         }
         \mkfrontmatter{
-            \singlespacing
-            \section*{Abkürzungsverzeichnis}
-            \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
-            \vspace{-1cm}
-            \printnoidxglossaries
-            \onehalfspacing
+            \iftoggle{dhsnacronyms}{
+                \singlespacing
+                \section*{Abkürzungsverzeichnis}
+                \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+                \vspace{-1cm}
+                \printnoidxglossaries
+                \onehalfspacing
+            }{
+                % do nothing
+            }
         }
     }{
         \printbibliography[heading=bibintoc]
