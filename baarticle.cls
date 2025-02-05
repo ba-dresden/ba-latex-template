@@ -122,11 +122,6 @@
 \addtolength{\cfttabnumwidth}{\tabnumspacing} % add the extra space
 \setlength{\cfttabindent}{0pt}
 
-% redefine the \newacronym command to set the toggle for the glossary
-\renewcommand{\newacronym}[3]{
-    \newacronym{#1}{#2}{#3}
-    \toggletrue{dhsnacronyms}
-}
 
 % List of Appendix (LoA)
 % The related commands will refer to 'appx' as the appendix command is already defined by LaTeX
@@ -534,4 +529,15 @@
     \end{table}
     \csundef{@basource}
     \csundef{@baenvtitle}
+}
+
+%updating the \newacronym command to set the toggle for the glossary
+\pretocmd{\newacronym}{
+    \toggletrue{dhsnacronyms}
+}{
+    % patching was successfully
+    \typeout{patched \newacronym command}
+}{
+    % patching failed
+    \typeout{patching of \newacronym command failed}
 }
