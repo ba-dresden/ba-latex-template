@@ -9,9 +9,12 @@
 \newtoggle{baclslinkcoloring} % toggles are false per default
 \newtoggle{baclsheader} % toggles are false per default
 \toggletrue{baclsheader} % default setting should show the header
+\newtoggle{dhsnacronyms} % toggles are false per default
 
 % use package showframe for "debugging"
 % \RequirePackage{showframe}
+
+\RequirePackage[figure,table]{totalcount}
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -69,7 +72,7 @@
     \RequirePackage[style=baarticle]{biblatex}
     \RequirePackage{hyperref}
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
-    
+
     \iftoggle{baclslinkcoloring}{
         % hyperref config
         \hypersetup{
@@ -118,6 +121,12 @@
 \settowidth{\tabnumspacing}{\bfseries\cfttabpresnum\cfttabaftersnum} % extra space
 \addtolength{\cfttabnumwidth}{\tabnumspacing} % add the extra space
 \setlength{\cfttabindent}{0pt}
+
+% redefine the \newacronym command to set the toggle for the glossary
+\renewcommand{\newacronym}[3]{
+    \newacronym{#1}{#2}{#3}
+    \toggletrue{dhsnacronyms}
+}
 
 % List of Appendix (LoA)
 % The related commands will refer to 'appx' as the appendix command is already defined by LaTeX
@@ -315,11 +324,15 @@
 \newcommand{\mkfrontmatter}[1]{
     \tableofcontents
     \clearpage
-    \listoffigures
+    \iftotalfigures
+        \listoffigures
+    \fi
     \clearpage
     #1
     \clearpage
-    \listoftables
+    \iftotaltables
+        \listoftables
+    \fi
     \clearpage
     \pagenumbering{arabic}
 }
@@ -390,12 +403,16 @@
             \clearpage
         }
         \mkfrontmatter{
-            \singlespacing
-            \section*{Abkürzungsverzeichnis}
-            \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
-            \vspace{-1cm}
-            \printnoidxglossaries
-            \onehalfspacing
+            \iftoggle{dhsnacronyms}{
+                \singlespacing
+                \section*{Abkürzungsverzeichnis}
+                \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+                \vspace{-1cm}
+                \printnoidxglossaries
+                \onehalfspacing
+            }{
+                % do nothing
+            }
         }
     }{
         \printbibliography[heading=bibintoc]
