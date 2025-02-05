@@ -46,16 +46,16 @@ Let's also discuss the options of the `basimple` environment:
 - `course` should be your course of studies
 - `title` should be the title of the paper
 - `number` should be your matriculation number
-- `corrector` should be a comma sperated list of correctors
+- `corrector` should be a comma separated list of correctors
 - `themedate` should be the date when the theme of the paper was announced
 - `returndate` should be the date when the paper is handed in
 - `signature` should be a path to an image of your signature
 - `location` should be the location of your company
 - `type` defines the type of the paper and influences the title page if set to `thesis`, `study` or `report`. Setting the `type` parameter is optional.
-- `assignment` should point to a PDF file containing the assignment to write a thesis. It will include the first page of the given PDF file at the apropiate place. Setting the `assignment` parameter is optional.
+- `assignment` should point to a PDF file containing the assignment to write a thesis. It will include the first page of the given PDF file at the appropriate place. Setting the `assignment` parameter is optional.
 - `blocknotice` defines whether a blocknotice should be included or not if set to `false`. One will be included per default. Setting the `blocknotice` parameter is optional.
 
-To add an abstract to the paper define a macro called `\basimpleabstract` which replacement text is the abtract's content. The following should do it (the `\addcontentsline` is optional):
+To add an abstract to the paper define a macro called `\basimpleabstract` which replacement text is the abstract's content. The following should do it (the `\addcontentsline` is optional):
 ```latex
 \documentclass[...,simple]{baarticle}
 
@@ -109,7 +109,7 @@ By the way these references are also clickable links.
     \end{basimple}
 \end{document}
 ```
-Images can be inculded with `\includegraphics`, which should be wrapped in a `bafigure` environment.
+Images can be included with `\includegraphics`, which should be wrapped in a `bafigure` environment.
 The number of a figure can be retrieved using `\ref{caption}` with the caption provided to the environment.
 `\includegraphics` has a lot of optional arguments, e.g. for rotating and scaling images.
 Take a look [here](https://latexref.xyz/_005cincludegraphics.html).
@@ -135,7 +135,7 @@ Tables should also be wrapped in a `batable` environment.
 \end{document}
 ```
 An appendix can be created using the `baappx` environment, which will also create an overview of all appendix entries.
-Most environments introduced by this template feature some customization options, which are describe in the [environments](./environments) section.
+Most environments introduced by this template feature some customization options, which are described in the [environments](./environments) section.
 ```latex
 \documentclass[...]{baarticle}
 
@@ -150,8 +150,8 @@ Most environments introduced by this template feature some customization options
     \end{basimple}
 \end{document}
 ```
-It is worthwhile to split up larger documents into mulitple files.
-You can put each chapter into a separat `.tex` file and join them in the main file using `\include{path/to/the/file}`.
+It is worthwhile to split up larger documents into multiple files.
+You can put each chapter into a separate `.tex` file and join them in the main file using `\include{path/to/the/file}`.
 Given the following file tree:
 ```text
 somedirectory
@@ -183,7 +183,7 @@ This should work.
 The template uses the biblatex package to deal with the bibliography and citations and provides customized styles for it, which are automatically loaded in simple mode.
 Biblatex own its own has a load functionality, so feel free to consult their [documentation](https://ctan.mc1.root.project-creative.net/macros/latex/contrib/biblatex/doc/biblatex.pdf) and [cheatsheet](http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf).
 
-At first it is required to setup a bibliography database.
+At first it is required to set up a bibliography database.
 One needs to create a file with the `.bib` extension in the file tree.
 ```text
 somedirectory
@@ -250,7 +250,7 @@ This template covers the `@article`, `@book`, `@online`, `@collection`, `@incoll
  Additional attributes should not be required and may use a wrong formatting. The same holds true for other entry types. Be aware.
 ```
 Now one can create references in the `.tex` file.
-Refering to sources in the text can be achieved with the `\bacite{citekey}` command for direct citations and the the `\vglcite{citekey}` command for indirect citations.
+Referring to sources in the text can be achieved with the `\bacite{citekey}` command for direct citations and the `\vglcite{citekey}` command for indirect citations.
 `\enquote{content}` puts its argument in quotation marks.
 The optional numbers given to the cite commands in the brackets describe the pages, where the information can be found in the sources.
 Footnotes for citations and the final bibliography are generated automatically.

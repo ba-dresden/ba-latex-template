@@ -46,8 +46,8 @@ The templates author uses [VSCode](https://code.visualstudio.com/) with the LaTe
 To get a PDF file from LaTeX code compilation is required.
 Compiling the document requires multiple programs have to be invoked in correct order (`latex` -> `biber` -> `latex` -> `latex`).
 There exist multiple options to automate that process.
-The author strongly recommends to use `latexmk`, as it is easiest to install and use. `latexmk` is already inculded in TeXLive.
-If you use MikTeX, you have to install the `latexmk` package from the MikTex Console. `latexmk` requires Perl, which is not availble per default on Windows.
+The author strongly recommends to use `latexmk`, as it is easiest to install and use. `latexmk` is already included in TeXLive.
+If you use MikTeX, you have to install the `latexmk` package from the MikTex Console. `latexmk` requires Perl, which is not available per default on Windows.
 You might want to install [StrawberryPerl](http://strawberryperl.com/).
 
 ```note
