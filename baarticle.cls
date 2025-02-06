@@ -493,7 +493,7 @@
 \csdef{@basource}{\@baenvsource}
 \csdef{@baenvtitle}{#2}
 % the stuff below for begin table is required because it is
-% required to expand the placment modifier instantly
+% required to expand the placement modifier instantly
 \def\etable{\begin{table}}%
         \expandafter\etable\expandafter[\@baenvplacement]
         \begin{center}
