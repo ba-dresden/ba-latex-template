@@ -536,8 +536,8 @@
     \toggletrue{dhsnacronyms}
 }{
     % patching was successfully
-    \typeout{patched \newacronym command}
+    \typeout{patched \protect\newacronym command}
 }{
     % patching failed
-    \typeout{patching of \newacronym command failed}
+    \typeout{patching of \protect\newacronym command failed}
 }
