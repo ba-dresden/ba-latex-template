@@ -400,6 +400,7 @@
         \mkfrontmatter{
             \iftoggle{dhsnacronyms}{
                 \singlespacing
+                \phantomsection
                 \section*{Abkürzungsverzeichnis}
                 \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
                 \vspace{-1cm}
