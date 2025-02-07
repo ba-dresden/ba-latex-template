@@ -290,11 +290,11 @@
     % do not print page number on affirmation
     \thispagestyle{empty}
     \subsubsection*{Eidesstattliche Erklärung}
-    Ich erkläre an Eides statt, \\
-    dass ich die vorliegende Arbeit selbständig und nur unter Verwendung der angegebenen Quellen und Hilfsmittel angefertigt habe. \\
-    Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht. \\
-    Bestandteile der Arbeit, die mittels Künstlicher Intelligenz entstanden sind, wurden ausdrücklich gekennzeichnet. \\
-    Die Zustimmung des/der beteiligten Unternehmen/s zur Verwendung betrieblicher Unterlagen habe ich eingeholt. \\
+    Ich erkläre an Eides statt,
+    dass ich die vorliegende Arbeit selbständig und nur unter Verwendung der angegebenen Quellen und Hilfsmittel angefertigt habe.
+    Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht.
+    Bestandteile der Arbeit, die mittels Künstlicher Intelligenz entstanden sind, wurden ausdrücklich gekennzeichnet.
+    Die Zustimmung des/der beteiligten Unternehmen/s zur Verwendung betrieblicher Unterlagen habe ich eingeholt.
     Die Arbeit wurde bisher in gleicher oder ähnlicher Form weder veröffentlicht noch einer anderen Prüfungsbehörde/-stelle vorgelegt. \\
 
     \bigskip\par
