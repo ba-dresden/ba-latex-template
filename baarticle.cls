@@ -9,12 +9,10 @@
 \newtoggle{baclslinkcoloring} % toggles are false per default
 \newtoggle{baclsheader} % toggles are false per default
 \toggletrue{baclsheader} % default setting should show the header
-\newtoggle{dhsnacronyms} % toggles are false per default
 
 % use package showframe for "debugging"
 % \RequirePackage{showframe}
 
-\RequirePackage[figure,table]{totalcount}
 
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
@@ -54,6 +52,7 @@
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
+\RequirePackage[figure,table]{totalcount} % count entries in ToC, LoF and LoT
 \RequirePackage{fancyhdr} % to adjust headers and footers
 \RequirePackage{graphicx} % to use includegraphics
 \RequirePackage[font={footnotesize},justification=centering]{caption} % to make captions smaller and keep long captions centered
@@ -66,6 +65,8 @@
 
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
+    \newtoggle{dhsnacronyms} % toggles are false per default
+    
     \RequirePackage{pdfpages}
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
@@ -184,7 +185,6 @@
 \fancyfoot[R]{\thepage}
 % Default \footrulewidth is 0pt
 % \renewcommand{\footrulewidth}{0.4pt}
-
 
 % helper macro to print the list of correctors comma seperated
 \newcommand{\printcorrectors}[1]{
@@ -368,6 +368,17 @@
     \renewcommand{\glossarysection}[2][]{}
     \makenoidxglossaries
     
+    %updating the \newacronym command to set the toggle for the glossary
+    \pretocmd{\newacronym}{
+        \toggletrue{dhsnacronyms}
+    }{
+        % patching was successfully
+        \typeout{patched \protect\newacronym command}
+    }{
+        % patching failed
+        \typeout{patching of \protect\newacronym command failed}
+    }
+    
     \newenvironment{basimple}[1][]{
         \setkeys[BA]{simple}{#1}
         \mktitle{
@@ -530,15 +541,4 @@
     \end{table}
     \csundef{@basource}
     \csundef{@baenvtitle}
-}
-
-%updating the \newacronym command to set the toggle for the glossary
-\pretocmd{\newacronym}{
-    \toggletrue{dhsnacronyms}
-}{
-    % patching was successfully
-    \typeout{patched \protect\newacronym command}
-}{
-    % patching failed
-    \typeout{patching of \protect\newacronym command failed}
 }

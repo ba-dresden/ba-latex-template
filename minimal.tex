@@ -1,10 +1,10 @@
 \documentclass[first=firstname,last=lastname,company=comp,location=Dresden]{baarticle}
 
 % already included and used packages
-% \usepackage[english,main=ngerman]{babel}
-% \usepackage[autostyle=true,german=quotes]{csquotes}
-% \usepackage[style=baarticle]{biblatex}
-% \usepackage{hyperref}
+\usepackage[english,main=ngerman]{babel}
+\usepackage[autostyle=true,german=quotes]{csquotes}
+\usepackage[style=baarticle]{biblatex}
+\usepackage{hyperref}
 
 \begin{filecontents}{minimal.bib}
 @book{cloudcomp,
@@ -39,7 +39,7 @@
 \begin{document}
     \mktitle{
         title=Test Report,
-        img=../ba.png,
+        img=images/logo.png,
         course=science,
         number=1234,
         corrector={corrector 1,corrector 2},
@@ -47,7 +47,7 @@
         returndate=\today
     }
     \mkblocknotice{
-        signature=../empty.png,
+        signature=images/signature.png,
         date=\today,
         location=Dresden
     }
@@ -81,7 +81,7 @@
     longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong
     \clearpage
     \mkaffirmation{
-        signature=../empty.png,
+        signature=images/signature.png,
         date=\today
     }
 \end{document}
