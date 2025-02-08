@@ -310,6 +310,9 @@ TSWLatexianTemp*
 # generated if using elsarticle.cls
 *.spl
 
+# listofcode files
+*.loc
+
 # Scons
 .sconsign.dblite
 
@@ -322,3 +325,6 @@ TSWLatexianTemp*
 
 # .idea directory in IntelliJ IDEA projects
 .idea
+
+# .vscode directory in Visual Studio Code project
+.vscode
