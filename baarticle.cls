@@ -13,6 +13,7 @@
 % use package showframe for "debugging"
 % \RequirePackage{showframe}
 
+
 % first name of the author
 \DeclareOptionX[BA]{first}{\def\@baclsfirst{#1}}
 % last name of the author
@@ -51,6 +52,7 @@
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
+\RequirePackage[figure,table]{totalcount} % count entries in ToC, LoF and LoT
 \RequirePackage{fancyhdr} % to adjust headers and footers
 \RequirePackage{graphicx} % to use includegraphics
 \RequirePackage[font={footnotesize},justification=centering]{caption} % to make captions smaller and keep long captions centered
@@ -64,6 +66,8 @@
 
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
+    \newtoggle{dhsnacronyms} % toggles are false per default
+    
     \RequirePackage{pdfpages}
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
@@ -72,7 +76,7 @@
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
     \RequirePackage{listings} % to add listings for code
     \RequirePackage{xcolor} % to define colors for listings
-    
+
     \iftoggle{baclslinkcoloring}{
         % hyperref config
         \hypersetup{
@@ -279,7 +283,6 @@
 % Default \footrulewidth is 0pt
 % \renewcommand{\footrulewidth}{0.4pt}
 
-
 % helper macro to print the list of correctors comma seperated
 \newcommand{\printcorrectors}[1]{
     \@for\next:=#1\do
@@ -388,22 +391,33 @@
     % do not print page number on affirmation
     \thispagestyle{empty}
     \subsubsection*{Eidesstattliche Erklärung}
-    Ich erkläre an Eides statt, dass ich die vorliegende Arbeit selbständig und ohne unerlaubte fremde Hilfe angefertigt, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt habe.
+    Ich erkläre an Eides statt,
+    dass ich die vorliegende Arbeit selbständig und nur unter Verwendung der angegebenen Quellen und Hilfsmittel angefertigt habe.
     Die aus fremden Quellen direkt oder indirekt übernommenen Stellen sind als solche kenntlich gemacht.
-    Die Zustimmung des Partnerunternehmens in der Praxis zur Verwendung betrieblicher Unterlagen habe ich eingeholt.
-    Die Arbeit wurde bisher in gleicher oder ähnlicher Form keiner anderen Prüfungsbehörde vorgelegt und auch nicht veröffentlicht.
+    Bestandteile der Arbeit, die mittels Künstlicher Intelligenz entstanden sind, wurden ausdrücklich gekennzeichnet.
+    Die Zustimmung des/der beteiligten Unternehmen/s zur Verwendung betrieblicher Unterlagen habe ich eingeholt.
+    Die Arbeit wurde bisher in gleicher oder ähnlicher Form weder veröffentlicht noch einer anderen Prüfungsbehörde/-stelle vorgelegt. \\
+
     \bigskip\par
+    \par\noindent
+    \@baclslast{}, \@baclsfirst{} \vspace{-8pt} \\
+    \rule{0.4\textwidth}{0.5pt} \\
+    \noindent
+    Name, Vorname Verfassender
+
     \begin{wrapfigure}[1]{r}{0.3\textwidth}
         \begin{center}
-            \vspace{-32pt}
+            \vspace{-40pt}
             \includegraphics[width=0.28\textwidth]{\@baaffirsignature}
         \end{center}
     \end{wrapfigure}
     \bigskip
+
     \par\noindent
-    \@baclslocation{}, \@baaffirdate{}
-    \par\noindent
-    Ort, Datum\hfill Unterschrift des Verfassers
+    \@baclslocation{}, \@baaffirdate{} \vspace{-8pt} \\
+    \rule{0.4\textwidth}{0.5pt}\hfill \rule{0.4\textwidth}{0.5pt}\\
+    \noindent
+    Ort, Datum Abgabetermin\hfill Unterschrift Verfassender
 }
 
 % Frontmatter
@@ -413,11 +427,15 @@
 \newcommand{\mkfrontmatter}[1]{
     \tableofcontents
     \clearpage
-    \listoffigures
+    \iftotalfigures
+        \listoffigures
+    \fi
     \clearpage
     #1
     \clearpage
-    \listoftables
+    \iftotaltables
+        \listoftables
+    \fi
     \clearpage
     \iftotalcodes
         \phantomsection
@@ -464,6 +482,17 @@
     \renewcommand{\glossarysection}[2][]{}
     \makenoidxglossaries
     
+    %updating the \newacronym command to set the toggle for the glossary
+    \pretocmd{\newacronym}{
+        \toggletrue{dhsnacronyms}
+    }{
+        % patching was successfully
+        \typeout{patched \protect\newacronym command}
+    }{
+        % patching failed
+        \typeout{patching of \protect\newacronym command failed}
+    }
+    
     \newenvironment{basimple}[1][]{
         \setkeys[BA]{simple}{#1}
         \mktitle{
@@ -494,12 +523,17 @@
             \clearpage
         }
         \mkfrontmatter{
-            \singlespacing
-            \section*{Abkürzungsverzeichnis}
-            \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
-            \vspace{-1cm}
-            \printnoidxglossaries
-            \onehalfspacing
+            \iftoggle{dhsnacronyms}{
+                \singlespacing
+                \phantomsection
+                \section*{Abkürzungsverzeichnis}
+                \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+                \vspace{-1cm}
+                \printnoidxglossaries
+                \onehalfspacing
+            }{
+                % do nothing
+            }
         }
     }{
         \printbibliography[heading=bibintoc]
