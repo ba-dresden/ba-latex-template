@@ -59,7 +59,8 @@
 \RequirePackage[bottom,hang]{footmisc} % to keep footnotes always on the bottom and to fix multiline indentation
 \RequirePackage[all]{nowidow} % to eliminate widows and orphans
 \RequirePackage{titlesec} % to reduce section spacing
-\RequirePackage{lipsum}% just to generate text for the example
+\RequirePackage{lipsum} % just to generate text for the example
+\RequirePackage[figure,table,code]{totalcount} % count entries in LoF and LoT, LoC
 
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
@@ -118,6 +119,16 @@
 \settowidth{\tabnumspacing}{\bfseries\cfttabpresnum\cfttabaftersnum} % extra space
 \addtolength{\cfttabnumwidth}{\tabnumspacing} % add the extra space
 \setlength{\cfttabindent}{0pt}
+
+% List of Codes Style
+\newcommand{\listcodename}{Quelltextverzeichnis}
+\newlistof{code}{loc}{\listcodename}
+\renewcommand{\cftloctitlefont}{\Large\bfseries}
+\renewcommand{\cftcodepresnum}{Quelltext\space}
+\renewcommand{\cftcodeaftersnum}{:}
+\newlength{\codenumspacing} % a "scratch" length
+\settowidth{\codenumspacing}{\bfseries\cftcodepresnum\cftcodeaftersnum} % extra space
+\addtolength{\cftcodenumwidth}{\codenumspacing} % add the extra space
 
 % List of Appendix (LoA)
 % The related commands will refer to 'appx' as the appendix command is already defined by LaTeX
@@ -309,7 +320,7 @@
 }
 
 % Frontmatter
-% prints ToC, LoF and LoT and swaps to arabic pagenumbering afterwards
+% prints ToC, LoF, LoT and LoC and swaps to arabic pagenumbering afterwards
 % the argument defines how to print the list of abbreviations, as there
 % exist multiple packages to handle abbreviations
 \newcommand{\mkfrontmatter}[1]{
@@ -320,6 +331,12 @@
     #1
     \clearpage
     \listoftables
+    \clearpage
+    \iftotalcodes
+        \phantomsection
+        \addcontentsline{toc}{section}{Quelltextverzeichnis}
+        \listofcode
+    \fi
     \clearpage
     \pagenumbering{arabic}
 }
@@ -515,6 +532,46 @@
         \label{\@baenvlabel}
     }
     \end{table}
+    \csundef{@basource}
+    \csundef{@baenvtitle}
+}
+
+% \begin{bacode}[source=SOURCE,placement=htb,label=LABEL]{title}
+% bacode adds a source reference below the code / content
+% also adds a label which equals the given title
+\newenvironment{bacode}[2][]{
+    \setkeys[BA]{env}{#1}
+    \csdef{@basource}{\@baenvsource}
+    \csdef{@baenvtitle}{#2}
+    \par
+    \iftoggle{baclsappx}{
+        % do nothing
+    }{
+        \refstepcounter{code} 
+        \phantomsection
+        %\addcontentsline{loc}{code}{\@baenvtitle}
+        \addcontentsline{loc}{code}{\protect\numberline{\thecode}{test}}\par %\@baenvtitle}\par%\protect\numberline{\thecode}
+    }
+}{
+    \iftoggle{baclsappx}{
+        \addtoappx{\@baenvtitle}
+        \begin{center}
+            \vspace{-5pt}
+            \small
+            Anhang \theappx{}: \@bacaption
+        \end{center}
+    }{
+        \begin{center}
+            \vspace{-6pt}
+            \small
+            Quelltext \thecode{}: \@bacaption
+        \end{center}
+    }
+    \ifdefempty{\@baenvlabel}{
+        \label{\@baenvtitle}
+    }{
+        \label{\@baenvlabel}
+    }
     \csundef{@basource}
     \csundef{@baenvtitle}
 }
