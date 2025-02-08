@@ -128,7 +128,7 @@
     \addcontentsline{loa}{appx}{\protect\numberline{\theappx}#1}\par
 }
 \renewcommand{\cftloatitlefont}{\Large\bfseries}
-\renewcommand{\cftappxpresnum}{Anhang }
+\renewcommand{\cftappxpresnum}{Anhang\space}
 \renewcommand{\cftappxaftersnum}{:}
 \newlength{\appxnumspacing} % a "scratch" length
 \settowidth{\appxnumspacing}{\bfseries\cftappxpresnum\cftappxaftersnum} % extra space
@@ -415,7 +415,7 @@
 \newenvironment{baappx}{
     \toggletrue{baclsappx}
     \phantomsection
-    \addcontentsline{toc}{section}{Anhangverzeichnis}
+    \addcontentsline{toc}{section}{\listappxname}
     \listofappx
     \clearpage
     \section*{Anhang}
@@ -450,17 +450,17 @@
 % also adds a label which equals the given title
 \newsavebox{\@bafigurebox}
 \newenvironment{bafigure}[2][]{
-\setkeys[BA]{env}{#1}
-\csdef{@basource}{\@baenvsource}
-\csdef{@baenvtitle}{#2}
-% the stuff below for begin figure is required because it is
-% required to expand the placement modifier instantly
-\def\efigure{\begin{figure}}%
-        \expandafter\efigure\expandafter[\@baenvplacement]
+    \setkeys[BA]{env}{#1}
+    \csdef{@basource}{\@baenvsource}
+    \csdef{@baenvtitle}{#2}
+    % the stuff below for begin figure is required because it is
+    % required to expand the placement modifier instantly
+    \def\efigure{\begin{figure}}%
+    \expandafter\efigure\expandafter[\@baenvplacement]
         \begin{lrbox}{\@bafigurebox}
             \begin{minipage}{0.98\textwidth}
                 \begin{center}
-                    }{
+}{
                 \end{center}
             \end{minipage}
         \end{lrbox}
@@ -472,7 +472,7 @@
                 \small
                 Anhang \theappx{}: \@bacaption
             \end{center}
-        } {
+        }{
             \caption[\@baenvtitle]{\@bacaption}
         }
         \ifdefempty{\@baenvlabel}{
@@ -489,31 +489,31 @@
 % batable centers the content and adds a source reference below the table
 % also adds a label which equals the given title
 \newenvironment{batable}[2][]{
-\setkeys[BA]{env}{#1}
-\csdef{@basource}{\@baenvsource}
-\csdef{@baenvtitle}{#2}
-% the stuff below for begin table is required because it is
-% required to expand the placement modifier instantly
-\def\etable{\begin{table}}%
-        \expandafter\etable\expandafter[\@baenvplacement]
+    \setkeys[BA]{env}{#1}
+    \csdef{@basource}{\@baenvsource}
+    \csdef{@baenvtitle}{#2}
+    % the stuff below for begin table is required because it is
+    % required to expand the placement modifier instantly
+    \def\etable{\begin{table}}%
+    \expandafter\etable\expandafter[\@baenvplacement]
+    \begin{center}
+}{
+    \end{center}
+    \iftoggle{baclsappx}{
+        \addtoappx{\@baenvtitle}
         \begin{center}
-            }{
+            \vspace{-10pt}
+            \small
+            Anhang \theappx{}: \@bacaption
         \end{center}
-        \iftoggle{baclsappx}{
-            \addtoappx{\@baenvtitle}
-            \begin{center}
-                \vspace{-10pt}
-                \small
-                Anhang \theappx{}: \@bacaption
-            \end{center}
-        } {
-            \caption[\@baenvtitle]{\@bacaption}
-        }
-        \ifdefempty{\@baenvlabel}{
-            \label{\@baenvtitle}
-        }{
-            \label{\@baenvlabel}
-        }
+    } {
+        \caption[\@baenvtitle]{\@bacaption}
+    }
+    \ifdefempty{\@baenvlabel}{
+        \label{\@baenvtitle}
+    }{
+        \label{\@baenvlabel}
+    }
     \end{table}
     \csundef{@basource}
     \csundef{@baenvtitle}
