@@ -3,9 +3,10 @@ title: Environments
 sort: 3
 ---
 # Environments
-The template provides two environments to deal with figures and tables.
+The template provides two environments to deal with figures and tables. 
 Both will likely break if the content spans multiple pages.
 Therefore, it could make sense to split up large content and use multiple `bafigures` or `batables`.
+There's also an additional environment to deal with code snippets in your work, `bacode`.
 ## bafigure
 The `bafigure` environment creates a frame and a label around its content and adds an entry to the list of figures.
 It also adds the given caption with a source reference below the figure.
@@ -42,6 +43,25 @@ The optional arguments have the same meaning as for `bafigure`.
 - `label` is the label, which you can use in `\ref{label}`, it defaults to the provided caption.
 
 In case you need footnotes in tables possible options are outlined [here](https://texfaq.org/FAQ-footintab).
+
+## bacode
+The `bacode` creates a frameless box around it's content to provide a caption and adds it content to the list of codes.
+The caption which includes a source reference is placed beneath the code snippet.
+```latex
+\begin{bacode}[
+    source=SOURCE,
+    placement=htb,
+    label=LABEL
+]{CAPTION}
+    % The content e.g. \begin{listing}
+\end{bacode}
+```
+The optional arguments have the same meaning as for `bafigure` and `batable`.
+- `source` is the source of the table, it defaults to you. To cite something here properly `\captioncite` should be used.
+- `placement` is **not** applied. This will probably managed by your own code environment e.g. `listings` or `minted`. For further information see [packages](./packages.md)
+- `label` is the label, which you can use in `\ref{label}`, it defaults to the provided caption.
+
+If you decide to use the [`simple mode`](./simple.md) and the package `listings` this template provides 2 different styling options for your code highlighting. These theme options are `github-light` and `github-dark` and are orientated on the code highlighting from [GitHub](https://github.com). Unfortunately the DHSN itself doesn't provide any requirements for code formatting, highlighting etc. The default theme option in `[simple mode](./simple.md)` is `github-light`. If you want to change this you can do this with `\lstset{style=github-dark}` or any other theme name you maybe created by your self. Also feel free to add other styles to this template. If you want to learn more about the `listings` package you can visit the [listings introduction page](https://de.overleaf.com/learn/latex/Code_listing) on overleaf and the package itself on [CTAN](https://ctan.org/pkg/listings). 
 
 ## baappx
 The `baappx` environment creates the appendix along with list of all appendix entries and adds required entries to the table of contents.
