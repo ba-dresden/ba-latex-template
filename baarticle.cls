@@ -52,7 +52,6 @@
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
-\RequirePackage[figure,table]{totalcount} % count entries in ToC, LoF and LoT
 \RequirePackage{fancyhdr} % to adjust headers and footers
 \RequirePackage{graphicx} % to use includegraphics
 \RequirePackage[font={footnotesize},justification=centering]{caption} % to make captions smaller and keep long captions centered
