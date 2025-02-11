@@ -35,7 +35,7 @@
 \begin{document}
     \mktitle{
         title=Test Report,
-        img=../empty.png,
+        img=example-image-a,
         course=science,
         number=1234,
         corrector={corrector 1,corrector 2},
@@ -46,12 +46,12 @@
     \edef\test{\thepage}\assert[title page increases page counter]{II}
     \rmfamily
     \mkblocknotice{
-        signature=../empty.png,
+        signature=example-image-a,
         date=\today,
         location=Dresden
     }
     \mkaffirmation{
-        signature=../empty.png,
+        signature=example-image-a,
         date=\today
     }
     \clearpage
@@ -65,6 +65,8 @@
     \edef\test{\cftfigaftersnum}\assert[LoF suffix is :]{:}
     \edef\test{\cfttabpresnum}\assert[LoT prefix is Tabelle]{Tabelle }
     \edef\test{\cfttabaftersnum}\assert[LoT suffix is :]{:}
+    \edef\test{\cftcodepresnum}\assert[LoC suffix is Quelltext]{Quelltext\space}
+    \edef\test{\cftcodeaftersnum}\assert[LoC suffix is :]{:}
 
     \subsection*{Environments}
 
