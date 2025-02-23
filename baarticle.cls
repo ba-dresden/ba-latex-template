@@ -319,7 +319,7 @@
         \noindent
         \normalsize
         Duale Hochschule Sachsen \\
-        Studienakademie \@baclslocation{} \\
+        Staatliche Studienakademie \@baclslocation{} \\
         Studiengang \@batitlecourse{} \\
         \par
         %%        \vspace{4cm}
