@@ -50,7 +50,6 @@ The caption which includes a source reference is placed beneath the code snippet
 ```latex
 \begin{bacode}[
     source=SOURCE,
-    placement=htb,
     label=LABEL
 ]{CAPTION}
     % The content e.g. \begin{listing}
