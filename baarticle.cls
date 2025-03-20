@@ -66,7 +66,7 @@
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
     \newtoggle{dhsnacronyms} % toggles are false per default
-    
+
     \RequirePackage{pdfpages}
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
@@ -394,15 +394,15 @@
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
-    
+
     \presetkeys[BA]{simple}{type=undefined,blocknotice=true}{}
-    
+
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
     \setacronymstyle{long-short}
     \renewcommand{\glossarysection}[2][]{}
     \makenoidxglossaries
-    
+
     %updating the \newacronym command to set the toggle for the glossary
     \pretocmd{\newacronym}{
         \toggletrue{dhsnacronyms}
@@ -413,7 +413,7 @@
         % patching failed
         \typeout{patching of \protect\newacronym command failed}
     }
-    
+
     \newenvironment{basimple}[1][]{
         \setkeys[BA]{simple}{#1}
         \mktitle{
@@ -509,17 +509,17 @@
 % also adds a label which equals the given title
 \newsavebox{\@bafigurebox}
 \newenvironment{bafigure}[2][]{
-    \setkeys[BA]{env}{#1}
-    \csdef{@basource}{\@baenvsource}
-    \csdef{@baenvtitle}{#2}
-    % the stuff below for begin figure is required because it is
-    % required to expand the placement modifier instantly
-    \def\efigure{\begin{figure}}%
-    \expandafter\efigure\expandafter[\@baenvplacement]
+\setkeys[BA]{env}{#1}
+\csdef{@basource}{\@baenvsource}
+\csdef{@baenvtitle}{#2}
+% the stuff below for begin figure is required because it is
+% required to expand the placement modifier instantly
+\def\efigure{\begin{figure}}%
+        \expandafter\efigure\expandafter[\@baenvplacement]
         \begin{lrbox}{\@bafigurebox}
             \begin{minipage}{0.98\textwidth}
                 \begin{center}
-}{
+                    }{
                 \end{center}
             \end{minipage}
         \end{lrbox}
@@ -548,31 +548,31 @@
 % batable centers the content and adds a source reference below the table
 % also adds a label which equals the given title
 \newenvironment{batable}[2][]{
-    \setkeys[BA]{env}{#1}
-    \csdef{@basource}{\@baenvsource}
-    \csdef{@baenvtitle}{#2}
-    % the stuff below for begin table is required because it is
-    % required to expand the placement modifier instantly
-    \def\etable{\begin{table}}%
-    \expandafter\etable\expandafter[\@baenvplacement]
-    \begin{center}
-}{
-    \end{center}
-    \iftoggle{baclsappx}{
-        \addtoappx{\@baenvtitle}
+\setkeys[BA]{env}{#1}
+\csdef{@basource}{\@baenvsource}
+\csdef{@baenvtitle}{#2}
+% the stuff below for begin table is required because it is
+% required to expand the placement modifier instantly
+\def\etable{\begin{table}}%
+        \expandafter\etable\expandafter[\@baenvplacement]
         \begin{center}
-            \vspace{-10pt}
-            \small
-            Anhang \theappx{}: \@bacaption
+            }{
         \end{center}
-    } {
-        \caption[\@baenvtitle]{\@bacaption}
-    }
-    \ifdefempty{\@baenvlabel}{
-        \label{\@baenvtitle}
-    }{
-        \label{\@baenvlabel}
-    }
+        \iftoggle{baclsappx}{
+            \addtoappx{\@baenvtitle}
+            \begin{center}
+                \vspace{-10pt}
+                \small
+                Anhang \theappx{}: \@bacaption
+            \end{center}
+        } {
+            \caption[\@baenvtitle]{\@bacaption}
+        }
+        \ifdefempty{\@baenvlabel}{
+            \label{\@baenvtitle}
+        }{
+            \label{\@baenvlabel}
+        }
     \end{table}
     \csundef{@basource}
     \csundef{@baenvtitle}
@@ -589,7 +589,7 @@
     \iftoggle{baclsappx}{
         % do nothing
     }{
-        \refstepcounter{code} 
+        \refstepcounter{code}
         \phantomsection
         \addcontentsline{loc}{code}{\protect\numberline{\thecode}{test}}\par
     }
