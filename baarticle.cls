@@ -52,7 +52,6 @@
 \RequirePackage{setspace} % for line spacing
 \RequirePackage{float} % for H placement directive in \begin{figure}
 \RequirePackage{tocloft} % to adjust the ToC, LoF and LoT
-\RequirePackage[figure,table]{totalcount} % count entries in ToC, LoF and LoT
 \RequirePackage{fancyhdr} % to adjust headers and footers
 \RequirePackage{graphicx} % to use includegraphics
 \RequirePackage[font={footnotesize},justification=centering]{caption} % to make captions smaller and keep long captions centered
@@ -61,18 +60,21 @@
 \RequirePackage[bottom,hang]{footmisc} % to keep footnotes always on the bottom and to fix multiline indentation
 \RequirePackage[all]{nowidow} % to eliminate widows and orphans
 \RequirePackage{titlesec} % to reduce section spacing
-\RequirePackage{lipsum}% just to generate text for the example
+\RequirePackage{lipsum} % just to generate text for the example
+\RequirePackage[figure,table,code]{totalcount} % count entries in LoF and LoT, LoC
 
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
     \newtoggle{dhsnacronyms} % toggles are false per default
-    
+
     \RequirePackage{pdfpages}
     \RequirePackage[english,main=ngerman]{babel}
     \RequirePackage[autostyle=true,german=quotes]{csquotes}
     \RequirePackage[style=baarticle]{biblatex}
     \RequirePackage{hyperref}
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
+    \RequirePackage{listings} % to add listings for code
+    \RequirePackage{xcolor} % to define colors for listings
 
     \iftoggle{baclslinkcoloring}{
         % hyperref config
@@ -85,6 +87,13 @@
     } {
         % no coloring required, do nothing
     }
+
+    \input{github-listings.theme}
+
+    % set default style to github-light
+    \lstset{style=github-light}
+    \lstset{aboveskip=\baselineskip}
+    \lstset{belowskip=-\baselineskip}
 } {
     % not in simple, do nothing
 }
@@ -123,6 +132,15 @@
 \addtolength{\cfttabnumwidth}{\tabnumspacing} % add the extra space
 \setlength{\cfttabindent}{0pt}
 
+% List of Codes Style
+\newcommand{\listcodename}{Quelltextverzeichnis}
+\newlistof{code}{loc}{\listcodename}
+\renewcommand{\cftloctitlefont}{\Large\bfseries}
+\renewcommand{\cftcodepresnum}{Quelltext\space}
+\renewcommand{\cftcodeaftersnum}{:}
+\newlength{\codenumspacing} % a "scratch" length
+\settowidth{\codenumspacing}{\bfseries\cftcodepresnum\cftcodeaftersnum} % extra space
+\addtolength{\cftcodenumwidth}{\codenumspacing} % add the extra space
 
 % List of Appendix (LoA)
 % The related commands will refer to 'appx' as the appendix command is already defined by LaTeX
@@ -133,7 +151,7 @@
     \addcontentsline{loa}{appx}{\protect\numberline{\theappx}#1}\par
 }
 \renewcommand{\cftloatitlefont}{\Large\bfseries}
-\renewcommand{\cftappxpresnum}{Anhang }
+\renewcommand{\cftappxpresnum}{Anhang\space}
 \renewcommand{\cftappxaftersnum}{:}
 \newlength{\appxnumspacing} % a "scratch" length
 \settowidth{\appxnumspacing}{\bfseries\cftappxpresnum\cftappxaftersnum} % extra space
@@ -223,7 +241,7 @@
         \noindent
         \normalsize
         Duale Hochschule Sachsen \\
-        Studienakademie \@baclslocation{} \\
+        Staatliche Studienakademie \@baclslocation{} \\
         Studiengang \@batitlecourse{} \\
         \par
         %%        \vspace{4cm}
@@ -324,7 +342,7 @@
 }
 
 % Frontmatter
-% prints ToC, LoF and LoT and swaps to arabic pagenumbering afterwards
+% prints ToC, LoF, LoT and LoC and swaps to arabic pagenumbering afterwards
 % the argument defines how to print the list of abbreviations, as there
 % exist multiple packages to handle abbreviations
 \newcommand{\mkfrontmatter}[1]{
@@ -338,6 +356,12 @@
     \clearpage
     \iftotaltables
         \listoftables
+    \fi
+    \clearpage
+    \iftotalcodes
+        \phantomsection
+        \addcontentsline{toc}{section}{Quelltextverzeichnis}
+        \listofcode
     \fi
     \clearpage
     \pagenumbering{arabic}
@@ -370,15 +394,15 @@
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
-    
+
     \presetkeys[BA]{simple}{type=undefined,blocknotice=true}{}
-    
+
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
     \setacronymstyle{long-short}
     \renewcommand{\glossarysection}[2][]{}
     \makenoidxglossaries
-    
+
     %updating the \newacronym command to set the toggle for the glossary
     \pretocmd{\newacronym}{
         \toggletrue{dhsnacronyms}
@@ -389,7 +413,7 @@
         % patching failed
         \typeout{patching of \protect\newacronym command failed}
     }
-    
+
     \newenvironment{basimple}[1][]{
         \setkeys[BA]{simple}{#1}
         \mktitle{
@@ -450,7 +474,7 @@
 \newenvironment{baappx}{
     \toggletrue{baclsappx}
     \phantomsection
-    \addcontentsline{toc}{section}{Anhangverzeichnis}
+    \addcontentsline{toc}{section}{\listappxname}
     \listofappx
     \clearpage
     \section*{Anhang}
@@ -507,7 +531,7 @@
                 \small
                 Anhang \theappx{}: \@bacaption
             \end{center}
-        } {
+        }{
             \caption[\@baenvtitle]{\@bacaption}
         }
         \ifdefempty{\@baenvlabel}{
@@ -528,7 +552,7 @@
 \csdef{@basource}{\@baenvsource}
 \csdef{@baenvtitle}{#2}
 % the stuff below for begin table is required because it is
-% required to expand the placment modifier instantly
+% required to expand the placement modifier instantly
 \def\etable{\begin{table}}%
         \expandafter\etable\expandafter[\@baenvplacement]
         \begin{center}
@@ -550,6 +574,45 @@
             \label{\@baenvlabel}
         }
     \end{table}
+    \csundef{@basource}
+    \csundef{@baenvtitle}
+}
+
+% \begin{bacode}[source=SOURCE,placement=htb,label=LABEL]{title}
+% bacode adds a source reference below the code / content
+% also adds a label which equals the given title
+\newenvironment{bacode}[2][]{
+    \setkeys[BA]{env}{#1}
+    \csdef{@basource}{\@baenvsource}
+    \csdef{@baenvtitle}{#2}
+    \par
+    \iftoggle{baclsappx}{
+        % do nothing
+    }{
+        \refstepcounter{code}
+        \phantomsection
+        \addcontentsline{loc}{code}{\protect\numberline{\thecode}{test}}\par
+    }
+}{
+    \iftoggle{baclsappx}{
+        \addtoappx{\@baenvtitle}
+        \begin{center}
+            \vspace{-5pt}
+            \small
+            Anhang \theappx{}: \@bacaption
+        \end{center}
+    }{
+        \begin{center}
+            \vspace{-6pt}
+            \small
+            Quelltext \thecode{}: \@bacaption
+        \end{center}
+    }
+    \ifdefempty{\@baenvlabel}{
+        \label{\@baenvtitle}
+    }{
+        \label{\@baenvlabel}
+    }
     \csundef{@basource}
     \csundef{@baenvtitle}
 }
