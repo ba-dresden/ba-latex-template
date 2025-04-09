@@ -591,7 +591,7 @@
     }{
         \refstepcounter{code}
         \phantomsection
-        \addcontentsline{loc}{code}{\protect\numberline{\thecode}{test}}\par
+        \addcontentsline{loc}{code}{\protect\numberline{\thecode}{\@baenvtitle}}\par
     }
 }{
     \iftoggle{baclsappx}{
