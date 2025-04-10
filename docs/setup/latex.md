@@ -2,6 +2,7 @@
 title: LaTeX
 sort: 1
 ---
+
 # LaTeX Setup
 
 ```tip

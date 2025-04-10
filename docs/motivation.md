@@ -3,7 +3,9 @@ layout: default
 title: Motivation
 sort: 2
 ---
+
 # Motivation
+
 Some general information about LaTeX, why you should use it for writing scientific papers, how to install
 and use it can be found [here](https://www.latex-project.org/about/) and [here](https://en.wikibooks.org/wiki/LaTeX/Introduction).
 LaTeX is known to have a somewhat steep learning curve, because it does not follow the "What you see is what you get" principle.
@@ -11,12 +13,12 @@ From my point of view learning LaTeX is worthwhile. Some arguments to justify th
 
 One major advantage of LaTeX is consistent formatting.
 If the code describing the formatting of paper is correct, there cannot be any formatting errors.
-Following the styleguide, using correct spelling and grammar make up more than a half of the DHSN Dresden's assessment, 
+Following the styleguide, using correct spelling and grammar make up more than a half of the DHSN Dresden's assessment,
 so you can basically pass any required scientific work without content but correct formatting.
-A rule, which easily creates violations of the styleguide, is that every citation after the first has to replace the 
+A rule, which easily creates violations of the styleguide, is that every citation after the first has to replace the
 author and year with "ebenda".
 You might do it right while writing the paper the first.
-After receiving feedback you might copy blocks of text around. Obviously, this will move citations and if inattentive 
+After receiving feedback you might copy blocks of text around. Obviously, this will move citations and if inattentive
 violate the rule. Moreover, this template sorts the abbreviations and provides the full term on the first occurrence
 automatically, creates compliant bibliography, creates compliant references on images and so on.
 

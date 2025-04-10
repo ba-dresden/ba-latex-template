@@ -1,6 +1,7 @@
 ---
 title: Index
 ---
+
 # DHSN Dresden LaTeX template
 
 A template, which tries to follow the
