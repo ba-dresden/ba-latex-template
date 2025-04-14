@@ -37,51 +37,51 @@
 \addbibresource{minimal.bib}
 
 \begin{document}
-    \mktitle{
-        title=Test Report,
-        img=images/logo.png,
-        course=science,
-        number=1234,
-        corrector={corrector 1,corrector 2},
-        themedate=\today,
-        returndate=\today
-    }
-    \mkblocknotice{
-        signature=images/signature.png,
-        date=\today,
-        location=Dresden
-    }
-    \mkfrontmatter{
-        \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
-        \section*{Abkürzungsverzeichnis}
-    }
-    \section{abc}
-    Le citation.\vglcite[17-22]{cloudcomp}
-    The duplicate.\vglcite[33-35]{cloudcomp}
-    longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong\vglcite[38]{rpa}
-    \footnote{longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong}
-    \subsection{sub}
-    \subsection{pub}
-    \section{abc}
-    \begin{bafigure}{Image regarding section abc}
-        The image.
+\mktitle{
+    title=Test Report,
+    img=images/logo.png,
+    course=science,
+    number=1234,
+    corrector={corrector 1,corrector 2},
+    themedate=\today,
+    returndate=\today
+}
+\mkblocknotice{
+    signature=images/signature.png,
+    date=\today,
+    location=Dresden
+}
+\mkfrontmatter{
+    \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+    \section*{Abkürzungsverzeichnis}
+}
+\section{abc}
+Le citation.\vglcite[17-22]{cloudcomp}
+The duplicate.\vglcite[33-35]{cloudcomp}
+longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong\vglcite[38]{rpa}
+\footnote{longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong}
+\subsection{sub}
+\subsection{pub}
+\section{abc}
+\begin{bafigure}{Image regarding section abc}
+    The image.
+\end{bafigure}
+\clearpage
+\begin{baappx}
+    \begin{bafigure}{Abc}
+        asdasdas
     \end{bafigure}
-    \clearpage
-    \begin{baappx}
-        \begin{bafigure}{Abc}
-            asdasdas
-        \end{bafigure}
     \addtoappx{Def}
     asdagggh
     \addtoappx{Ghi}
     eufzsiukefhabl\bacite[7]{internal}
-    \end{baappx}
-    \clearpage
-    \printbibliography[heading=bibintoc]
-    longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong
-    \clearpage
-    \mkaffirmation{
-        signature=images/signature.png,
-        date=\today
-    }
+\end{baappx}
+\clearpage
+\printbibliography[heading=bibintoc]
+longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong longlonglong
+\clearpage
+\mkaffirmation{
+    signature=images/signature.png,
+    date=\today
+}
 \end{document}

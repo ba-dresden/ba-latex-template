@@ -18,12 +18,12 @@
 \renewbibmacro*{textcite:postnote}{%
     \iffieldundef{postnote}
     {\ifbool{cbx:parens}
-    {\bibcloseparen}
-    {}}%iffieldundef
+        {\bibcloseparen}
+        {}}%iffieldundef
     {\ifbool{cbx:parens}
-    {\setunit{\postnotedelim}}
-    {\setunit{\extpostnotedelim\bibopenparen}}%
-    \bibcloseparen\printfield{postnote}}}
+        {\setunit{\postnotedelim}}
+        {\setunit{\extpostnotedelim\bibopenparen}}%
+        \bibcloseparen\printfield{postnote}}}
 \providecommand*{\mkibid}[1]{#1}
 
 % force ebenda to lowercase
@@ -42,28 +42,28 @@
 \DeclareCiteCommand{\bacite}[\mkbibfootnote]
 {\usebibmacro{prenote}}
 {\bibhyperref[#3]{%
-    \usebibmacro{citeindex}%
-    \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
-    {\usebibmacro{cite:ibid}}
-    {\usebibmacro{cite:fullpartcite}}%
-}}
+        \usebibmacro{citeindex}%
+        \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+        {\usebibmacro{cite:ibid}}
+        {\usebibmacro{cite:fullpartcite}}%
+    }}
 {\addsemicolon\space}
 {\usebibmacro{postnote}}
 \DeclareCiteCommand{\vglcite}[\mkbibfootnote]
 {Vgl. \usebibmacro{prenote}}
 {\bibhyperref[#3]{%
-    \usebibmacro{citeindex}%
-    \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
-    {\usebibmacro{cite:ibid}}
-    {\usebibmacro{cite:fullpartcite}}%
-}}
+        \usebibmacro{citeindex}%
+        \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+        {\usebibmacro{cite:ibid}}
+        {\usebibmacro{cite:fullpartcite}}%
+    }}
 {\addsemicolon\space}
 {\usebibmacro{postnote}}
 \DeclareCiteCommand{\captioncite}
 {\usebibmacro{prenote}}
 {\bibhyperref[#3]{%
-    \usebibmacro{citeindex}%
-    \usebibmacro{cite:fullpartcite}%
-}}
+        \usebibmacro{citeindex}%
+        \usebibmacro{cite:fullpartcite}%
+    }}
 {\addsemicolon\space}
 {\usebibmacro{postnote}}
