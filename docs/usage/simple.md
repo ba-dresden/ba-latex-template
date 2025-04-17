@@ -57,7 +57,8 @@ Let's also discuss the options of the `basimple` environment:
 - `returndate` should be the date when the paper is handed in
 - `signature` should be a path to an image of your signature
 - `location` should be the location of your company
-- `type` defines the type of the paper and influences the title page if set to `thesis`, `study` or `report`. Setting the `type` parameter is optional.
+- `type` defines the type of the paper and influences the title page. Some preconfigured values are `thesis`, `master-thesis`, `study` or `report`. If you choose a value which is not in the list, the value itself is the new custom title which is getting displayed at the title page. Setting the `type` parameter is optional.
+- `degreetype` defines the degree type e. g. `Arts`, `Egineering` or `Science`. Setting the `degreetype` parameter is optional. The default value for `degreetype` is `Science`.
 - `assignment` should point to a PDF file containing the assignment to write a thesis. It will include the first page of the given PDF file at the appropriate place. Setting the `assignment` parameter is optional.
 - `blocknotice` defines whether a blocknotice should be included or not if set to `false`. One will be included per default. Setting the `blocknotice` parameter is optional.
 
