@@ -2,9 +2,12 @@
 title: Simple Mode
 sort: 1
 ---
+
 # Simple mode
+
 The template has a "simple mode", which loads a bunch of opinionated packages and provides the `basimple` environment, which configures everything, so you do not have to worry about anything.
 The "simple mode" is enabled with the `simple` package option.
+
 ```latex
 \documentclass[first=firstname,last=lastname,company=comp,location=Dresden,simple]{baarticle}
 
@@ -32,7 +35,9 @@ The "simple mode" is enabled with the `simple` package option.
 ```note
  The "simple" package option loads the pdfpages, babel, csquotes, biblatex, glossaries and hyperref packages.
 ```
+
 Let's go through the other package options quickly:
+
 - `first` should be your first name
 - `last` should be your last name
 - `company` should be the company you work for, in case the name contains spaces use `\space` to split the parts, e.g. `part1\space part2`
@@ -42,6 +47,7 @@ Let's go through the other package options quickly:
 - `headertitle` takes an argument to overwrite the header with the new value
 
 Let's also discuss the options of the `basimple` environment:
+
 - `img` should be a path pointing to the logo of the university
 - `course` should be your course of studies
 - `title` should be the title of the paper
@@ -56,6 +62,7 @@ Let's also discuss the options of the `basimple` environment:
 - `blocknotice` defines whether a blocknotice should be included or not if set to `false`. One will be included per default. Setting the `blocknotice` parameter is optional.
 
 To add an abstract to the paper define a macro called `\basimpleabstract` which replacement text is the abstract's content. The following should do it (the `\addcontentsline` is optional):
+
 ```latex
 \documentclass[...,simple]{baarticle}
 
@@ -70,6 +77,7 @@ To add an abstract to the paper define a macro called `\basimpleabstract` which 
 ```
 
 The example document given can be compiled, with `latexmk --pdf --interaction=nonstopmode file.tex` for example.
+
 ```warning
  Importing additional packages with `\usepackage` while in "simple mode" might not work. If you need to load additional packages consider using the [normal mode](normal.html).
 ```
@@ -82,6 +90,7 @@ If you do not want that use the starred version of the command, e.g. `\section*{
 Footnotes can be created as usual with `\footnote{content}`.
 Abbreviations are managed by the glossaries package.
 To define an abbreviation use `\newacronym{identifier}{short-form}{long-form}` before `\begin{document}` and to refer to it use `\gls{identifier}`.
+
 ```latex
 \documentclass[...]{baarticle}
 
@@ -93,8 +102,10 @@ To define an abbreviation use `\newacronym{identifier}{short-form}{long-form}` b
     \end{basimple}
 \end{document}
 ```
+
 It is possible to refer to certain sections using `\label{identifier}`, which marks a certain (sub-)section, and `\ref{identifier}`, which inserts the section number.
 By the way these references are also clickable links.
+
 ```latex
 \documentclass[...]{baarticle}
 
@@ -109,11 +120,13 @@ By the way these references are also clickable links.
     \end{basimple}
 \end{document}
 ```
+
 Images can be included with `\includegraphics`, which should be wrapped in a `bafigure` environment.
 The number of a figure can be retrieved using `\ref{caption}` with the caption provided to the environment.
 `\includegraphics` has a lot of optional arguments, e.g. for rotating and scaling images.
 Take a look [here](https://latexref.xyz/_005cincludegraphics.html).
 Tables should also be wrapped in a `batable` environment.
+
 ```latex
 \documentclass[...]{baarticle}
 
@@ -134,8 +147,10 @@ Tables should also be wrapped in a `batable` environment.
     \end{basimple}
 \end{document}
 ```
+
 An appendix can be created using the `baappx` environment, which will also create an overview of all appendix entries.
 Most environments introduced by this template feature some customization options, which are described in the [environments](./environments) section.
+
 ```latex
 \documentclass[...]{baarticle}
 
@@ -150,9 +165,11 @@ Most environments introduced by this template feature some customization options
     \end{basimple}
 \end{document}
 ```
+
 It is worthwhile to split up larger documents into multiple files.
 You can put each chapter into a separate `.tex` file and join them in the main file using `\include{path/to/the/file}`.
 Given the following file tree:
+
 ```text
 somedirectory
 |-baarticle.bbx
@@ -165,7 +182,9 @@ somedirectory
 |-document.tex
 |-ngerman-ba.lbx
 ```
+
 This should work.
+
 ```latex
 \documentclass[...]{baarticle}
 
@@ -180,11 +199,13 @@ This should work.
 ```
 
 ## Citations and bibliography
+
 The template uses the biblatex package to deal with the bibliography and citations and provides customized styles for it, which are automatically loaded in simple mode.
 Biblatex own its own has a load functionality, so feel free to consult their [documentation](https://ctan.mc1.root.project-creative.net/macros/latex/contrib/biblatex/doc/biblatex.pdf) and [cheatsheet](http://tug.ctan.org/info/biblatex-cheatsheet/biblatex-cheatsheet.pdf).
 
 At first it is required to set up a bibliography database.
 One needs to create a file with the `.bib` extension in the file tree.
+
 ```text
 somedirectory
 |-baarticle.bbx
@@ -195,9 +216,11 @@ somedirectory
 |-document.tex
 |-ngerman-ba.lbx
 ```
+
 That biliography file needs to be included in the main file before `\begin{document}` using `\addbibresource{document.bib}`.
 Such file consists of multiple entries, which each requiring a type and a citekey.
 This template covers the `@article`, `@book`, `@online`, `@collection`, `@incollection`, `@unpublished` with attributes as shown below.
+
 ```text
 // cloudcomp is the citekey for this entry
 @book{cloudcomp,
@@ -246,15 +269,18 @@ This template covers the `@article`, `@book`, `@online`, `@collection`, `@incoll
     year = {2021}
 }
 ```
+
 ```warning
  Additional attributes should not be required and may use a wrong formatting. The same holds true for other entry types. Be aware.
 ```
+
 Now one can create references in the `.tex` file.
 Referring to sources in the text can be achieved with the `\bacite{citekey}` command for direct citations and the `\vglcite{citekey}` command for indirect citations.
 `\enquote{content}` puts its argument in quotation marks.
 The optional numbers given to the cite commands in the brackets describe the pages, where the information can be found in the sources.
 Footnotes for citations and the final bibliography are generated automatically.
 In case one needs to chain multiple cite commands one after another, they should be separated using `\textsuperscript{,}`.
+
 ```latex
 \documentclass[...]{baarticle}
 
