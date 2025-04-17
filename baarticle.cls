@@ -183,7 +183,8 @@
 \define@key[BA]{title}{returndate}{\def\@batitlereturndate{#1}}
 % type of paper (thesis etc...)
 \define@key[BA]{title}{type}{\def\@batitletype{#1}}
-\presetkeys[BA]{title}{type=undefined}{}
+\define@key[BA]{title}{degreetype}{\def\@badegreetype{#1}}
+\presetkeys[BA]{title}{type=undefined,degreetype=undefined}{}
 
 % Clear the header and footer
 \fancyhead{}
@@ -213,18 +214,34 @@
 % helper macro to convert @baclstype to an actual text
 \newcommand{\@bapapertype}{%
     % need to expand @bapapertype as ifdefstring does not do that
-    \edef\@bapapertest{\@batitletype}%
-    \ifdefstring{\@bapapertest}{thesis}{%
+    \edef\@bapapertypetest{\@batitletype}%
+    \edef\@bapaperdegreetype{\@badegreetype}%
+
+    \ifdefstring{\@bapaperdegreetype}{undefined}{%
+        \def\@bapaperdegreetype{Science}
+    }{}
+
+    \ifdefstring{\@bapapertypetest}{thesis}{%
         Bachelorarbeit\\
-        zur Erlangung des Abschlusses Bachelor of Science\\
+        zur Erlangung des Abschlusses Bachelor of \@bapaperdegreetype\\
         im Studiengang \@batitlecourse\\[\baselineskip]%
-    }{} % \ifdefstring
-    \ifdefstring{\@bapapertest}{study}{%
-        Studienarbeit\\[\baselineskip]%
-    }{}%
-    \ifdefstring{\@bapapertest}{report}{%
-        Belegarbeit\\[\baselineskip]%
-    }{}%
+    }{
+        \ifdefstring{\@bapapertypetest}{master-thesis}{
+            Masterarbeit\\
+            zur Erlangung des Abschlusses Master of \@bapaperdegreetype\\
+            im Studiengang \@batitlecourse\\[\baselineskip]%
+        }{
+            \ifdefstring{\@bapapertypetest}{study}{%
+                Studienarbeit\\[\baselineskip]%
+            }{
+                \ifdefstring{\@bapapertypetest}{report}{%
+                    Belegarbeit\\[\baselineskip]%
+                }{
+                    \@bapapertypetest\\[\baselineskip]% % enables custom title
+                }%
+            }%
+        }%
+    }%
 }
 
 % Title Page
@@ -390,12 +407,14 @@
     \define@key[BA]{simple}{location}{\def\@basimplelocation{#1}}
     % type of the paper (thesis etc...)
     \define@key[BA]{simple}{type}{\def\@basimpletype{#1}}
+    % if type thesis select bachelor degree type
+    \define@key[BA]{simple}{degreetype}{\def\@basimpledegreetype{#1}}
     % path to thesis assignment (must be a pdf file)
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
 
-    \presetkeys[BA]{simple}{type=undefined,blocknotice=true}{}
+    \presetkeys[BA]{simple}{type=undefined,degreetype=undefined,blocknotice=true}{}
 
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
@@ -424,7 +443,8 @@
             corrector=\@basimplecorrector,
             themedate=\@basimplethemedate,
             returndate=\@basimplereturndate,
-            type=\@basimpletype,
+            type=\@basimpletype, %
+            degreetype=\@basimpledegreetype,
         }
         \ifdefvoid{\@basimpleassignment}{
             % no assignment file set, do nothing
@@ -494,7 +514,7 @@
 \presetkeys[BA]{env}{placement=H,source,label}{}
 
 % Environment caption
-% Somehow is use of global variables is required here, because otherwiese 
+% Somehow is use of global variables is required here, because otherwiese
 % the \edef tests cause a stack overflow
 \newcommand{\@bacaption}{%
     \ifdefempty{\@baenvsource}{%
