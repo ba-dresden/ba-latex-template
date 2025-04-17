@@ -21,4 +21,9 @@ Modifications to the template can be tested by compiling the `minimal.tex` and `
 
 The documentation is build from the `docs` folder and served via GitHub Pages.
 
+## Formatting
+
+The `.md` Markdown files are formatted using the VS Code extension [esbenp.prettier-vscode](vscode:extension/esbenp.prettier-vscode) without any additional configuration.
+All LaTeX related files are formatted using the `latexindent` module.
+
 Originally crafted by [Nuckal777](https://github.com/Nuckal777).
