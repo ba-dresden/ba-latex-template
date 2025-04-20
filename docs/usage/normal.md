@@ -72,6 +72,8 @@ It should be obvious that it is possible to move different elements from the beg
   - list of figures, abbreviations and tables are only created if they have an entry
   - the first and only argument describes how to create the list of abbreviations. Per default no package is loaded, which can deal with abbreviations. You can choose a package you like.
   - instead of using `\mkfrontmatter` you can build the whole frontmatter yourself using standard LaTeX commands like `\tableofcontents,\listoffigures,\listoftables`
+- `\mkainotice` creates a notice due to the usage of generative artificial intelligence
+  - `model` should be a comma separated list of artificial intelligence models used
 - `\mkaffirmation` creates the affirmation
   - `signature` should be a path to an image of your signature
   - `date` should be the date when the paper is handed in

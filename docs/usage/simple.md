@@ -60,7 +60,8 @@ Let's also discuss the options of the `basimple` environment:
 - `type` defines the type of the paper and influences the title page. Some preconfigured values are `thesis`, `master-thesis`, `study` or `report`. If you choose a value which is not in the list, the value itself is the new custom title which is getting displayed at the title page. Setting the `type` parameter is optional.
 - `degreetype` defines the degree type e. g. `Arts`, `Egineering` or `Science`. Setting the `degreetype` parameter is optional and only used if `type` is set to `thesis` or `master-thesis`. The default value for `degreetype` is `Science`.
 - `assignment` should point to a PDF file containing the assignment to write a thesis. It will include the first page of the given PDF file at the appropriate place. Setting the `assignment` parameter is optional.
-- `blocknotice` defines whether a blocknotice should be included or not if set to `false`. One will be included per default. Setting the `blocknotice` parameter is optional.
+- `ainotice` defines whether a notice due to the usage of generative artificial intelligence should be created if set to `true` or not. Per default their will be no notice on that topic. Setting the `ainotice` parameter is optional.
+- `aimodel` should be a comma separated list of artificial intelligence models used. The content of this parameter is only considered if `ainotice` is set to `true`. Setting `aimodel` the parameter is optional.
 
 To add an abstract to the paper define a macro called `\basimpleabstract` which replacement text is the abstract's content. The following should do it (the `\addcontentsline` is optional):
 
