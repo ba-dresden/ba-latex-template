@@ -60,7 +60,7 @@ It should be obvious that it is possible to move different elements from the beg
   - `img` should be a path pointing to the logo of the university
   - `course` should be your course of studies
   - `number` should be your matriculation number
-  - `corrector` should be a comma sperated list of correctors
+  - `corrector` should be a comma separated list of correctors
   - `themedate` should be the date when the theme of the paper was announced
   - `returndate` should be the date when the paper is handed in
   - `type` defines the type of the paper. It should be one of `thesis`, `study` or `report`. Setting the `type` parameter is optional.
