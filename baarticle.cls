@@ -221,6 +221,10 @@
         \def\@bapaperdegreetype{Science}
     }{}
 
+    \ifdefstring{\@bapapertypetest}{undefined}{%
+        \ClassError {baarticle}{no type set for `mktitle` command}{When using the `mktitle` command make sure to specify the parameter type with a value. For more information see the following documentation: https://ba-dresden.github.io/ba-latex-template/usage/normal.html\#normal-mode.}
+    }{}
+
     \ifdefstring{\@bapapertypetest}{thesis}{%
         Bachelorarbeit\\
         zur Erlangung des Abschlusses Bachelor of \@bapaperdegreetype\\
@@ -443,7 +447,7 @@
             corrector=\@basimplecorrector,
             themedate=\@basimplethemedate,
             returndate=\@basimplereturndate,
-            type=\@basimpletype, %
+            type=\@basimpletype,
             degreetype=\@basimpledegreetype,
         }
         \ifdefvoid{\@basimpleassignment}{
