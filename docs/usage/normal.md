@@ -43,6 +43,9 @@ The package options are described in the "simple mode" [section](./simple).
         \section*{Abkürzungsverzeichnis}
         \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
     }
+    \mkainotice{
+        model={GPT-4omini, DALL-E}
+    }
     % Content here
     \printbibliography[heading=bibintoc]
     \clearpage
