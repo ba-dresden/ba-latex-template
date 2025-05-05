@@ -494,7 +494,7 @@
 \presetkeys[BA]{env}{placement=H,source,label}{}
 
 % Environment caption
-% Somehow is use of global variables is required here, because otherwiese 
+% Somehow is use of global variables is required here, because otherwiese
 % the \edef tests cause a stack overflow
 \newcommand{\@bacaption}{%
     \ifdefempty{\@baenvsource}{%
