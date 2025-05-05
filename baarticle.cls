@@ -183,7 +183,8 @@
 \define@key[BA]{title}{returndate}{\def\@batitlereturndate{#1}}
 % type of paper (thesis etc...)
 \define@key[BA]{title}{type}{\def\@batitletype{#1}}
-\presetkeys[BA]{title}{type=undefined}{}
+\define@key[BA]{title}{degreetype}{\def\@badegreetype{#1}}
+\presetkeys[BA]{title}{type=undefined,degreetype=undefined}{}
 
 % Clear the header and footer
 \fancyhead{}
@@ -213,18 +214,38 @@
 % helper macro to convert @baclstype to an actual text
 \newcommand{\@bapapertype}{%
     % need to expand @bapapertype as ifdefstring does not do that
-    \edef\@bapapertest{\@batitletype}%
-    \ifdefstring{\@bapapertest}{thesis}{%
+    \edef\@bapapertypetest{\@batitletype}%
+    \edef\@bapaperdegreetype{\@badegreetype}%
+
+    \ifdefstring{\@bapaperdegreetype}{undefined}{%
+        \def\@bapaperdegreetype{Science}
+    }{}
+
+    \ifdefstring{\@bapapertypetest}{undefined}{%
+        \ClassError {baarticle}{no type set for `mktitle` command}{When using the `mktitle` command make sure to specify the parameter type with a value. For more information see the following documentation: https://ba-dresden.github.io/ba-latex-template/usage/normal.html\#normal-mode.}
+    }{}
+
+    \ifdefstring{\@bapapertypetest}{thesis}{%
         Bachelorarbeit\\
-        zur Erlangung des Abschlusses Bachelor of Science\\
+        zur Erlangung des Abschlusses Bachelor of \@bapaperdegreetype\\
         im Studiengang \@batitlecourse\\[\baselineskip]%
-    }{} % \ifdefstring
-    \ifdefstring{\@bapapertest}{study}{%
-        Studienarbeit\\[\baselineskip]%
-    }{}%
-    \ifdefstring{\@bapapertest}{report}{%
-        Belegarbeit\\[\baselineskip]%
-    }{}%
+    }{
+        \ifdefstring{\@bapapertypetest}{master-thesis}{
+            Masterarbeit\\
+            zur Erlangung des Abschlusses Master of \@bapaperdegreetype\\
+            im Studiengang \@batitlecourse\\[\baselineskip]%
+        }{
+            \ifdefstring{\@bapapertypetest}{study}{%
+                Studienarbeit\\[\baselineskip]%
+            }{
+                \ifdefstring{\@bapapertypetest}{report}{%
+                    Belegarbeit\\[\baselineskip]%
+                }{
+                    \@bapapertypetest\\[\baselineskip]% % enables custom title
+                }%
+            }%
+        }%
+    }%
 }
 
 % Title Page
@@ -390,12 +411,14 @@
     \define@key[BA]{simple}{location}{\def\@basimplelocation{#1}}
     % type of the paper (thesis etc...)
     \define@key[BA]{simple}{type}{\def\@basimpletype{#1}}
+    % if type thesis select bachelor degree type
+    \define@key[BA]{simple}{degreetype}{\def\@basimpledegreetype{#1}}
     % path to thesis assignment (must be a pdf file)
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
 
-    \presetkeys[BA]{simple}{type=undefined,blocknotice=true}{}
+    \presetkeys[BA]{simple}{type=undefined,degreetype=undefined,blocknotice=true}{}
 
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
@@ -425,6 +448,7 @@
             themedate=\@basimplethemedate,
             returndate=\@basimplereturndate,
             type=\@basimpletype,
+            degreetype=\@basimpledegreetype,
         }
         \ifdefvoid{\@basimpleassignment}{
             % no assignment file set, do nothing
