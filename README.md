@@ -23,7 +23,20 @@ The documentation is build from the `docs` folder and served via GitHub Pages.
 
 ## Formatting
 
-The `.md` Markdown files are formatted using the VS Code extension [esbenp.prettier-vscode](vscode:extension/esbenp.prettier-vscode) without any additional configuration.
+To ensure consistent formatting use the [`.editorconfig`](./.editorconfig) and [`.prettierrc`](./.prettierrc) files.
+
+The following file types are formatted using Prettier:
+
+- Markdown
+- YAML
+- Ruby
+- HTML
+
 All LaTeX related files are formatted using the `latexindent` module.
+
+The following vs code extensions are helpful to format the files:
+
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 Originally crafted by [Nuckal777](https://github.com/Nuckal777).
