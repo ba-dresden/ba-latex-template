@@ -342,24 +342,25 @@
 
     \bigskip\par
     \par\noindent
-    \@baclslast{}, \@baclsfirst{} \vspace{-8pt} \\
-    \rule{0.4\textwidth}{0.5pt} \\
+    \space \@baclslast{}, \@baclsfirst{} \vspace{-14pt} \\
+    \rule{0.4\textwidth}{0.5pt} \vspace{-6pt}\\
     \noindent
-    Name, Vorname Verfassender
+    \makebox[0.4\textwidth][l]{\space Name, Vorname Verfassender}
 
     \begin{wrapfigure}[1]{r}{0.3\textwidth}
         \begin{center}
-            \vspace{-40pt}
+            \vspace{-46pt}
+            \hspace{-50pt}
             \includegraphics[width=0.28\textwidth]{\@baaffirsignature}
         \end{center}
     \end{wrapfigure}
     \bigskip
 
     \par\noindent
-    \@baclslocation{}, \@baaffirdate{} \vspace{-8pt} \\
-    \rule{0.4\textwidth}{0.5pt}\hfill \rule{0.4\textwidth}{0.5pt}\\
+    \space \@baclslocation{}, \@baaffirdate{} \vspace{-14pt} \\
+    \rule{0.4\textwidth}{0.5pt}\hfill \rule{0.4\textwidth}{0.5pt}\vspace{-6pt} \\
     \noindent
-    Ort, Datum Abgabetermin\hfill Unterschrift Verfassender
+    \makebox[0.4\textwidth][l]{\space Ort, Datum Abgabetermin}\hfill \makebox[0.4\textwidth][l]{\space Unterschrift Verfassender} \\
 }
 
 % Frontmatter
