@@ -222,7 +222,7 @@
     }{}
 
     \ifdefstring{\@bapapertypetest}{undefined}{%
-        \ClassError {baarticle}{no type set for `mktitle` command}{When using the `mktitle` command make sure to specify the parameter type with a value. For more information see the following documentation: https://ba-dresden.github.io/ba-latex-template/usage/normal.html\#normal-mode.}
+        \ClassError {baarticle}{no type is being set for `mktitle` command}{When using the `mktitle` command make sure to specify the parameter "type" with a value. For more information see the following documentation: https://ba-dresden.github.io/ba-latex-template/usage/normal.html\string##normal-mode.}
     }{}
 
     \ifdefstring{\@bapapertypetest}{thesis}{%
