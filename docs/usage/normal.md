@@ -68,7 +68,8 @@ It should be obvious that it is possible to move different elements from the beg
   - `signature` should be a path to an image of your signature
   - `date` should be the date when the paper is handed in
   - `location` should be the location of your company
-- `\mkfrontmatter` creates the the table of contents, list of figures, abbreviations and tables
+- `\mkgendernotice` creates a notice about gender usage in the text
+- `\mkfrontmatter` creates the table of contents, list of figures, abbreviations and tables
   - list of figures, abbreviations and tables are only created if they have an entry
   - the first and only argument describes how to create the list of abbreviations. Per default no package is loaded, which can deal with abbreviations. You can choose a package you like.
   - instead of using `\mkfrontmatter` you can build the whole frontmatter yourself using standard LaTeX commands like `\tableofcontents,\listoffigures,\listoftables`
