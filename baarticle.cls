@@ -35,6 +35,8 @@
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptionsX[BA]\relax
 
+\pretocmd{\printbibliography}{\phantomsection}{}{}
+
 % Class is based on the deault article class
 \LoadClass[12pt]{article}
 
