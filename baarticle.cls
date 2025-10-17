@@ -35,6 +35,8 @@
 \DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptionsX[BA]\relax
 
+\pretocmd{\printbibliography}{\phantomsection}{}{}
+
 % Class is based on the deault article class
 \LoadClass[12pt]{article}
 
@@ -62,6 +64,7 @@
 \RequirePackage{titlesec} % to reduce section spacing
 \RequirePackage{lipsum} % just to generate text for the example
 \RequirePackage[figure,table,code]{totalcount} % count entries in LoF and LoT, LoC
+\RequirePackage[bookmarksnumbered=true]{hyperref}
 
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
