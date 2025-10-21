@@ -209,7 +209,7 @@
 % \renewcommand{\footrulewidth}{0.4pt}
 
 % helper macro to print the list of correctors comma seperated
-\newcommand{\printcorrectors}[1]{
+\newcommand{\printcorrectors}[1]{%
     \@for\next:=#1\do
     {Gutachter: \next\\}%
 }
@@ -324,6 +324,49 @@
     \clearpage
 }
 
+% Define keys for the artificial intelligence usage notice
+% models used
+\define@key[BA]{ai}{model}{\edef\@baaimodel{#1}}
+
+\newcommand{\printaimodels}[1]{%
+    \ifdefempty{#1}{%
+        % Do nothing if the list is empty
+    }{%
+        \begingroup
+        \def\modellist{}%
+        \@for\next:=#1\do{%
+            \ifx\modellist\empty
+                \edef\modellist{\next}%
+            \else
+                \edef\modellist{\modellist, \next}%
+            \fi
+        }
+        \newcount\modelcount
+        \modelcount=0
+        \@for\next:=#1\do{\advance\modelcount by 1}%
+        \ifnum\modelcount=1
+            Als Modell wurde \modellist{} verwendet.%
+        \else
+            Als Modelle wurden \modellist{} verwendet.%
+        \fi
+        \endgroup%
+    }%
+}
+
+% artificial intelligence usage notice
+\newcommand{\mkainotice}[1]{
+    \setkeys[BA]{ai}{#1}
+    % do not print page number on AI notice
+    \thispagestyle{empty}
+    \subsection*{Hinweis zur Nutzung Generativer Künstlicher Intelligenz}
+    Die vorliegende wissenschaftliche Arbeit wurde mit Unterstützung einer generativen KI erstellt.%
+    \printaimodels{\@baaimodel}
+    Die Inhalte wurden auf Basis der Ausgabe der Künstlichen Intelligenz erstellt, wobei eine eigenständige Überprüfung und wissenschaftliche Validierung durch die Autorin bzw. den Autor erfolgte.
+    Die Verantwortung für die Richtigkeit, Vollständigkeit und wissenschaftliche Relevanz der Arbeit liegt bei der Autorin bzw. dem Autor.
+    Die Nutzung der KI erfolgte ausschließlich zur Unterstützung der Erstellung und Analyse von Textinhalten im Rahmen der wissenschaftlichen Arbeit.
+    \clearpage
+}
+
 % Define keys for the affirmation
 % signature of the author
 \define@key[BA]{affirmation}{signature}{\def\@baaffirsignature{#1}}
@@ -421,8 +464,12 @@
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
+    % whether to include the artificial intelligence usage notice or not
+    \define@boolkey[BA]{simple}{ainotice}[false]{}
+    % artificial intelligence models used
+    \define@key[BA]{simple}{aimodel}{\def\@basimpleaimodel{#1}}
 
-    \presetkeys[BA]{simple}{type=undefined,degreetype=undefined,blocknotice=true}{}
+    \presetkeys[BA]{simple}{corrector={},type=undefined,degreetype=undefined,blocknotice=true,ainotice=false,aimodel={}}{}
 
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
@@ -464,6 +511,11 @@
                 signature=\@basimplesignature,
                 date=\@basimplereturndate,
                 location=\@basimplelocation
+            }
+        \fi
+        \ifBA@simple@ainotice
+            \mkainotice{
+                model=\@basimpleaimodel
             }
         \fi
         \ifdefvoid{\basimpleabstract}{}{
