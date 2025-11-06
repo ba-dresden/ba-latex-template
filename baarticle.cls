@@ -324,6 +324,18 @@
     \clearpage
 }
 
+% gender language notice
+\newcommand{\mkgendernotice}[1]{
+    \setkeys[BA]{gender}{#1}
+    % do not print page number on gender notice
+    \thispagestyle{empty}
+    \subsubsection*{Hinweis zur sprachlichen Gestaltung}
+    In der vorliegenden Arbeit wird aus Gründen der Lesbarkeit ausschließlich das generische Maskulinum verwendet.
+    Diese Entscheidung basiert auf der Zielsetzung, den Text sprachlich klar und prägnant zu gestalten.
+    Die Verwendung des generischen Maskulinums ist hierbei als grammatikalische Konvention zu verstehen und schließt alle Geschlechter gleichermaßen ein.
+    \clearpage
+}
+
 % Define keys for the affirmation
 % signature of the author
 \define@key[BA]{affirmation}{signature}{\def\@baaffirsignature{#1}}
@@ -421,8 +433,10 @@
     \define@key[BA]{simple}{assignment}{\def\@basimpleassignment{#1}}
     % whether to include the blocknotice or not
     \define@boolkey[BA]{simple}{blocknotice}[true]{}
+    % whether to include the gender notice or not
+    \define@boolkey[BA]{simple}{gendernotice}[true]{}
 
-    \presetkeys[BA]{simple}{type=undefined,degreetype=undefined,blocknotice=true}{}
+    \presetkeys[BA]{simple}{type=undefined,degreetype=undefined,blocknotice=true,gendernotice=false}{}
 
     % adjust glossary styling
     \renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
@@ -465,6 +479,9 @@
                 date=\@basimplereturndate,
                 location=\@basimplelocation
             }
+        \fi
+        \ifBA@simple@gendernotice
+            \mkgendernotice{}
         \fi
         \ifdefvoid{\basimpleabstract}{}{
             \section*{Abstract}
