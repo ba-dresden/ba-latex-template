@@ -104,6 +104,24 @@ To define an abbreviation use `\newacronym{identifier}{short-form}{long-form}` b
 \end{document}
 ```
 
+You can also define entries for a glossary with a short description of a term using `\newglossaryentry{identifier}{type=glossary,name=term,description={description}}` before `\begin{document}` and refer to it with `\gls{identifier}`. The important part is that the `type` attribute is set to `glossary`, otherwise the entry will not be included inside the glossary.
+
+```latex
+\documentclass[...]{baarticle}
+
+\newglossaryentry{cloud}{
+    type=glossary,
+    name=Cloud Computing,
+    description={Cloud computing is the on-demand availability of computer system resources, especially data storage and computing power, without direct active management by the user.}
+}
+\begin{document}
+    \begin{basimple}[...]
+        \section{Caption}
+        \gls{cloud} is a term for ...
+    \end{basimple}
+\end{document}
+```
+
 It is possible to refer to certain sections using `\label{identifier}`, which marks a certain (sub-)section, and `\ref{identifier}`, which inserts the section number.
 By the way these references are also clickable links.
 
