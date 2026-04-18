@@ -66,6 +66,7 @@
 % Load additional packages if in simple mode
 \iftoggle{baclssimple}{
     \newtoggle{dhsnacronyms} % toggles are false per default
+    \newtoggle{dhsnglossary} % toggles are false per default
 
     \RequirePackage{pdfpages}
     \RequirePackage[english,main=ngerman]{babel}
@@ -75,6 +76,8 @@
     \RequirePackage[style=alttree,nogroupskip,nonumberlist,nopostdot,nolong,nosuper,nolist]{glossaries}
     \RequirePackage{listings} % to add listings for code
     \RequirePackage{xcolor} % to define colors for listings
+
+    \newglossary*{glossary}{}
 
     \iftoggle{baclslinkcoloring}{
         % hyperref config
@@ -438,6 +441,17 @@
         \typeout{patching of \protect\newacronym command failed}
     }
 
+    %updating the \newacronym command to set the toggle for the glossary
+    \pretocmd{\newglossaryentry}{
+        \toggletrue{dhsnglossary}
+    }{
+        % patching was successfully
+        \typeout{patched \protect\newglossaryentry command}
+    }{
+        % patching failed
+        \typeout{patching of \protect\newglossaryentry command failed}
+    }
+
     \newenvironment{basimple}[1][]{
         \setkeys[BA]{simple}{#1}
         \mktitle{
@@ -475,8 +489,21 @@
                 \section*{Abkürzungsverzeichnis}
                 \addcontentsline{toc}{section}{Abkürzungsverzeichnis}
                 \vspace{-1cm}
-                \printnoidxglossaries
+                \printnoidxglossary[type=\acronymtype]
                 \onehalfspacing
+                \clearpage
+            }{
+                % do nothing
+            }
+            \iftoggle{dhsnglossary}{
+                \singlespacing
+                \phantomsection
+                \section*{Glossar}
+                \addcontentsline{toc}{section}{Glossar}
+                \vspace{-1cm}
+                \printnoidxglossary[type=glossary]
+                \onehalfspacing
+                \clearpage
             }{
                 % do nothing
             }
